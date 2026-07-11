@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.pamu.gymbro.domain.usecase.favorite.ToggleFavoriteUseCaseTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-07-11T03:21:16.069Z" hostname="thinkpad-E14" time="0.286">
+  <properties/>
+  <testcase name="invoke with DIET type calls diet repository" classname="com.pamu.gymbro.domain.usecase.favorite.ToggleFavoriteUseCaseTest" time="0.192"/>
+  <testcase name="invoke with EXERCISE type calls exercise repository" classname="com.pamu.gymbro.domain.usecase.favorite.ToggleFavoriteUseCaseTest" time="0.063"/>
+  <testcase name="invoke with WORKOUT type calls workout repository" classname="com.pamu.gymbro.domain.usecase.favorite.ToggleFavoriteUseCaseTest" time="0.031"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

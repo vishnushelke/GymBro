@@ -1,0 +1,9 @@
+com.pamu.gymbro.features.exercise-pngs-0 /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/generated/res/pngs/release
+com.pamu.gymbro.features.exercise-updated_navigation_xml-1 /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/generated/updated_navigation_xml/release
+com.pamu.gymbro.features.exercise-mergeReleaseResources-2 /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.pamu.gymbro.features.exercise-mergeReleaseResources-3 /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.pamu.gymbro.features.exercise-release-4 /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/merged_res/release/mergeReleaseResources
+com.pamu.gymbro.features.exercise-release-5 /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/packaged_res/release/packageReleaseResources
+com.pamu.gymbro.features.exercise-main-6 /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/src/main/res
+com.pamu.gymbro.features.exercise-release-7 /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/src/release/res
+gradleHome-0 /home/vishnu/.gradle

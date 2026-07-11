@@ -1,0 +1,9 @@
+com.pamu.gymbro.features.reminder-pngs-0 /home/vishnu/AndroidStudioProjects/GymBro/features/reminder/build/generated/res/pngs/release
+com.pamu.gymbro.features.reminder-updated_navigation_xml-1 /home/vishnu/AndroidStudioProjects/GymBro/features/reminder/build/generated/updated_navigation_xml/release
+com.pamu.gymbro.features.reminder-mergeReleaseResources-2 /home/vishnu/AndroidStudioProjects/GymBro/features/reminder/build/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.pamu.gymbro.features.reminder-mergeReleaseResources-3 /home/vishnu/AndroidStudioProjects/GymBro/features/reminder/build/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.pamu.gymbro.features.reminder-release-4 /home/vishnu/AndroidStudioProjects/GymBro/features/reminder/build/intermediates/merged_res/release/mergeReleaseResources
+com.pamu.gymbro.features.reminder-release-5 /home/vishnu/AndroidStudioProjects/GymBro/features/reminder/build/intermediates/packaged_res/release/packageReleaseResources
+com.pamu.gymbro.features.reminder-main-6 /home/vishnu/AndroidStudioProjects/GymBro/features/reminder/src/main/res
+com.pamu.gymbro.features.reminder-release-7 /home/vishnu/AndroidStudioProjects/GymBro/features/reminder/src/release/res
+gradleHome-0 /home/vishnu/.gradle

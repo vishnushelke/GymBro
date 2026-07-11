@@ -1,0 +1,9 @@
+com.pamu.gymbro.core-pngs-0 /home/vishnu/AndroidStudioProjects/GymBro/core/build/generated/res/pngs/debug
+com.pamu.gymbro.core-updated_navigation_xml-1 /home/vishnu/AndroidStudioProjects/GymBro/core/build/generated/updated_navigation_xml/debug
+com.pamu.gymbro.core-mergeDebugResources-2 /home/vishnu/AndroidStudioProjects/GymBro/core/build/intermediates/incremental/debug/mergeDebugResources/merged.dir
+com.pamu.gymbro.core-mergeDebugResources-3 /home/vishnu/AndroidStudioProjects/GymBro/core/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+com.pamu.gymbro.core-debug-4 /home/vishnu/AndroidStudioProjects/GymBro/core/build/intermediates/merged_res/debug/mergeDebugResources
+com.pamu.gymbro.core-debug-5 /home/vishnu/AndroidStudioProjects/GymBro/core/build/intermediates/packaged_res/debug/packageDebugResources
+com.pamu.gymbro.core-debug-6 /home/vishnu/AndroidStudioProjects/GymBro/core/src/debug/res
+com.pamu.gymbro.core-main-7 /home/vishnu/AndroidStudioProjects/GymBro/core/src/main/res
+gradleHome-0 /home/vishnu/.gradle

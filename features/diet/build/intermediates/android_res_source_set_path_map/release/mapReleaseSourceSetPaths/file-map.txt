@@ -1,0 +1,9 @@
+com.pamu.gymbro.features.diet-pngs-0 /home/vishnu/AndroidStudioProjects/GymBro/features/diet/build/generated/res/pngs/release
+com.pamu.gymbro.features.diet-updated_navigation_xml-1 /home/vishnu/AndroidStudioProjects/GymBro/features/diet/build/generated/updated_navigation_xml/release
+com.pamu.gymbro.features.diet-mergeReleaseResources-2 /home/vishnu/AndroidStudioProjects/GymBro/features/diet/build/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.pamu.gymbro.features.diet-mergeReleaseResources-3 /home/vishnu/AndroidStudioProjects/GymBro/features/diet/build/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.pamu.gymbro.features.diet-release-4 /home/vishnu/AndroidStudioProjects/GymBro/features/diet/build/intermediates/merged_res/release/mergeReleaseResources
+com.pamu.gymbro.features.diet-release-5 /home/vishnu/AndroidStudioProjects/GymBro/features/diet/build/intermediates/packaged_res/release/packageReleaseResources
+com.pamu.gymbro.features.diet-main-6 /home/vishnu/AndroidStudioProjects/GymBro/features/diet/src/main/res
+com.pamu.gymbro.features.diet-release-7 /home/vishnu/AndroidStudioProjects/GymBro/features/diet/src/release/res
+gradleHome-0 /home/vishnu/.gradle

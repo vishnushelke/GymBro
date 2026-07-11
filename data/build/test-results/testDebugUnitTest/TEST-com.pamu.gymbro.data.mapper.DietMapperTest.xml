@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.pamu.gymbro.data.mapper.DietMapperTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-07-11T03:21:11.990Z" hostname="thinkpad-E14" time="0.045">
+  <properties/>
+  <testcase name="DietPlanEntity toDomain maps correctly" classname="com.pamu.gymbro.data.mapper.DietMapperTest" time="0.009"/>
+  <testcase name="DietPlan toEntity maps correctly" classname="com.pamu.gymbro.data.mapper.DietMapperTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

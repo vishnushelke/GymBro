@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.pamu.gymbro.domain.usecase.diet.GetDietPlansUseCaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-11T03:21:15.954Z" hostname="thinkpad-E14" time="0.007">
+  <properties/>
+  <testcase name="invoke returns all diet plans" classname="com.pamu.gymbro.domain.usecase.diet.GetDietPlansUseCaseTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

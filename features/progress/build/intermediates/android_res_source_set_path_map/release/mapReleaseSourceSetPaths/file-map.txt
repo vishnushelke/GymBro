@@ -1,0 +1,9 @@
+com.pamu.gymbro.features.progress-pngs-0 /home/vishnu/AndroidStudioProjects/GymBro/features/progress/build/generated/res/pngs/release
+com.pamu.gymbro.features.progress-updated_navigation_xml-1 /home/vishnu/AndroidStudioProjects/GymBro/features/progress/build/generated/updated_navigation_xml/release
+com.pamu.gymbro.features.progress-mergeReleaseResources-2 /home/vishnu/AndroidStudioProjects/GymBro/features/progress/build/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.pamu.gymbro.features.progress-mergeReleaseResources-3 /home/vishnu/AndroidStudioProjects/GymBro/features/progress/build/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.pamu.gymbro.features.progress-release-4 /home/vishnu/AndroidStudioProjects/GymBro/features/progress/build/intermediates/merged_res/release/mergeReleaseResources
+com.pamu.gymbro.features.progress-release-5 /home/vishnu/AndroidStudioProjects/GymBro/features/progress/build/intermediates/packaged_res/release/packageReleaseResources
+com.pamu.gymbro.features.progress-main-6 /home/vishnu/AndroidStudioProjects/GymBro/features/progress/src/main/res
+com.pamu.gymbro.features.progress-release-7 /home/vishnu/AndroidStudioProjects/GymBro/features/progress/src/release/res
+gradleHome-0 /home/vishnu/.gradle
