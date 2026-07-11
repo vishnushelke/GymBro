@@ -72,11 +72,8 @@ class ExerciseRepositoryImpl @Inject constructor(
             }
             dao.insertCategories(categoryEntities)
 
-            // Deduplicate by normalized name
-            val uniqueExercises = importData.exercises
-                .distinctBy { it.name.lowercase().replace("-", " ").replace("_", " ").trim() }
-
-            val exerciseEntities = uniqueExercises.map { 
+            // Raw import: Do not remove any duplications for now as requested
+            val exerciseEntities = importData.exercises.map {
                 com.pamu.gymbro.data.local.entity.ExerciseEntity(
                     id = it.exerciseId,
                     name = it.name.trim(),

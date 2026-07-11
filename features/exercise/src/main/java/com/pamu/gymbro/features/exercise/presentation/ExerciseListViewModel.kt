@@ -9,9 +9,13 @@ import com.pamu.gymbro.domain.usecase.exercise.GetExercisesUseCase
 import com.pamu.gymbro.domain.usecase.favorite.FavoriteType
 import com.pamu.gymbro.domain.usecase.favorite.ToggleFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,28 +32,25 @@ class ExerciseListViewModel @Inject constructor(
     private val _selectedCategoryId = MutableStateFlow<Long?>(null)
     val selectedCategoryId: StateFlow<Long?> = _selectedCategoryId.asStateFlow()
 
-    private val _exercises = MutableStateFlow<List<Exercise>>(emptyList())
-    val exercises: StateFlow<List<Exercise>> = _exercises.asStateFlow()
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val exercises: StateFlow<List<Exercise>> = _selectedCategoryId
+        .flatMapLatest { categoryId ->
+            getExercisesUseCase(categoryId)
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
 
     init {
         loadCategories()
-        observeExercises()
     }
 
     private fun loadCategories() {
         viewModelScope.launch {
             getCategoriesUseCase().collect {
                 _categories.value = it
-            }
-        }
-    }
-
-    private fun observeExercises() {
-        viewModelScope.launch {
-            _selectedCategoryId.collect { categoryId ->
-                getExercisesUseCase(categoryId).collect {
-                    _exercises.value = it
-                }
             }
         }
     }
