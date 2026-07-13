@@ -5,8 +5,10 @@ import com.pamu.gymbro.data.mapper.toDomain
 import com.pamu.gymbro.data.mapper.toEntity
 import com.pamu.gymbro.domain.model.ProgressEntry
 import com.pamu.gymbro.domain.repository.ProgressRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ProgressRepositoryImpl @Inject constructor(
@@ -19,11 +21,11 @@ class ProgressRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun insertProgressEntry(entry: ProgressEntry) {
+    override suspend fun insertProgressEntry(entry: ProgressEntry) = withContext(Dispatchers.IO) {
         dao.insertProgressEntry(entry.toEntity())
     }
 
-    override suspend fun deleteProgressEntry(id: Long) {
+    override suspend fun deleteProgressEntry(id: Long) = withContext(Dispatchers.IO) {
         dao.deleteProgressEntry(id)
     }
 }

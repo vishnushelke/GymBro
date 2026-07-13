@@ -96,11 +96,19 @@ fun HomeScreen(
                         )
                     )
             )
+            // Column for Logo and Welcome Text
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(horizontal = 24.dp, vertical = 32.dp)
             ) {
+                Image(
+                    painter = rememberAsyncImagePainter(model = com.pamu.gymbro.core.R.drawable.app_logo),
+                    contentDescription = "GymBro Logo",
+                    modifier = Modifier
+                        .size(80.dp)
+                        .padding(bottom = 16.dp)
+                )
                 Text(
                     text = "Welcome Back, Bro!",
                     style = MaterialTheme.typography.headlineLarge.copy(

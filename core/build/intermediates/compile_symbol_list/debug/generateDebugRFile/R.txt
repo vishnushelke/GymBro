@@ -1,0 +1,2 @@
+int drawable app_logo 0x0
+int drawable gym_bro 0x0

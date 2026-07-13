@@ -1,1 +1,3 @@
 com.pamu.gymbro.core
+drawable app_logo
+drawable gym_bro

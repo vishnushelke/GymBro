@@ -16,8 +16,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ShowChart
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ShowChart
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -27,6 +28,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -57,6 +59,7 @@ fun ProgressScreen(
     val entries by viewModel.entries.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     var showAddDialog by remember { mutableStateOf(false) }
+    val todayEntry = viewModel.getTodayEntry()
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -66,7 +69,10 @@ fun ProgressScreen(
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Add Progress")
+                Icon(
+                    imageVector = if (todayEntry == null) Icons.Default.Add else Icons.Default.Edit,
+                    contentDescription = if (todayEntry == null) "Add Progress" else "Edit Today's Progress"
+                )
             }
         }
     ) { padding ->
@@ -82,7 +88,7 @@ fun ProgressScreen(
             )
 
             Box(modifier = Modifier.fillMaxSize()) {
-                if (isLoading) {
+                if (isLoading && entries.isEmpty()) {
                     CircularProgressIndicator(
                         modifier = Modifier.align(Alignment.Center),
                         color = MaterialTheme.colorScheme.primary
@@ -95,7 +101,7 @@ fun ProgressScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Icon(
-                            imageVector = Icons.Default.ShowChart,
+                            imageVector = Icons.AutoMirrored.Filled.ShowChart,
                             contentDescription = null,
                             modifier = Modifier.size(64.dp),
                             tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
@@ -105,12 +111,6 @@ fun ProgressScreen(
                             text = "No progress logged yet",
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                        )
-                        Text(
-                            text = "Start logging your weight to see your progress chart!",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
-                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
                         )
                         Button(
                             onClick = { showAddDialog = true },
@@ -138,11 +138,8 @@ fun ProgressScreen(
                             )
                         }
 
-                        items(entries, key = { it.id }) { entry ->
-                            ProgressItem(
-                                modifier = Modifier.animateItem(),
-                                entry = entry
-                            )
+                        items(entries) { entry ->
+                            ProgressItem(entry = entry)
                         }
                     }
                 }
@@ -152,9 +149,10 @@ fun ProgressScreen(
 
     if (showAddDialog) {
         AddProgressDialog(
+            existingEntry = todayEntry,
             onDismiss = { showAddDialog = false },
-            onAdd = { weight, bodyFat, notes ->
-                viewModel.addEntry(weight, bodyFat, notes)
+            onAdd = { weight, notes ->
+                viewModel.addEntry(weight, notes)
                 showAddDialog = false
             }
         )
@@ -179,22 +177,28 @@ fun WeightChart(entries: List<ProgressEntry>) {
                 }
             },
             update = { chart ->
-                val chartEntries = entries.reversed().mapIndexed { index, entry ->
-                    Entry(index.toFloat(), entry.weight)
+                try {
+                    val chartEntries = entries.reversed().mapIndexed { index, entry ->
+                        Entry(index.toFloat(), entry.weight)
+                    }
+                    if (chartEntries.isNotEmpty()) {
+                        val dataSet = LineDataSet(chartEntries, "Weight (kg)").apply {
+                            color = colorPrimary
+                            setCircleColor(colorPrimary)
+                            lineWidth = 2f
+                            circleRadius = 4f
+                            setDrawCircleHole(false)
+                            valueTextSize = 0f
+                            setDrawFilled(true)
+                            fillColor = colorPrimary
+                            mode = LineDataSet.Mode.CUBIC_BEZIER
+                        }
+                        chart.data = LineData(dataSet)
+                        chart.invalidate()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-                val dataSet = LineDataSet(chartEntries, "Weight (kg)").apply {
-                    color = colorPrimary
-                    setCircleColor(colorPrimary)
-                    lineWidth = 2f
-                    circleRadius = 4f
-                    setDrawCircleHole(false)
-                    valueTextSize = 0f
-                    setDrawFilled(true)
-                    fillColor = colorPrimary
-                    mode = LineDataSet.Mode.CUBIC_BEZIER
-                }
-                chart.data = LineData(dataSet)
-                chart.invalidate()
             },
             modifier = Modifier.fillMaxSize().padding(8.dp)
         )
@@ -225,12 +229,6 @@ fun ProgressItem(
                     color = MaterialTheme.colorScheme.primary
                 )
             }
-            if (entry.bodyFat > 0) {
-                Text(
-                    text = "Body Fat: ${entry.bodyFat}%",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
             if (entry.notes.isNotEmpty()) {
                 Text(
                     text = entry.notes,
@@ -244,17 +242,20 @@ fun ProgressItem(
 
 @Composable
 fun AddProgressDialog(
+    existingEntry: ProgressEntry? = null,
     onDismiss: () -> Unit,
-    onAdd: (Float, Float, String) -> Unit
+    onAdd: (Float, String) -> Unit
 ) {
-    var weight by remember { mutableStateOf("") }
-    var bodyFat by remember { mutableStateOf("") }
-    var notes by remember { mutableStateOf("") }
+    var weight by remember { mutableStateOf(existingEntry?.weight?.toString() ?: "") }
+    var notes by remember { mutableStateOf(existingEntry?.notes ?: "") }
 
     Dialog(onDismissRequest = onDismiss) {
         Card(modifier = Modifier.fillMaxWidth()) {
             Column(modifier = Modifier.padding(16.dp)) {
-                Text(text = "Log Progress", style = MaterialTheme.typography.titleLarge)
+                Text(
+                    text = if (existingEntry == null) "Log Progress" else "Edit Today's Progress",
+                    style = MaterialTheme.typography.titleLarge
+                )
                 Spacer(modifier = Modifier.height(16.dp))
                 
                 OutlinedTextField(
@@ -265,16 +266,6 @@ fun AddProgressDialog(
                     modifier = Modifier.fillMaxWidth()
                 )
                 
-                Spacer(modifier = Modifier.height(8.dp))
-                
-                OutlinedTextField(
-                    value = bodyFat,
-                    onValueChange = { bodyFat = it },
-                    label = { Text("Body Fat %") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                    modifier = Modifier.fillMaxWidth()
-                )
-
                 Spacer(modifier = Modifier.height(8.dp))
 
                 OutlinedTextField(
@@ -287,18 +278,17 @@ fun AddProgressDialog(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Row(modifier = Modifier.fillMaxWidth()) {
-                    Button(onClick = onDismiss, modifier = Modifier.weight(1f).padding(end = 4.dp)) {
+                    TextButton(onClick = onDismiss, modifier = Modifier.weight(1f).padding(end = 4.dp)) {
                         Text("Cancel")
                     }
                     Button(
                         onClick = {
                             val w = weight.toFloatOrNull() ?: 0f
-                            val bf = bodyFat.toFloatOrNull() ?: 0f
-                            onAdd(w, bf, notes)
+                            onAdd(w, notes)
                         },
                         modifier = Modifier.weight(1f).padding(start = 4.dp)
                     ) {
-                        Text("Add")
+                        Text(if (existingEntry == null) "Add" else "Update")
                     }
                 }
             }
