@@ -50,7 +50,7 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(15) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(16) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `user_profile` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `age` INTEGER NOT NULL, `gender` TEXT NOT NULL, `heightCm` REAL NOT NULL, `weightKg` REAL NOT NULL, `fitnessGoal` TEXT NOT NULL, `experienceLevel` TEXT NOT NULL, `workoutDurationMinutes` INTEGER NOT NULL, `workoutDaysPerWeek` INTEGER NOT NULL, `injuries` TEXT NOT NULL, `availableEquipment` TEXT NOT NULL, PRIMARY KEY(`id`))");

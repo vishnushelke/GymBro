@@ -62,8 +62,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/7919bb28-1702-4d88-bc16-65eb049adae2/pushups.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/7919bb28-1702-4d88-bc16-65eb049adae2/pushups.mp4"
+      "videoFrontUrl": "asset:///videos/pushups.mp4",
+      "videoSideUrl": "asset:///videos/pushups.mp4"
     },
     {
       "exerciseId": 2,
@@ -81,8 +81,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/00858b2f-e74a-4907-aa3e-645c6e47a665/incline-pushup.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/00858b2f-e74a-4907-aa3e-645c6e47a665/incline-pushup.mp4"
+      "videoFrontUrl": "asset:///videos/incline-pushup.mp4",
+      "videoSideUrl": "asset:///videos/incline-pushup.mp4"
     },
     {
       "exerciseId": 3,
@@ -100,8 +100,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/9e0f9842-eb91-425e-b365-a373140e3abd/decline-pushup.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/9e0f9842-eb91-425e-b365-a373140e3abd/decline-pushup.mp4"
+      "videoFrontUrl": "asset:///videos/decline-pushup.mp4",
+      "videoSideUrl": "asset:///videos/decline-pushup.mp4"
     },
     {
       "exerciseId": 4,
@@ -119,8 +119,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/e2629d5f-798e-4560-a2f0-6e63a3098ee0/bench-press.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/e2629d5f-798e-4560-a2f0-6e63a3098ee0/bench-press.mp4"
+      "videoFrontUrl": "asset:///videos/bench-press.mp4",
+      "videoSideUrl": "asset:///videos/bench-press.mp4"
     },
     {
       "exerciseId": 5,
@@ -138,8 +138,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/68cec85a-ced0-499f-9130-822eaab9f73c/incline-press.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/68cec85a-ced0-499f-9130-822eaab9f73c/incline-press.mp4"
+      "videoFrontUrl": "asset:///videos/incline-press.mp4",
+      "videoSideUrl": "asset:///videos/incline-press.mp4"
     },
     {
       "exerciseId": 6,
@@ -157,8 +157,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/318b9998-c202-4888-9a31-4e3536cd509c/chest-fly.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/318b9998-c202-4888-9a31-4e3536cd509c/chest-fly.mp4"
+      "videoFrontUrl": "asset:///videos/chest-fly.mp4",
+      "videoSideUrl": "asset:///videos/chest-fly.mp4"
     },
     {
       "exerciseId": 7,
@@ -176,8 +176,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/814ced49-161b-431d-a541-7d128d54f450/cable-crossover.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/814ced49-161b-431d-a541-7d128d54f450/cable-crossover.mp4"
+      "videoFrontUrl": "asset:///videos/cable-crossover.mp4",
+      "videoSideUrl": "asset:///videos/cable-crossover.mp4"
     },
     {
       "exerciseId": 8,
@@ -195,8 +195,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/915b4ea4-ce58-41e2-b84e-ef217147fe8e/dips-chest.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/915b4ea4-ce58-41e2-b84e-ef217147fe8e/dips-chest.mp4"
+      "videoFrontUrl": "asset:///videos/dips-chest.mp4",
+      "videoSideUrl": "asset:///videos/dips-chest.mp4"
     },
     {
       "exerciseId": 9,
@@ -309,8 +309,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/b3d3c872-ccfa-4a0e-96f4-61cbadfb518c/pullups.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/b3d3c872-ccfa-4a0e-96f4-61cbadfb518c/pullups.mp4"
+      "videoFrontUrl": "asset:///videos/pullups.mp4",
+      "videoSideUrl": "asset:///videos/pullups.mp4"
     },
     {
       "exerciseId": 15,
@@ -328,8 +328,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/6e445474-a5ca-435b-885a-159e6b8db890/chinup.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/6e445474-a5ca-435b-885a-159e6b8db890/chinup.mp4"
+      "videoFrontUrl": "asset:///videos/chinup.mp4",
+      "videoSideUrl": "asset:///videos/chinup.mp4"
     },
     {
       "exerciseId": 16,
@@ -347,8 +347,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/cbc22b28-918c-450f-8c18-ee434ad9c7c9/deadlift.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/cbc22b28-918c-450f-8c18-ee434ad9c7c9/deadlift.mp4"
+      "videoFrontUrl": "asset:///videos/deadlift.mp4",
+      "videoSideUrl": "asset:///videos/deadlift.mp4"
     },
     {
       "exerciseId": 17,
@@ -366,8 +366,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/79f4831d-9f51-4709-a17d-460d1435298f/lat-pulldown.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/79f4831d-9f51-4709-a17d-460d1435298f/lat-pulldown.mp4"
+      "videoFrontUrl": "asset:///videos/lat-pulldown.mp4",
+      "videoSideUrl": "asset:///videos/lat-pulldown.mp4"
     },
     {
       "exerciseId": 18,
@@ -385,8 +385,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/edfa7d93-b2fa-4736-9cea-3422e59854d7/rows.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/edfa7d93-b2fa-4736-9cea-3422e59854d7/rows.mp4"
+      "videoFrontUrl": "asset:///videos/rows.mp4",
+      "videoSideUrl": "asset:///videos/rows.mp4"
     },
     {
       "exerciseId": 19,
@@ -404,8 +404,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/ab5c7062-cbcd-43c9-84d3-7db414adefbd/db-row.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/ab5c7062-cbcd-43c9-84d3-7db414adefbd/db-row.mp4"
+      "videoFrontUrl": "asset:///videos/db-row.mp4",
+      "videoSideUrl": "asset:///videos/db-row.mp4"
     },
     {
       "exerciseId": 20,
@@ -423,8 +423,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/c158ffff-136c-4bdd-b455-9ef993ae1ca1/seated-row.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/c158ffff-136c-4bdd-b455-9ef993ae1ca1/seated-row.mp4"
+      "videoFrontUrl": "asset:///videos/seated-row.mp4",
+      "videoSideUrl": "asset:///videos/seated-row.mp4"
     },
     {
       "exerciseId": 21,
@@ -442,8 +442,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/e8091e7b-367c-4195-8bbf-79a467a4c550/hyperextension.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/e8091e7b-367c-4195-8bbf-79a467a4c550/hyperextension.mp4"
+      "videoFrontUrl": "asset:///videos/hyperextension.mp4",
+      "videoSideUrl": "asset:///videos/hyperextension.mp4"
     },
     {
       "exerciseId": 22,
@@ -461,8 +461,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/325035b1-6aa3-4881-8c26-e7bedf10e35b/face-pull.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/325035b1-6aa3-4881-8c26-e7bedf10e35b/face-pull.mp4"
+      "videoFrontUrl": "asset:///videos/face-pull.mp4",
+      "videoSideUrl": "asset:///videos/face-pull.mp4"
     },
     {
       "exerciseId": 23,
@@ -594,8 +594,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/42ba5ef1-a674-429a-b944-5cde037b2f16/shoulder-press.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/42ba5ef1-a674-429a-b944-5cde037b2f16/shoulder-press.mp4"
+      "videoFrontUrl": "asset:///videos/shoulder-press.mp4",
+      "videoSideUrl": "asset:///videos/shoulder-press.mp4"
     },
     {
       "exerciseId": 30,
@@ -613,8 +613,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/42ba5ef1-a674-429a-b944-5cde037b2f16/shoulder-press.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/42ba5ef1-a674-429a-b944-5cde037b2f16/shoulder-press.mp4"
+      "videoFrontUrl": "asset:///videos/shoulder-press.mp4",
+      "videoSideUrl": "asset:///videos/shoulder-press.mp4"
     },
     {
       "exerciseId": 31,
@@ -651,8 +651,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/803058c9-d4b0-44bf-8ab4-4604020be4a9/front-raise.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/803058c9-d4b0-44bf-8ab4-4604020be4a9/front-raise.mp4"
+      "videoFrontUrl": "asset:///videos/front-raise.mp4",
+      "videoSideUrl": "asset:///videos/front-raise.mp4"
     },
     {
       "exerciseId": 33,
@@ -670,8 +670,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/1fc9d6cb-23cd-4dbe-9379-3b69f3ca3e06/rear-delt-fly.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/1fc9d6cb-23cd-4dbe-9379-3b69f3ca3e06/rear-delt-fly.mp4"
+      "videoFrontUrl": "asset:///videos/rear-delt-fly.mp4",
+      "videoSideUrl": "asset:///videos/rear-delt-fly.mp4"
     },
     {
       "exerciseId": 34,
@@ -689,8 +689,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/3f788bc8-0bbe-4b28-9d79-755215e0f477/arnold-press.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/3f788bc8-0bbe-4b28-9d79-755215e0f477/arnold-press.mp4"
+      "videoFrontUrl": "asset:///videos/arnold-press.mp4",
+      "videoSideUrl": "asset:///videos/arnold-press.mp4"
     },
     {
       "exerciseId": 35,
@@ -708,8 +708,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/109a67e4-39c1-4af2-b618-512ed2d7a41f/upright-row.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/109a67e4-39c1-4af2-b618-512ed2d7a41f/upright-row.mp4"
+      "videoFrontUrl": "asset:///videos/upright-row.mp4",
+      "videoSideUrl": "asset:///videos/upright-row.mp4"
     },
     {
       "exerciseId": 36,
@@ -727,8 +727,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/a5f934a9-f4e2-41ea-b27e-de74fe7693fa/shrugs.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/a5f934a9-f4e2-41ea-b27e-de74fe7693fa/shrugs.mp4"
+      "videoFrontUrl": "asset:///videos/shrugs.mp4",
+      "videoSideUrl": "asset:///videos/shrugs.mp4"
     },
     {
       "exerciseId": 37,
@@ -860,8 +860,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/1f887a33-ed4f-4a39-9416-369ff71986fb/bicep-curls.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/1f887a33-ed4f-4a39-9416-369ff71986fb/bicep-curls.mp4"
+      "videoFrontUrl": "asset:///videos/bicep-curls.mp4",
+      "videoSideUrl": "asset:///videos/bicep-curls.mp4"
     },
     {
       "exerciseId": 44,
@@ -879,8 +879,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/20a18403-7913-4aec-835d-69f948f7abb5/hammer-curls.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/20a18403-7913-4aec-835d-69f948f7abb5/hammer-curls.mp4"
+      "videoFrontUrl": "asset:///videos/hammer-curls.mp4",
+      "videoSideUrl": "asset:///videos/hammer-curls.mp4"
     },
     {
       "exerciseId": 45,
@@ -898,8 +898,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/2fa7cd10-a7cc-429f-938d-635893181d8d/barbell-curl.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/2fa7cd10-a7cc-429f-938d-635893181d8d/barbell-curl.mp4"
+      "videoFrontUrl": "asset:///videos/barbell-curl.mp4",
+      "videoSideUrl": "asset:///videos/barbell-curl.mp4"
     },
     {
       "exerciseId": 46,
@@ -917,8 +917,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/78cc76cc-2c1a-4cc3-8f24-d0cf95a7935e/preacher-curl.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/78cc76cc-2c1a-4cc3-8f24-d0cf95a7935e/preacher-curl.mp4"
+      "videoFrontUrl": "asset:///videos/preacher-curl.mp4",
+      "videoSideUrl": "asset:///videos/preacher-curl.mp4"
     },
     {
       "exerciseId": 47,
@@ -936,8 +936,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/77e71cbe-52d2-43db-9069-3a5b77ff94ed/concentration-curl.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/77e71cbe-52d2-43db-9069-3a5b77ff94ed/concentration-curl.mp4"
+      "videoFrontUrl": "asset:///videos/concentration-curl.mp4",
+      "videoSideUrl": "asset:///videos/concentration-curl.mp4"
     },
     {
       "exerciseId": 48,
@@ -955,8 +955,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/1a28fd0c-7193-4e88-a52b-f7bea4469ebc/incline-db-curl.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/1a28fd0c-7193-4e88-a52b-f7bea4469ebc/incline-db-curl.mp4"
+      "videoFrontUrl": "asset:///videos/incline-db-curl.mp4",
+      "videoSideUrl": "asset:///videos/incline-db-curl.mp4"
     },
     {
       "exerciseId": 49,
@@ -974,8 +974,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/0ff7bb00-ddf9-40fe-b67e-900fe1fcf53d/cable-curl.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/0ff7bb00-ddf9-40fe-b67e-900fe1fcf53d/cable-curl.mp4"
+      "videoFrontUrl": "asset:///videos/cable-curl.mp4",
+      "videoSideUrl": "asset:///videos/cable-curl.mp4"
     },
     {
       "exerciseId": 50,
@@ -1107,8 +1107,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/dbfbbd9a-5651-4904-b0c1-61e7d684c7cf/pushdowns.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/dbfbbd9a-5651-4904-b0c1-61e7d684c7cf/pushdowns.mp4"
+      "videoFrontUrl": "asset:///videos/pushdowns.mp4",
+      "videoSideUrl": "asset:///videos/pushdowns.mp4"
     },
     {
       "exerciseId": 57,
@@ -1126,8 +1126,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/69c53c4e-d697-44e3-8de1-d38abeb464a4/tricep-dips.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/69c53c4e-d697-44e3-8de1-d38abeb464a4/tricep-dips.mp4"
+      "videoFrontUrl": "asset:///videos/tricep-dips.mp4",
+      "videoSideUrl": "asset:///videos/tricep-dips.mp4"
     },
     {
       "exerciseId": 58,
@@ -1145,8 +1145,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/7b657565-72e8-4091-a10e-e1532009e5cc/skull-crusher.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/7b657565-72e8-4091-a10e-e1532009e5cc/skull-crusher.mp4"
+      "videoFrontUrl": "asset:///videos/skull-crusher.mp4",
+      "videoSideUrl": "asset:///videos/skull-crusher.mp4"
     },
     {
       "exerciseId": 59,
@@ -1164,8 +1164,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/f799c282-04ff-4be7-a613-ebfdc304d30b/overhead-tricep.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/f799c282-04ff-4be7-a613-ebfdc304d30b/overhead-tricep.mp4"
+      "videoFrontUrl": "asset:///videos/overhead-tricep.mp4",
+      "videoSideUrl": "asset:///videos/overhead-tricep.mp4"
     },
     {
       "exerciseId": 60,
@@ -1183,8 +1183,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/73c4237c-0c37-47b0-8620-ac1c76d02485/kickback.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/73c4237c-0c37-47b0-8620-ac1c76d02485/kickback.mp4"
+      "videoFrontUrl": "asset:///videos/kickback.mp4",
+      "videoSideUrl": "asset:///videos/kickback.mp4"
     },
     {
       "exerciseId": 61,
@@ -1202,8 +1202,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/ab1b938b-1eff-44c1-93b0-7585d8f19504/diamond-pushup.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/ab1b938b-1eff-44c1-93b0-7585d8f19504/diamond-pushup.mp4"
+      "videoFrontUrl": "asset:///videos/diamond-pushup.mp4",
+      "videoSideUrl": "asset:///videos/diamond-pushup.mp4"
     },
     {
       "exerciseId": 62,
@@ -1335,8 +1335,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/c8741034-ed3c-4e25-812f-e2a6e4c18a29/wrist-curl.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/c8741034-ed3c-4e25-812f-e2a6e4c18a29/wrist-curl.mp4"
+      "videoFrontUrl": "asset:///videos/wrist-curl.mp4",
+      "videoSideUrl": "asset:///videos/wrist-curl.mp4"
     },
     {
       "exerciseId": 69,
@@ -1354,8 +1354,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/7e8c54f8-446d-4b48-8756-c40611b0519e/wrist-roller.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/7e8c54f8-446d-4b48-8756-c40611b0519e/wrist-roller.mp4"
+      "videoFrontUrl": "asset:///videos/wrist-roller.mp4",
+      "videoSideUrl": "asset:///videos/wrist-roller.mp4"
     },
     {
       "exerciseId": 70,
@@ -1373,8 +1373,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/4727a910-f03b-48d9-8f29-e41b5329df5f/towel-hang.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/4727a910-f03b-48d9-8f29-e41b5329df5f/towel-hang.mp4"
+      "videoFrontUrl": "asset:///videos/towel-hang.mp4",
+      "videoSideUrl": "asset:///videos/towel-hang.mp4"
     },
     {
       "exerciseId": 71,
@@ -1392,8 +1392,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/e280c2ad-cd67-4af3-a969-df5daaae05d8/barbell-hold.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/e280c2ad-cd67-4af3-a969-df5daaae05d8/barbell-hold.mp4"
+      "videoFrontUrl": "asset:///videos/barbell-hold.mp4",
+      "videoSideUrl": "asset:///videos/barbell-hold.mp4"
     },
     {
       "exerciseId": 72,
@@ -1411,8 +1411,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/2fd566dd-ef39-45cd-a670-45896aec9b7d/squats.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/2fd566dd-ef39-45cd-a670-45896aec9b7d/squats.mp4"
+      "videoFrontUrl": "asset:///videos/squats.mp4",
+      "videoSideUrl": "asset:///videos/squats.mp4"
     },
     {
       "exerciseId": 73,
@@ -1430,8 +1430,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/00610406-567e-4786-bc70-19943b4b2a68/bodyweight-squat.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/00610406-567e-4786-bc70-19943b4b2a68/bodyweight-squat.mp4"
+      "videoFrontUrl": "asset:///videos/bodyweight-squat.mp4",
+      "videoSideUrl": "asset:///videos/bodyweight-squat.mp4"
     },
     {
       "exerciseId": 74,
@@ -1449,8 +1449,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/fd1dfb65-fb30-4c1c-81ed-3551ecbb177d/lunges.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/fd1dfb65-fb30-4c1c-81ed-3551ecbb177d/lunges.mp4"
+      "videoFrontUrl": "asset:///videos/lunges.mp4",
+      "videoSideUrl": "asset:///videos/lunges.mp4"
     },
     {
       "exerciseId": 75,
@@ -1468,8 +1468,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/7e256797-13f1-4edd-8495-942c7d60bbc0/bulgarian-split.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/7e256797-13f1-4edd-8495-942c7d60bbc0/bulgarian-split.mp4"
+      "videoFrontUrl": "asset:///videos/bulgarian-split.mp4",
+      "videoSideUrl": "asset:///videos/bulgarian-split.mp4"
     },
     {
       "exerciseId": 76,
@@ -1487,8 +1487,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/1cfd0283-bbc5-45b3-8f5a-b70e7c01f77f/leg-press.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/1cfd0283-bbc5-45b3-8f5a-b70e7c01f77f/leg-press.mp4"
+      "videoFrontUrl": "asset:///videos/leg-press.mp4",
+      "videoSideUrl": "asset:///videos/leg-press.mp4"
     },
     {
       "exerciseId": 77,
@@ -1506,8 +1506,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/4131bd27-f7cf-4348-bdc4-ce19e376fcdf/leg-extension.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/4131bd27-f7cf-4348-bdc4-ce19e376fcdf/leg-extension.mp4"
+      "videoFrontUrl": "asset:///videos/leg-extension.mp4",
+      "videoSideUrl": "asset:///videos/leg-extension.mp4"
     },
     {
       "exerciseId": 78,
@@ -1525,8 +1525,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/66229283-6331-457f-9915-b2fd4d64cd57/romanian-deadlift.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/66229283-6331-457f-9915-b2fd4d64cd57/romanian-deadlift.mp4"
+      "videoFrontUrl": "asset:///videos/romanian-deadlift.mp4",
+      "videoSideUrl": "asset:///videos/romanian-deadlift.mp4"
     },
     {
       "exerciseId": 79,
@@ -1544,8 +1544,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/3128bf66-869e-4e1e-8d4e-3d906b49fbd3/hip-thrust.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/3128bf66-869e-4e1e-8d4e-3d906b49fbd3/hip-thrust.mp4"
+      "videoFrontUrl": "asset:///videos/hip-thrust.mp4",
+      "videoSideUrl": "asset:///videos/hip-thrust.mp4"
     },
     {
       "exerciseId": 80,
@@ -1563,8 +1563,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/b82cfedb-4053-420a-bcd7-69d231ecd1bc/goblet-squat.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/b82cfedb-4053-420a-bcd7-69d231ecd1bc/goblet-squat.mp4"
+      "videoFrontUrl": "asset:///videos/goblet-squat.mp4",
+      "videoSideUrl": "asset:///videos/goblet-squat.mp4"
     },
     {
       "exerciseId": 81,
@@ -1677,8 +1677,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/641d555d-fb3c-4fe9-8ec7-6a0361eee7bb/calf-raises.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/641d555d-fb3c-4fe9-8ec7-6a0361eee7bb/calf-raises.mp4"
+      "videoFrontUrl": "asset:///videos/calf-raises.mp4",
+      "videoSideUrl": "asset:///videos/calf-raises.mp4"
     },
     {
       "exerciseId": 87,
@@ -1696,8 +1696,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/a275c05d-d13e-4455-9593-b5111a74eecd/seated-calf.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/a275c05d-d13e-4455-9593-b5111a74eecd/seated-calf.mp4"
+      "videoFrontUrl": "asset:///videos/seated-calf.mp4",
+      "videoSideUrl": "asset:///videos/seated-calf.mp4"
     },
     {
       "exerciseId": 88,
@@ -1715,8 +1715,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/22840a21-b3b9-4d4e-94cc-d7223803c4c0/donkey-calf.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/22840a21-b3b9-4d4e-94cc-d7223803c4c0/donkey-calf.mp4"
+      "videoFrontUrl": "asset:///videos/donkey-calf.mp4",
+      "videoSideUrl": "asset:///videos/donkey-calf.mp4"
     },
     {
       "exerciseId": 89,
@@ -1734,8 +1734,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/76a631bc-fc27-45ef-b92f-78f71766225e/single-leg-calf.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/76a631bc-fc27-45ef-b92f-78f71766225e/single-leg-calf.mp4"
+      "videoFrontUrl": "asset:///videos/single-leg-calf.mp4",
+      "videoSideUrl": "asset:///videos/single-leg-calf.mp4"
     },
     {
       "exerciseId": 90,
@@ -1753,8 +1753,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/08ea142a-44cb-4e52-89ac-1b6fc70344e3/jump-rope.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/08ea142a-44cb-4e52-89ac-1b6fc70344e3/jump-rope.mp4"
+      "videoFrontUrl": "asset:///videos/jump-rope.mp4",
+      "videoSideUrl": "asset:///videos/jump-rope.mp4"
     },
     {
       "exerciseId": 91,
@@ -1772,8 +1772,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/84bd98d4-856e-4249-bdcd-ef3d18f195ad/leg-press-calf.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/84bd98d4-856e-4249-bdcd-ef3d18f195ad/leg-press-calf.mp4"
+      "videoFrontUrl": "asset:///videos/leg-press-calf.mp4",
+      "videoSideUrl": "asset:///videos/leg-press-calf.mp4"
     },
     {
       "exerciseId": 92,
@@ -1791,8 +1791,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/432b9f5d-1138-4c79-9f60-ed17ddd0b8c2/smith-calf.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/432b9f5d-1138-4c79-9f60-ed17ddd0b8c2/smith-calf.mp4"
+      "videoFrontUrl": "asset:///videos/smith-calf.mp4",
+      "videoSideUrl": "asset:///videos/smith-calf.mp4"
     },
     {
       "exerciseId": 93,
@@ -1810,8 +1810,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/250b1c86-7194-4c68-aee5-92c683513aa8/tibialis-raise.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/250b1c86-7194-4c68-aee5-92c683513aa8/tibialis-raise.mp4"
+      "videoFrontUrl": "asset:///videos/tibialis-raise.mp4",
+      "videoSideUrl": "asset:///videos/tibialis-raise.mp4"
     },
     {
       "exerciseId": 94,
@@ -1829,8 +1829,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/8e90a6b0-62a4-4ef0-8fc9-a4b0e0b7e99a/box-jump.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/8e90a6b0-62a4-4ef0-8fc9-a4b0e0b7e99a/box-jump.mp4"
+      "videoFrontUrl": "asset:///videos/box-jump.mp4",
+      "videoSideUrl": "asset:///videos/box-jump.mp4"
     },
     {
       "exerciseId": 95,
@@ -1848,8 +1848,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/abcdcdf5-649b-487c-afe4-701f593bac55/farmer-toes.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/abcdcdf5-649b-487c-afe4-701f593bac55/farmer-toes.mp4"
+      "videoFrontUrl": "asset:///videos/farmer-toes.mp4",
+      "videoSideUrl": "asset:///videos/farmer-toes.mp4"
     },
     {
       "exerciseId": 96,
@@ -1867,8 +1867,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/0b9ebb79-4d32-487b-8dfb-1862ed691854/bent-knee-calf.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/0b9ebb79-4d32-487b-8dfb-1862ed691854/bent-knee-calf.mp4"
+      "videoFrontUrl": "asset:///videos/bent-knee-calf.mp4",
+      "videoSideUrl": "asset:///videos/bent-knee-calf.mp4"
     },
     {
       "exerciseId": 97,
@@ -1886,8 +1886,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/bfd8dac2-2773-4f75-9eda-363493cf749f/crunches.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/bfd8dac2-2773-4f75-9eda-363493cf749f/crunches.mp4"
+      "videoFrontUrl": "asset:///videos/crunches.mp4",
+      "videoSideUrl": "asset:///videos/crunches.mp4"
     },
     {
       "exerciseId": 98,
@@ -1905,8 +1905,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/797da923-7bf3-403b-8e57-7d37f060130a/plank.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/797da923-7bf3-403b-8e57-7d37f060130a/plank.mp4"
+      "videoFrontUrl": "asset:///videos/plank.mp4",
+      "videoSideUrl": "asset:///videos/plank.mp4"
     },
     {
       "exerciseId": 99,
@@ -1924,8 +1924,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/64404c4f-9b29-4307-b297-d731b4f1ded1/side-plank.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/64404c4f-9b29-4307-b297-d731b4f1ded1/side-plank.mp4"
+      "videoFrontUrl": "asset:///videos/side-plank.mp4",
+      "videoSideUrl": "asset:///videos/side-plank.mp4"
     },
     {
       "exerciseId": 100,
@@ -1943,8 +1943,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/b65d5519-4430-41df-a50d-82aa37eae8da/leg-raises.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/b65d5519-4430-41df-a50d-82aa37eae8da/leg-raises.mp4"
+      "videoFrontUrl": "asset:///videos/leg-raises.mp4",
+      "videoSideUrl": "asset:///videos/leg-raises.mp4"
     },
     {
       "exerciseId": 101,
@@ -1962,8 +1962,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/86eb4900-6d07-41e3-9441-16a9f8e44b60/bicycle-crunch.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/86eb4900-6d07-41e3-9441-16a9f8e44b60/bicycle-crunch.mp4"
+      "videoFrontUrl": "asset:///videos/bicycle-crunch.mp4",
+      "videoSideUrl": "asset:///videos/bicycle-crunch.mp4"
     },
     {
       "exerciseId": 102,
@@ -1981,8 +1981,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/dfa1f933-98f8-41b8-b773-4ac04a1d302f/russian-twist.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/dfa1f933-98f8-41b8-b773-4ac04a1d302f/russian-twist.mp4"
+      "videoFrontUrl": "asset:///videos/russian-twist.mp4",
+      "videoSideUrl": "asset:///videos/russian-twist.mp4"
     },
     {
       "exerciseId": 103,
@@ -2000,8 +2000,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/2827149d-7df3-4169-8f4d-75ffc3ae7c58/mountain-climber.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/2827149d-7df3-4169-8f4d-75ffc3ae7c58/mountain-climber.mp4"
+      "videoFrontUrl": "asset:///videos/mountain-climber.mp4",
+      "videoSideUrl": "asset:///videos/mountain-climber.mp4"
     },
     {
       "exerciseId": 104,
@@ -2038,8 +2038,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/cf402c08-ed6b-46bd-902f-e049400b0e11/ab-rollout.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/cf402c08-ed6b-46bd-902f-e049400b0e11/ab-rollout.mp4"
+      "videoFrontUrl": "asset:///videos/ab-rollout.mp4",
+      "videoSideUrl": "asset:///videos/ab-rollout.mp4"
     },
     {
       "exerciseId": 106,
@@ -2057,8 +2057,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/209dd861-d53b-4c5c-b803-cf7abe14224b/cable-crunch.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/209dd861-d53b-4c5c-b803-cf7abe14224b/cable-crunch.mp4"
+      "videoFrontUrl": "asset:///videos/cable-crunch.mp4",
+      "videoSideUrl": "asset:///videos/cable-crunch.mp4"
     },
     {
       "exerciseId": 107,
@@ -2076,8 +2076,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/ba26bf5f-0be5-44f0-af92-6088ab09793c/decline-situp.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/ba26bf5f-0be5-44f0-af92-6088ab09793c/decline-situp.mp4"
+      "videoFrontUrl": "asset:///videos/decline-situp.mp4",
+      "videoSideUrl": "asset:///videos/decline-situp.mp4"
     },
     {
       "exerciseId": 108,
@@ -2095,8 +2095,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/b30e055f-97cf-4291-b40a-90265d65fa89/v-up.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/b30e055f-97cf-4291-b40a-90265d65fa89/v-up.mp4"
+      "videoFrontUrl": "asset:///videos/v-up.mp4",
+      "videoSideUrl": "asset:///videos/v-up.mp4"
     },
     {
       "exerciseId": 109,
@@ -2114,8 +2114,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/d7999de1-cdce-40ab-a6d4-c435e304f52a/dead-bug.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/d7999de1-cdce-40ab-a6d4-c435e304f52a/dead-bug.mp4"
+      "videoFrontUrl": "asset:///videos/dead-bug.mp4",
+      "videoSideUrl": "asset:///videos/dead-bug.mp4"
     },
     {
       "exerciseId": 110,
@@ -2133,8 +2133,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/0e186cf1-a0f3-420f-b20d-c105c527ef9d/toes-to-bar.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/0e186cf1-a0f3-420f-b20d-c105c527ef9d/toes-to-bar.mp4"
+      "videoFrontUrl": "asset:///videos/toes-to-bar.mp4",
+      "videoSideUrl": "asset:///videos/toes-to-bar.mp4"
     },
     {
       "exerciseId": 111,
@@ -2152,8 +2152,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/04a98ec1-7605-45e6-9ff0-f7f787b8c177/pallof-press.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/04a98ec1-7605-45e6-9ff0-f7f787b8c177/pallof-press.mp4"
+      "videoFrontUrl": "asset:///videos/pallof-press.mp4",
+      "videoSideUrl": "asset:///videos/pallof-press.mp4"
     },
     {
       "exerciseId": 112,
@@ -2171,8 +2171,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/863311b5-e39d-4f22-80bd-a4957fb38cfe/cardio.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/863311b5-e39d-4f22-80bd-a4957fb38cfe/cardio.mp4"
+      "videoFrontUrl": "asset:///videos/cardio.mp4",
+      "videoSideUrl": "asset:///videos/cardio.mp4"
     },
     {
       "exerciseId": 113,
@@ -2190,8 +2190,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/2caab5e6-e378-4b23-8987-050dd2405513/burpee.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/2caab5e6-e378-4b23-8987-050dd2405513/burpee.mp4"
+      "videoFrontUrl": "asset:///videos/burpee.mp4",
+      "videoSideUrl": "asset:///videos/burpee.mp4"
     },
     {
       "exerciseId": 114,
@@ -2209,8 +2209,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/c9203e05-9f99-4744-96df-fd654ffe1793/high-knees.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/c9203e05-9f99-4744-96df-fd654ffe1793/high-knees.mp4"
+      "videoFrontUrl": "asset:///videos/high-knees.mp4",
+      "videoSideUrl": "asset:///videos/high-knees.mp4"
     },
     {
       "exerciseId": 115,
@@ -2228,8 +2228,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/ff6c5231-922d-48e1-8d94-9f56e8d4ac0b/treadmill-run.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/ff6c5231-922d-48e1-8d94-9f56e8d4ac0b/treadmill-run.mp4"
+      "videoFrontUrl": "asset:///videos/treadmill-run.mp4",
+      "videoSideUrl": "asset:///videos/treadmill-run.mp4"
     },
     {
       "exerciseId": 116,
@@ -2247,8 +2247,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/f4f00f05-5650-48f5-9c39-a66110398470/stretching.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/f4f00f05-5650-48f5-9c39-a66110398470/stretching.mp4"
+      "videoFrontUrl": "asset:///videos/stretching.mp4",
+      "videoSideUrl": "asset:///videos/stretching.mp4"
     },
     {
       "exerciseId": 117,
@@ -2266,8 +2266,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/413f39c5-268f-41a7-8244-4b4cbe8778b8/mobility.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/413f39c5-268f-41a7-8244-4b4cbe8778b8/mobility.mp4"
+      "videoFrontUrl": "asset:///videos/mobility.mp4",
+      "videoSideUrl": "asset:///videos/mobility.mp4"
     },
     {
       "exerciseId": 118,
@@ -2285,8 +2285,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/98c8b5d4-0336-4fa1-b96b-d53877e72d16/battle-ropes.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/98c8b5d4-0336-4fa1-b96b-d53877e72d16/battle-ropes.mp4"
+      "videoFrontUrl": "asset:///videos/battle-ropes.mp4",
+      "videoSideUrl": "asset:///videos/battle-ropes.mp4"
     },
     {
       "exerciseId": 119,
@@ -2304,8 +2304,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/638b9e33-f60a-45a0-a3ba-e4772f053ea7/rowing.mp4",
-      "videoSideUrl": "https://gym-fitness-app.lovable.app/__l5e/assets-v1/638b9e33-f60a-45a0-a3ba-e4772f053ea7/rowing.mp4"
+      "videoFrontUrl": "asset:///videos/rowing.mp4",
+      "videoSideUrl": "asset:///videos/rowing.mp4"
     },
     {
       "exerciseId": 120,
