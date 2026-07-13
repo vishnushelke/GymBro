@@ -13,15 +13,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -41,7 +38,6 @@ fun ExerciseDetailScreen(
     }
 
     exercise?.let { item ->
-        var selectedVideoTab by remember { mutableIntStateOf(0) }
         var playbackSpeed by remember { mutableFloatStateOf(1.0f) }
 
         Column(
@@ -49,25 +45,10 @@ fun ExerciseDetailScreen(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-            val videoUrl = if (selectedVideoTab == 0) item.videoFrontUrl else item.videoSideUrl
-            
             VideoPlayer(
-                videoUrl = videoUrl,
+                videoUrl = item.videoFrontUrl,
                 playbackSpeed = playbackSpeed
             )
-
-            TabRow(selectedTabIndex = selectedVideoTab) {
-                Tab(
-                    selected = selectedVideoTab == 0,
-                    onClick = { selectedVideoTab = 0 },
-                    text = { Text("Front View") }
-                )
-                Tab(
-                    selected = selectedVideoTab == 1,
-                    onClick = { selectedVideoTab = 1 },
-                    text = { Text("Side View") }
-                )
-            }
 
             Row(
                 modifier = Modifier

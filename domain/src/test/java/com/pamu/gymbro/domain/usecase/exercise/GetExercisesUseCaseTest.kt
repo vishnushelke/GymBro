@@ -21,12 +21,39 @@ class GetExercisesUseCaseTest {
         getExercisesUseCase = GetExercisesUseCase(repository)
     }
 
+    private fun createExercise(id: Long, name: String, primaryMuscle: String = "") = Exercise(
+        id = id,
+        name = name,
+        categoryId = 1L,
+        difficulty = "Beginner",
+        equipment = "None",
+        primaryMuscle = primaryMuscle,
+        secondaryMuscles = "",
+        exerciseType = "",
+        movementPattern = "",
+        caloriesBurnedEstimate = 10,
+        description = "",
+        benefits = "",
+        commonMistakes = "",
+        safetyWarnings = "",
+        beginnerVariation = "",
+        intermediateVariation = "",
+        advancedVariation = "",
+        instructions = "",
+        thumbnailUrl = "",
+        videoFrontUrl = "",
+        videoSideUrl = "",
+        videoDuration = 0,
+        videoFps = 0,
+        videoResolution = ""
+    )
+
     @Test
     fun `invoke with null categoryId returns all exercises`() = runBlocking {
         // Given
         val exercises = listOf(
-            Exercise(1, "Push up", 1, "Beginner", "None", "Chest", "", "", "", "", "", "", "", 10),
-            Exercise(2, "Squat", 2, "Beginner", "None", "Legs", "", "", "", "", "", "", "", 15)
+            createExercise(1, "Push up"),
+            createExercise(2, "Squat")
         )
         every { repository.getAllExercises() } returns flowOf(exercises)
 
@@ -42,7 +69,7 @@ class GetExercisesUseCaseTest {
         // Given
         val categoryId = 1L
         val exercises = listOf(
-            Exercise(1, "Push up", 1, "Beginner", "None", "Chest", "", "", "", "", "", "", "", 10)
+            createExercise(1, "Push up")
         )
         every { repository.getExercisesByCategory(categoryId) } returns flowOf(exercises)
 
@@ -51,5 +78,39 @@ class GetExercisesUseCaseTest {
 
         // Then
         assertEquals(exercises, result)
+    }
+
+    @Test
+    fun `invoke with query filters exercises by name`() = runBlocking {
+        // Given
+        val exercises = listOf(
+            createExercise(1, "Push up"),
+            createExercise(2, "Squat")
+        )
+        every { repository.getAllExercises() } returns flowOf(exercises)
+
+        // When
+        val result = getExercisesUseCase(null, "push").first()
+
+        // Then
+        assertEquals(1, result.size)
+        assertEquals("Push up", result[0].name)
+    }
+
+    @Test
+    fun `invoke with query filters exercises by primary muscle`() = runBlocking {
+        // Given
+        val exercises = listOf(
+            createExercise(1, "Push up", "Chest"),
+            createExercise(2, "Squat", "Legs")
+        )
+        every { repository.getAllExercises() } returns flowOf(exercises)
+
+        // When
+        val result = getExercisesUseCase(null, "chest").first()
+
+        // Then
+        assertEquals(1, result.size)
+        assertEquals("Chest", result[0].primaryMuscle)
     }
 }

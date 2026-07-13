@@ -32,16 +32,22 @@ class ExerciseListViewModel @Inject constructor(
     private val _selectedCategoryId = MutableStateFlow<Long?>(null)
     val selectedCategoryId: StateFlow<Long?> = _selectedCategoryId.asStateFlow()
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
     @OptIn(ExperimentalCoroutinesApi::class)
-    val exercises: StateFlow<List<Exercise>> = _selectedCategoryId
-        .flatMapLatest { categoryId ->
-            getExercisesUseCase(categoryId)
-        }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
-        )
+    val exercises: StateFlow<List<Exercise>> = kotlinx.coroutines.flow.combine(
+        _selectedCategoryId,
+        _searchQuery
+    ) { categoryId, query ->
+        categoryId to query
+    }.flatMapLatest { (categoryId, query) ->
+        getExercisesUseCase(categoryId, query)
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
 
     init {
         loadCategories()
@@ -57,6 +63,10 @@ class ExerciseListViewModel @Inject constructor(
 
     fun selectCategory(categoryId: Long?) {
         _selectedCategoryId.value = categoryId
+    }
+
+    fun onSearchQueryChange(query: String) {
+        _searchQuery.value = query
     }
 
     fun toggleFavorite(exercise: Exercise) {
