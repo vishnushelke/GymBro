@@ -17,10 +17,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.automirrored.filled.ShowChart
 import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.LocalDrink
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.filled.Whatshot
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -64,14 +67,21 @@ fun HomeScreen(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(280.dp)
+                .height(300.dp)
         ) {
             Image(
-                painter = rememberAsyncImagePainter(model = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000"),
+                painter = rememberAsyncImagePainter(model = "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=1000"),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
+            // Dark scrim for overall image contrast
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.4f))
+            )
+            // Bottom gradient for text readability and smooth transition
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -79,7 +89,8 @@ fun HomeScreen(
                         brush = Brush.verticalGradient(
                             colors = listOf(
                                 Color.Transparent,
-                                MaterialTheme.colorScheme.background.copy(alpha = 0.8f),
+                                Color.Transparent,
+                                MaterialTheme.colorScheme.background.copy(alpha = 0.5f),
                                 MaterialTheme.colorScheme.background
                             )
                         )
@@ -88,19 +99,23 @@ fun HomeScreen(
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
-                    .padding(24.dp)
+                    .padding(horizontal = 24.dp, vertical = 32.dp)
             ) {
                 Text(
                     text = "Welcome Back, Bro!",
                     style = MaterialTheme.typography.headlineLarge.copy(
                         fontWeight = FontWeight.Black,
-                        color = Color.White
+                        color = Color.White,
+                        letterSpacing = (-1).sp,
+                        lineHeight = 40.sp
                     )
                 )
                 Text(
                     text = "Ready to crush your goals today?",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = Color.White.copy(alpha = 0.7f)
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontWeight = FontWeight.Medium,
+                        color = Color.White.copy(alpha = 0.8f)
+                    )
                 )
             }
         }
@@ -143,7 +158,7 @@ fun HomeScreen(
                 onLibraryClick = onNavigateToExercises,
                 onWorkoutsClick = onNavigateToWorkouts,
                 onDietsClick = onNavigateToDiets,
-                onRemindersClick = onNavigateToReminders
+                onProgressClick = onNavigateToProgress
             )
 
             favorites?.let { favs ->
@@ -224,7 +239,7 @@ fun QuickStatsRow(summary: DashboardSummary) {
             label = "Calories",
             value = "${summary.caloriesConsumed}",
             unit = "kcal",
-            icon = Icons.Default.Info,
+            icon = Icons.Default.Whatshot,
             color = Color(0xFFFF5722),
             progress = summary.caloriesConsumed.toFloat() / summary.calorieGoal.toFloat()
         )
@@ -233,7 +248,7 @@ fun QuickStatsRow(summary: DashboardSummary) {
             label = "Water",
             value = "${summary.waterIntakeMl}",
             unit = "ml",
-            icon = Icons.Default.Info,
+            icon = Icons.Default.LocalDrink,
             color = Color(0xFF2196F3),
             progress = summary.waterIntakeMl.toFloat() / summary.waterGoalMl.toFloat()
         )
@@ -305,7 +320,7 @@ fun ExploreGrid(
     onLibraryClick: () -> Unit,
     onWorkoutsClick: () -> Unit,
     onDietsClick: () -> Unit,
-    onRemindersClick: () -> Unit
+    onProgressClick: () -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -340,8 +355,8 @@ fun ExploreGrid(
                 title = "Stats",
                 subtitle = "Track Progress",
                 image = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500",
-                icon = Icons.Default.Info,
-                onClick = onRemindersClick
+                icon = Icons.AutoMirrored.Filled.ShowChart,
+                onClick = onProgressClick
             )
         }
     }
