@@ -39,7 +39,30 @@ fun ExerciseDetailScreen(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = MaterialTheme.colorScheme.background,
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = { 
+                    exercise?.let { 
+                        Text(
+                            text = it.name,
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                        ) 
+                    } 
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
+            )
+        }
     ) { padding ->
         if (exercise == null) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -48,8 +71,6 @@ fun ExerciseDetailScreen(
         }
 
         exercise?.let { item ->
-            var playbackSpeed by remember { mutableFloatStateOf(1.0f) }
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -61,25 +82,8 @@ fun ExerciseDetailScreen(
                 Box(modifier = Modifier.fillMaxWidth().height(350.dp)) {
                     VideoPlayer(
                         videoUrl = item.videoFrontUrl,
-                        playbackSpeed = playbackSpeed,
                         modifier = Modifier.fillMaxSize()
                     )
-                    
-                    // Back Button
-                    IconButton(
-                        onClick = onBackClick,
-                        modifier = Modifier
-                            .statusBarsPadding()
-                            .padding(8.dp)
-                            .clip(CircleShape)
-                            .background(Color.Black.copy(alpha = 0.3f))
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.White
-                        )
-                    }
 
                     // Bottom Gradient Overlay
                     Box(
@@ -96,41 +100,12 @@ fun ExerciseDetailScreen(
                 }
 
                 Column(modifier = Modifier.padding(horizontal = 20.dp)) {
-                    Text(
-                        text = item.name,
-                        style = MaterialTheme.typography.headlineMedium.copy(
-                            fontWeight = FontWeight.Black,
-                            letterSpacing = (-0.5).sp
-                        )
-                    )
-                    
                     Row(
                         modifier = Modifier.padding(vertical = 12.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         DetailChip(label = item.difficulty, icon = Icons.Default.Star)
                         DetailChip(label = item.equipment, icon = Icons.Default.FitnessCenter)
-                    }
-
-                    // Playback Speed Selector
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Playback Speed:",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                        )
-                        listOf(0.5f, 1.0f, 1.5f).forEach { speed ->
-                            FilterChip(
-                                selected = playbackSpeed == speed,
-                                onClick = { playbackSpeed = speed },
-                                label = { Text("${speed}x") },
-                                shape = CircleShape
-                            )
-                        }
                     }
 
                     HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp), thickness = 0.5.dp, color = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f))
@@ -174,22 +149,38 @@ fun ExerciseDetailScreen(
 
 @Composable
 fun DetailChip(label: String, icon: ImageVector) {
+    val isDifficulty = label.lowercase() in listOf("beginner", "intermediate", "expert")
+    val chipColor = when (label.lowercase()) {
+        "beginner" -> Color(0xFF2196F3)
+        "intermediate" -> Color(0xFF4CAF50)
+        "expert" -> Color(0xFFF44336)
+        else -> MaterialTheme.colorScheme.primary
+    }
+
     Surface(
         shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+        color = if (isDifficulty) chipColor.copy(alpha = 0.1f) 
+                else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                imageVector = icon, 
-                contentDescription = null, 
-                modifier = Modifier.size(14.dp), 
-                tint = MaterialTheme.colorScheme.primary
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(14.dp),
+                tint = chipColor
             )
             Spacer(modifier = Modifier.width(6.dp))
-            Text(text = label, style = MaterialTheme.typography.labelMedium)
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelMedium,
+                color = if (isDifficulty) chipColor 
+                        else MaterialTheme.colorScheme.onSurface,
+                fontWeight = if (isDifficulty) FontWeight.Bold
+                           else FontWeight.Normal
+            )
         }
     }
 }

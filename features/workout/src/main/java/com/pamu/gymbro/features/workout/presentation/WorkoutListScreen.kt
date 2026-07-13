@@ -186,8 +186,20 @@ fun WorkoutPlanItem(
                             modifier = Modifier.size(14.dp)
                         )
                         Spacer(modifier = Modifier.width(4.dp))
+                        val levelColor = when (plan.level.lowercase()) {
+                            "beginner" -> Color(0xFF2196F3)
+                            "intermediate" -> Color(0xFF4CAF50)
+                            "expert" -> Color(0xFFF44336)
+                            else -> Color.White.copy(alpha = 0.7f)
+                        }
                         Text(
-                            text = "${plan.level} • ${plan.goal}",
+                            text = plan.level,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = levelColor,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = " • ${plan.goal}",
                             style = MaterialTheme.typography.labelSmall,
                             color = Color.White.copy(alpha = 0.7f)
                         )

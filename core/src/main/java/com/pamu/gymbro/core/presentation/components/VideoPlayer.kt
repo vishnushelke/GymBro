@@ -29,8 +29,7 @@ import coil.compose.rememberAsyncImagePainter
 @Composable
 fun VideoPlayer(
     videoUrl: String,
-    modifier: Modifier = Modifier,
-    playbackSpeed: Float = 1.0f
+    modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     var isVideoFormat by remember { mutableStateOf(true) }
@@ -60,10 +59,6 @@ fun VideoPlayer(
                 }
             }
 
-            LaunchedEffect(playbackSpeed) {
-                exoPlayer.playbackParameters = PlaybackParameters(playbackSpeed)
-            }
-
             DisposableEffect(Unit) {
                 onDispose {
                     exoPlayer.release()
@@ -74,7 +69,7 @@ fun VideoPlayer(
                 factory = {
                     PlayerView(context).apply {
                         player = exoPlayer
-                        useController = true
+                        useController = false
                     }
                 },
                 modifier = Modifier.fillMaxSize()

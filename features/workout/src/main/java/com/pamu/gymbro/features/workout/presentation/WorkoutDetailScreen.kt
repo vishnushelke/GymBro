@@ -93,11 +93,25 @@ fun WorkoutDetailScreen(
                                 color = Color.White
                             )
                         )
-                        Text(
-                            text = "${details.plan.level} • ${details.plan.goal}",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = Color.White.copy(alpha = 0.8f)
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            val levelColor = when (details.plan.level.lowercase()) {
+                                "beginner" -> Color(0xFF2196F3)
+                                "intermediate" -> Color(0xFF4CAF50)
+                                "expert" -> Color(0xFFF44336)
+                                else -> Color.White.copy(alpha = 0.8f)
+                            }
+                            Text(
+                                text = details.plan.level,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = levelColor,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = " • ${details.plan.goal}",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = Color.White.copy(alpha = 0.8f)
+                            )
+                        }
                     }
                 }
 

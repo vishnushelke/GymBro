@@ -156,8 +156,7 @@ fun ExerciseListScreen(
                         ExerciseItem(
                             modifier = Modifier.animateItem(),
                             exercise = exercise,
-                            onClick = { onExerciseClick(exercise.id) },
-                            onToggleFavorite = { viewModel.toggleFavorite(exercise) }
+                            onClick = { onExerciseClick(exercise.id) }
                         )
                     }
                 }
@@ -170,8 +169,7 @@ fun ExerciseListScreen(
 fun ExerciseItem(
     modifier: Modifier = Modifier,
     exercise: Exercise,
-    onClick: () -> Unit,
-    onToggleFavorite: () -> Unit
+    onClick: () -> Unit
 ) {
     Card(
         modifier = modifier
@@ -181,44 +179,32 @@ fun ExerciseItem(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Row(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Placeholder for exercise icon/image
-            Box(
-                modifier = Modifier
-                    .size(56.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = exercise.primaryMuscle.firstOrNull()?.toString() ?: "E",
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-            }
-
-            Spacer(modifier = Modifier.width(16.dp))
-
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = exercise.name,
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
+                    val difficultyColor = when (exercise.difficulty.lowercase()) {
+                        "beginner" -> Color(0xFF2196F3)
+                        "intermediate" -> Color(0xFF4CAF50)
+                        "expert" -> Color(0xFFF44336)
+                        else -> MaterialTheme.colorScheme.secondary
+                    }
                     Box(
                         modifier = Modifier
                             .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.2f))
+                            .background(difficultyColor.copy(alpha = 0.2f))
                             .padding(horizontal = 8.dp, vertical = 2.dp)
                     ) {
                         Text(
                             text = exercise.difficulty,
                             style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.secondary
+                            color = difficultyColor,
+                            fontWeight = FontWeight.Bold
                         )
                     }
                     Text(
@@ -232,14 +218,6 @@ fun ExerciseItem(
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                     )
                 }
-            }
-            
-            IconButton(onClick = onToggleFavorite) {
-                Icon(
-                    imageVector = if (exercise.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                    contentDescription = "Toggle Favorite",
-                    tint = if (exercise.isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
-                )
             }
         }
     }
