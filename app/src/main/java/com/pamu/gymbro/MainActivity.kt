@@ -31,6 +31,7 @@ import com.pamu.gymbro.features.profile.presentation.ProfileScreen
 import com.pamu.gymbro.features.progress.presentation.ProgressScreen
 import com.pamu.gymbro.features.reminder.presentation.ReminderSettingsScreen
 import com.pamu.gymbro.features.workout.presentation.WorkoutBuilderScreen
+import com.pamu.gymbro.features.workout.presentation.WorkoutDayDetailScreen
 import com.pamu.gymbro.features.workout.presentation.WorkoutDetailScreen
 import com.pamu.gymbro.features.workout.presentation.WorkoutListScreen
 import com.pamu.gymbro.ui.theme.GymBroTheme
@@ -121,7 +122,25 @@ class MainActivity : ComponentActivity() {
                                 arguments = listOf(navArgument("planId") { type = NavType.LongType })
                             ) { backStackEntry ->
                                 val id = backStackEntry.arguments?.getLong("planId") ?: 0L
-                                WorkoutDetailScreen(planId = id)
+                                WorkoutDetailScreen(
+                                    planId = id,
+                                    onDayClick = { dayId ->
+                                        navController.navigate("workout_day_detail/$dayId")
+                                    }
+                                )
+                            }
+                            composable(
+                                "workout_day_detail/{dayId}",
+                                arguments = listOf(navArgument("dayId") { type = NavType.LongType })
+                            ) { backStackEntry ->
+                                val dayId = backStackEntry.arguments?.getLong("dayId") ?: 0L
+                                WorkoutDayDetailScreen(
+                                    dayId = dayId,
+                                    onExerciseClick = { id ->
+                                        navController.navigate("exercise_detail/$id")
+                                    },
+                                    onBackClick = { navController.popBackStack() }
+                                )
                             }
                             composable("workout_builder?planId={planId}",
                                 arguments = listOf(navArgument("planId") { 

@@ -128,7 +128,8 @@ fun HomeScreen(
                     user = user,
                     summary = summary,
                     networkStatus = networkStatus,
-                    favorites = favorites
+                    favorites = favorites,
+                    onNavigateToProfile = onNavigateToProfile
                 )
                 2 -> ProfileContent(
                     user = user,
@@ -144,7 +145,8 @@ fun HomeTab(
     user: com.pamu.gymbro.domain.model.User?,
     summary: DashboardSummary?,
     networkStatus: ConnectivityObserver.Status,
-    favorites: FavoriteItems?
+    favorites: FavoriteItems?,
+    onNavigateToProfile: () -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
         // Hero Section
@@ -210,6 +212,11 @@ fun HomeTab(
         }
 
         Column(modifier = Modifier.padding(horizontal = 20.dp)) {
+            user?.let { profile ->
+                UserProfileCard(user = profile, onEditClick = onNavigateToProfile)
+                Spacer(modifier = Modifier.height(24.dp))
+            }
+
             summary?.let { data ->
                 DashboardHeader(data)
                 Spacer(modifier = Modifier.height(24.dp))

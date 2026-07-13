@@ -3,6 +3,7 @@ package com.pamu.gymbro.data.mapper
 import com.pamu.gymbro.data.local.entity.WorkoutDayEntity
 import com.pamu.gymbro.data.local.entity.WorkoutExerciseEntity
 import com.pamu.gymbro.data.local.entity.WorkoutPlanEntity
+import com.pamu.gymbro.domain.model.Exercise
 import com.pamu.gymbro.domain.model.WorkoutDay
 import com.pamu.gymbro.domain.model.WorkoutExercise
 import com.pamu.gymbro.domain.model.WorkoutPlan
@@ -48,15 +49,20 @@ fun WorkoutDay.toEntity(): WorkoutDayEntity {
     )
 }
 
-fun WorkoutExerciseEntity.toDomain(): WorkoutExercise {
+fun WorkoutExerciseEntity.toDomain(exercise: Exercise? = null): WorkoutExercise {
     return WorkoutExercise(
         id = id,
         workoutDayId = workoutDayId,
         exerciseId = exerciseId,
         sets = sets,
         reps = reps,
-        restSeconds = restSeconds
+        restSeconds = restSeconds,
+        exercise = exercise
     )
+}
+
+fun com.pamu.gymbro.data.local.model.WorkoutExerciseWithExercise.toDomain(): WorkoutExercise {
+    return workoutExercise.toDomain(exercise.toDomain())
 }
 
 fun WorkoutExercise.toEntity(): WorkoutExerciseEntity {

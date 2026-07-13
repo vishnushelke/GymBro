@@ -2,17 +2,20 @@ package com.pamu.gymbro.features.workout.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -29,6 +32,7 @@ import com.pamu.gymbro.domain.model.WorkoutDay
 fun WorkoutDetailScreen(
     planId: Long,
     viewModel: WorkoutDetailViewModel = hiltViewModel(),
+    onDayClick: (Long) -> Unit = {},
     onBackClick: () -> Unit = {}
 ) {
     val workoutDetails by viewModel.workoutDetails.collectAsState()
@@ -127,7 +131,11 @@ fun WorkoutDetailScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(details.days) { day ->
-                        WorkoutDayItem(modifier = Modifier.animateItem(), day = day)
+                        WorkoutDayItem(
+                            modifier = Modifier.animateItem(),
+                            day = day,
+                            onClick = { onDayClick(day.id) }
+                        )
                     }
                     item { Spacer(modifier = Modifier.height(32.dp)) }
                 }
@@ -137,9 +145,11 @@ fun WorkoutDetailScreen(
 }
 
 @Composable
-fun WorkoutDayItem(modifier: Modifier = Modifier, day: WorkoutDay) {
+fun WorkoutDayItem(modifier: Modifier = Modifier, day: WorkoutDay, onClick: () -> Unit) {
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onClick() },
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
@@ -150,7 +160,10 @@ fun WorkoutDayItem(modifier: Modifier = Modifier, day: WorkoutDay) {
             Box(
                 modifier = Modifier
                     .size(48.dp)
-                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), RoundedCornerShape(12.dp)),
+                    .background(
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                        RoundedCornerShape(12.dp)
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -159,10 +172,10 @@ fun WorkoutDayItem(modifier: Modifier = Modifier, day: WorkoutDay) {
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
-            
+
             Spacer(modifier = Modifier.width(16.dp))
-            
-            Column {
+
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = "Day ${day.dayNumber}",
                     style = MaterialTheme.typography.labelSmall,
@@ -174,6 +187,12 @@ fun WorkoutDayItem(modifier: Modifier = Modifier, day: WorkoutDay) {
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                 )
             }
+
+            Icon(
+                imageVector = Icons.Default.ChevronRight,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+            )
         }
     }
 }

@@ -7,8 +7,7 @@ import com.pamu.gymbro.domain.model.WorkoutDay
 import com.pamu.gymbro.domain.model.WorkoutPlan
 import com.pamu.gymbro.domain.repository.WorkoutRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -26,9 +25,20 @@ class WorkoutRepositoryImpl @Inject constructor(
         return dao.getWorkoutPlanById(planId).map { it?.toDomain() }
     }
 
+    override fun getWorkoutDayById(dayId: Long): Flow<WorkoutDay?> {
+        return dao.getWorkoutDayById(dayId).map { it?.toDomain() }
+    }
+
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     override fun getWorkoutDaysForPlan(planId: Long): Flow<List<WorkoutDay>> {
-        return dao.getWorkoutDaysForPlan(planId).map { dayEntities ->
-            dayEntities.map { it.toDomain() }
+        return dao.getWorkoutDaysForPlan(planId).flatMapLatest { dayEntities ->
+            val dayFlows = dayEntities.map { dayEntity ->
+                dao.getExercisesWithDetailsForDay(dayEntity.id).map { exercisesWithDetails ->
+                    dayEntity.toDomain(exercisesWithDetails.map { it.toDomain() })
+                }
+            }
+            if (dayFlows.isEmpty()) flowOf(emptyList())
+            else combine(dayFlows) { it.toList() }
         }
     }
 
