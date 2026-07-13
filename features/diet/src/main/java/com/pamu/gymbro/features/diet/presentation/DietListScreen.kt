@@ -35,6 +35,7 @@ fun DietListScreen(
     onDietClick: (Long) -> Unit
 ) {
     val dietPlans by viewModel.dietPlans.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background
@@ -53,17 +54,47 @@ fun DietListScreen(
                 modifier = Modifier.padding(16.dp)
             )
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(dietPlans) { plan ->
-                    DietPlanItem(
-                        plan = plan,
-                        onClick = { onDietClick(plan.id) },
-                        onToggleFavorite = { viewModel.toggleFavorite(plan) }
+            Box(modifier = Modifier.fillMaxSize()) {
+                if (isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center),
+                        color = MaterialTheme.colorScheme.primary
                     )
+                } else if (dietPlans.isEmpty()) {
+                    Column(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .padding(32.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.List,
+                            contentDescription = null,
+                            modifier = Modifier.size(64.dp),
+                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "No diet plans available",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                        )
+                    }
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        items(dietPlans, key = { it.id }) { plan ->
+                            DietPlanItem(
+                                modifier = Modifier.animateItem(),
+                                plan = plan,
+                                onClick = { onDietClick(plan.id) },
+                                onToggleFavorite = { viewModel.toggleFavorite(plan) }
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -72,6 +103,7 @@ fun DietListScreen(
 
 @Composable
 fun DietPlanItem(
+    modifier: Modifier = Modifier,
     plan: DietPlan,
     onClick: () -> Unit,
     onToggleFavorite: () -> Unit
@@ -83,7 +115,7 @@ fun DietPlanItem(
     }
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(180.dp)
             .clickable { onClick() },

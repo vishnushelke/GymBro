@@ -37,6 +37,7 @@ fun ExerciseListScreen(
     val exercises by viewModel.exercises.collectAsState()
     val selectedCategoryId by viewModel.selectedCategoryId.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
 
     Scaffold(
         topBar = {
@@ -62,7 +63,7 @@ fun ExerciseListScreen(
                         .padding(bottom = 8.dp),
                     placeholder = { Text("Search 140+ exercises...", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)) },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Icon(imageVector = Icons.Default.Search, contentDescription = "Search icon", tint = MaterialTheme.colorScheme.primary)
                     },
                     trailingIcon = {
                         if (searchQuery.isNotEmpty()) {
@@ -107,20 +108,59 @@ fun ExerciseListScreen(
             }
         }
     ) { padding ->
-        LazyColumn(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = PaddingValues(bottom = 24.dp)
         ) {
-            items(exercises) { exercise ->
-                ExerciseItem(
-                    exercise = exercise,
-                    onClick = { onExerciseClick(exercise.id) },
-                    onToggleFavorite = { viewModel.toggleFavorite(exercise) }
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center),
+                    color = MaterialTheme.colorScheme.primary
                 )
+            } else if (exercises.isEmpty()) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(32.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = null,
+                        modifier = Modifier.size(64.dp),
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "No exercises found",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
+                    Text(
+                        text = "Try adjusting your search or category",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+                    )
+                }
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    contentPadding = PaddingValues(bottom = 24.dp)
+                ) {
+                    items(exercises, key = { it.id }) { exercise ->
+                        ExerciseItem(
+                            modifier = Modifier.animateItem(),
+                            exercise = exercise,
+                            onClick = { onExerciseClick(exercise.id) },
+                            onToggleFavorite = { viewModel.toggleFavorite(exercise) }
+                        )
+                    }
+                }
             }
         }
     }
@@ -128,12 +168,13 @@ fun ExerciseListScreen(
 
 @Composable
 fun ExerciseItem(
+    modifier: Modifier = Modifier,
     exercise: Exercise,
     onClick: () -> Unit,
     onToggleFavorite: () -> Unit
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clickable { onClick() },
         shape = RoundedCornerShape(20.dp),

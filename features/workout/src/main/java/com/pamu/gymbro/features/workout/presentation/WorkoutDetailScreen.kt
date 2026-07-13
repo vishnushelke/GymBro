@@ -40,6 +40,12 @@ fun WorkoutDetailScreen(
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
+        if (workoutDetails == null) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+            }
+        }
+
         workoutDetails?.let { details ->
             Column(
                 modifier = Modifier
@@ -52,8 +58,16 @@ fun WorkoutDetailScreen(
                         .fillMaxWidth()
                         .height(200.dp)
                 ) {
+                    val image = when(details.plan.name.lowercase()) {
+                        "chest" -> "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=800"
+                        "back" -> "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=800"
+                        "legs" -> "https://images.unsplash.com/photo-1434608519344-49d77a699e1d?q=80&w=800"
+                        "arms" -> "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800"
+                        else -> "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800"
+                    }
+                    
                     Image(
-                        painter = rememberAsyncImagePainter(model = "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800"),
+                        painter = rememberAsyncImagePainter(model = image),
                         contentDescription = null,
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop
@@ -99,7 +113,7 @@ fun WorkoutDetailScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(details.days) { day ->
-                        WorkoutDayItem(day = day)
+                        WorkoutDayItem(modifier = Modifier.animateItem(), day = day)
                     }
                     item { Spacer(modifier = Modifier.height(32.dp)) }
                 }
@@ -109,9 +123,9 @@ fun WorkoutDetailScreen(
 }
 
 @Composable
-fun WorkoutDayItem(day: WorkoutDay) {
+fun WorkoutDayItem(modifier: Modifier = Modifier, day: WorkoutDay) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {

@@ -1,5 +1,10 @@
 package com.pamu.gymbro.features.home.presentation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -100,8 +105,23 @@ fun HomeScreen(
             }
         }
 
-        if (networkStatus != ConnectivityObserver.Status.Available) {
+        AnimatedVisibility(
+            visible = networkStatus != ConnectivityObserver.Status.Available,
+            enter = fadeIn() + expandVertically(),
+            exit = fadeOut() + shrinkVertically()
+        ) {
             OfflineIndicator()
+        }
+
+        if (summary == null) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+            }
         }
 
         Column(modifier = Modifier.padding(horizontal = 20.dp)) {

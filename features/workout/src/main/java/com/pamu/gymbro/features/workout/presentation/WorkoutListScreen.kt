@@ -38,6 +38,7 @@ fun WorkoutListScreen(
     onAddWorkoutClick: () -> Unit
 ) {
     val workoutPlans by viewModel.workoutPlans.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -66,21 +67,58 @@ fun WorkoutListScreen(
                 modifier = Modifier.padding(16.dp)
             )
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(workoutPlans) { plan ->
-                    WorkoutPlanItem(
-                        plan = plan,
-                        onClick = { onWorkoutClick(plan.id) },
-                        onToggleFavorite = { viewModel.toggleFavorite(plan) }
+            Box(modifier = Modifier.fillMaxSize()) {
+                if (isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center),
+                        color = MaterialTheme.colorScheme.primary
                     )
-                }
-                
-                item {
-                    Spacer(modifier = Modifier.height(80.dp))
+                } else if (workoutPlans.isEmpty()) {
+                    Column(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .padding(32.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = null,
+                            modifier = Modifier.size(64.dp),
+                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "No workout plans yet",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                        )
+                        Button(
+                            onClick = onAddWorkoutClick,
+                            modifier = Modifier.padding(top = 16.dp),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Text("Create Your First Plan")
+                        }
+                    }
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        items(workoutPlans, key = { it.id }) { plan ->
+                            WorkoutPlanItem(
+                                modifier = Modifier.animateItem(),
+                                plan = plan,
+                                onClick = { onWorkoutClick(plan.id) },
+                                onToggleFavorite = { viewModel.toggleFavorite(plan) }
+                            )
+                        }
+
+                        item {
+                            Spacer(modifier = Modifier.height(80.dp))
+                        }
+                    }
                 }
             }
         }
@@ -89,6 +127,7 @@ fun WorkoutListScreen(
 
 @Composable
 fun WorkoutPlanItem(
+    modifier: Modifier = Modifier,
     plan: WorkoutPlan,
     onClick: () -> Unit,
     onToggleFavorite: () -> Unit
@@ -102,7 +141,7 @@ fun WorkoutPlanItem(
     }
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(180.dp)
             .clickable { onClick() },

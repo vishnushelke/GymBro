@@ -49,8 +49,16 @@ class ExerciseListViewModel @Inject constructor(
         initialValue = emptyList()
     )
 
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
     init {
         loadCategories()
+        viewModelScope.launch {
+            exercises.collect {
+                _isLoading.value = false
+            }
+        }
     }
 
     private fun loadCategories() {

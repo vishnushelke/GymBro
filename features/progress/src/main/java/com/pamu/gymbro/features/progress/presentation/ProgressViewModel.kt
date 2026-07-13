@@ -22,6 +22,9 @@ class ProgressViewModel @Inject constructor(
     private val _entries = MutableStateFlow<List<ProgressEntry>>(emptyList())
     val entries: StateFlow<List<ProgressEntry>> = _entries.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
     init {
         loadEntries()
     }
@@ -30,6 +33,7 @@ class ProgressViewModel @Inject constructor(
         viewModelScope.launch {
             getProgressEntriesUseCase().collect {
                 _entries.value = it
+                _isLoading.value = false
             }
         }
     }

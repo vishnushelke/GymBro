@@ -22,6 +22,9 @@ class DietListViewModel @Inject constructor(
     private val _dietPlans = MutableStateFlow<List<DietPlan>>(emptyList())
     val dietPlans: StateFlow<List<DietPlan>> = _dietPlans.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
     init {
         loadDietPlans()
     }
@@ -30,6 +33,7 @@ class DietListViewModel @Inject constructor(
         viewModelScope.launch {
             getDietPlansUseCase().collect {
                 _dietPlans.value = it
+                _isLoading.value = false
             }
         }
     }

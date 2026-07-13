@@ -41,6 +41,12 @@ fun ExerciseDetailScreen(
         modifier = Modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
+        if (exercise == null) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+            }
+        }
+
         exercise?.let { item ->
             var playbackSpeed by remember { mutableFloatStateOf(1.0f) }
 

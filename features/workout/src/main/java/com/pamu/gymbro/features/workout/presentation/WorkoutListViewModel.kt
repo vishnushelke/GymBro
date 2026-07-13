@@ -22,6 +22,9 @@ class WorkoutListViewModel @Inject constructor(
     private val _workoutPlans = MutableStateFlow<List<WorkoutPlan>>(emptyList())
     val workoutPlans: StateFlow<List<WorkoutPlan>> = _workoutPlans.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
     init {
         loadWorkoutPlans()
     }
@@ -30,6 +33,7 @@ class WorkoutListViewModel @Inject constructor(
         viewModelScope.launch {
             getWorkoutPlansUseCase().collect {
                 _workoutPlans.value = it
+                _isLoading.value = false
             }
         }
     }
