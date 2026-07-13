@@ -43,7 +43,6 @@ fun DietListScreen(
     val isLoading by viewModel.isLoading.collectAsState()
 
     var showDefaultDietPicker by remember { mutableStateOf(false) }
-    var pendingDietConfig by remember { mutableStateOf<Triple<Boolean, Boolean, String>?>(null) }
     var showReplaceConfirmation by remember { mutableStateOf(false) }
     var showCustomReplaceConfirmation by remember { mutableStateOf(false) }
 
@@ -152,46 +151,34 @@ fun DietListScreen(
     }
 
     if (showDefaultDietPicker) {
-        DefaultDietPicker(
-            onDismiss = { showDefaultDietPicker = false },
-            onDietSelected = { isVeg, isBeginner, goal ->
-                val existing = viewModel.hasDefaultPlan()
-                if (existing != null) {
-                    pendingDietConfig = Triple(isVeg, isBeginner, goal)
-                    showReplaceConfirmation = true
-                } else {
-                    viewModel.generateDefaultDiet(isVeg, isBeginner, goal)
-                }
-                showDefaultDietPicker = false
-            }
-        )
+        // We no longer need the picker dialog if we use the saved profile.
+        // But for consistency with your request "replace if exists", 
+        // I will keep a simpler "Replace existing?" check if they click the magic button.
+        val existing = viewModel.hasDefaultPlan()
+        if (existing != null) {
+            showReplaceConfirmation = true
+        } else {
+            viewModel.generateDefaultDiet()
+        }
+        showDefaultDietPicker = false
     }
 
-    if (showReplaceConfirmation && pendingDietConfig != null) {
+    if (showReplaceConfirmation) {
         AlertDialog(
             onDismissRequest = { showReplaceConfirmation = false },
             title = { Text("Replace Default Plan?") },
-            text = { Text("You already have a default diet plan. Would you like to replace it with a new one?") },
+            text = { Text("You already have a default diet plan. Replacing it will regenerate it based on your profile.") },
             confirmButton = {
                 Button(onClick = {
                     val existing = viewModel.hasDefaultPlan()
-                    viewModel.generateDefaultDiet(
-                        pendingDietConfig!!.first,
-                        pendingDietConfig!!.second,
-                        pendingDietConfig!!.third,
-                        replaceExistingId = existing?.id
-                    )
+                    viewModel.generateDefaultDiet(replaceExistingId = existing?.id)
                     showReplaceConfirmation = false
-                    pendingDietConfig = null
                 }) {
                     Text("REPLACE")
                 }
             },
             dismissButton = {
-                TextButton(onClick = { 
-                    showReplaceConfirmation = false
-                    pendingDietConfig = null
-                }) {
+                TextButton(onClick = { showReplaceConfirmation = false }) {
                     Text("CANCEL")
                 }
             }

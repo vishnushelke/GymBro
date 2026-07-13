@@ -8,14 +8,10 @@ import com.pamu.gymbro.domain.usecase.exercise.GetCategoriesUseCase
 import com.pamu.gymbro.domain.usecase.exercise.GetExercisesUseCase
 import com.pamu.gymbro.domain.usecase.favorite.FavoriteType
 import com.pamu.gymbro.domain.usecase.favorite.ToggleFavoriteUseCase
+import com.pamu.gymbro.domain.usecase.user.GetUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,7 +19,7 @@ import javax.inject.Inject
 class ExerciseListViewModel @Inject constructor(
     private val getExercisesUseCase: GetExercisesUseCase,
     private val getCategoriesUseCase: GetCategoriesUseCase,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
+    private val getUserUseCase: GetUserUseCase
 ) : ViewModel() {
 
     private val _categories = MutableStateFlow<List<ExerciseCategory>>(emptyList())
@@ -36,13 +32,21 @@ class ExerciseListViewModel @Inject constructor(
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val exercises: StateFlow<List<Exercise>> = kotlinx.coroutines.flow.combine(
+    val exercises: StateFlow<List<Exercise>> = combine(
         _selectedCategoryId,
-        _searchQuery
-    ) { categoryId, query ->
-        categoryId to query
-    }.flatMapLatest { (categoryId, query) ->
-        getExercisesUseCase(categoryId, query)
+        _searchQuery,
+        getUserUseCase()
+    ) { categoryId, query, user ->
+        Triple(categoryId, query, user)
+    }.flatMapLatest { (categoryId, query, user) ->
+        getExercisesUseCase(categoryId, query).map { list ->
+            if (user != null) {
+                list.sortedWith(compareByDescending<Exercise> { it.difficulty.lowercase() == user.level.lowercase() }
+                    .thenBy { it.name })
+            } else {
+                list
+            }
+        }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
@@ -75,11 +79,5 @@ class ExerciseListViewModel @Inject constructor(
 
     fun onSearchQueryChange(query: String) {
         _searchQuery.value = query
-    }
-
-    fun toggleFavorite(exercise: Exercise) {
-        viewModelScope.launch {
-            toggleFavoriteUseCase(exercise.id, FavoriteType.EXERCISE, !exercise.isFavorite)
-        }
     }
 }

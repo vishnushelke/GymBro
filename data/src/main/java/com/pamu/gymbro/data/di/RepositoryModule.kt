@@ -3,10 +3,12 @@ package com.pamu.gymbro.data.di
 import com.pamu.gymbro.data.repository.DietRepositoryImpl
 import com.pamu.gymbro.data.repository.ExerciseRepositoryImpl
 import com.pamu.gymbro.data.repository.ProgressRepositoryImpl
+import com.pamu.gymbro.data.repository.UserRepositoryImpl
 import com.pamu.gymbro.data.repository.WorkoutRepositoryImpl
 import com.pamu.gymbro.domain.repository.DietRepository
 import com.pamu.gymbro.domain.repository.ExerciseRepository
 import com.pamu.gymbro.domain.repository.ProgressRepository
+import com.pamu.gymbro.domain.repository.UserRepository
 import com.pamu.gymbro.domain.repository.WorkoutRepository
 import dagger.Binds
 import dagger.Module
@@ -41,4 +43,10 @@ abstract class RepositoryModule {
     abstract fun bindProgressRepository(
         progressRepositoryImpl: ProgressRepositoryImpl
     ): ProgressRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindUserRepository(
+        userRepositoryImpl: UserRepositoryImpl
+    ): UserRepository
 }

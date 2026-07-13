@@ -1,7 +1,10 @@
 package com.pamu.gymbro.features.workout.presentation;
 
 import com.pamu.gymbro.domain.usecase.favorite.ToggleFavoriteUseCase;
+import com.pamu.gymbro.domain.usecase.user.GetUserUseCase;
+import com.pamu.gymbro.domain.usecase.workout.DeleteWorkoutPlanUseCase;
 import com.pamu.gymbro.domain.usecase.workout.GetWorkoutPlansUseCase;
+import com.pamu.gymbro.domain.usecase.workout.SaveWorkoutPlanUseCase;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Provider;
@@ -30,26 +33,43 @@ public final class WorkoutListViewModel_Factory implements Factory<WorkoutListVi
 
   private final Provider<ToggleFavoriteUseCase> toggleFavoriteUseCaseProvider;
 
+  private final Provider<GetUserUseCase> getUserUseCaseProvider;
+
+  private final Provider<SaveWorkoutPlanUseCase> saveWorkoutPlanUseCaseProvider;
+
+  private final Provider<DeleteWorkoutPlanUseCase> deleteWorkoutPlanUseCaseProvider;
+
   private WorkoutListViewModel_Factory(
       Provider<GetWorkoutPlansUseCase> getWorkoutPlansUseCaseProvider,
-      Provider<ToggleFavoriteUseCase> toggleFavoriteUseCaseProvider) {
+      Provider<ToggleFavoriteUseCase> toggleFavoriteUseCaseProvider,
+      Provider<GetUserUseCase> getUserUseCaseProvider,
+      Provider<SaveWorkoutPlanUseCase> saveWorkoutPlanUseCaseProvider,
+      Provider<DeleteWorkoutPlanUseCase> deleteWorkoutPlanUseCaseProvider) {
     this.getWorkoutPlansUseCaseProvider = getWorkoutPlansUseCaseProvider;
     this.toggleFavoriteUseCaseProvider = toggleFavoriteUseCaseProvider;
+    this.getUserUseCaseProvider = getUserUseCaseProvider;
+    this.saveWorkoutPlanUseCaseProvider = saveWorkoutPlanUseCaseProvider;
+    this.deleteWorkoutPlanUseCaseProvider = deleteWorkoutPlanUseCaseProvider;
   }
 
   @Override
   public WorkoutListViewModel get() {
-    return newInstance(getWorkoutPlansUseCaseProvider.get(), toggleFavoriteUseCaseProvider.get());
+    return newInstance(getWorkoutPlansUseCaseProvider.get(), toggleFavoriteUseCaseProvider.get(), getUserUseCaseProvider.get(), saveWorkoutPlanUseCaseProvider.get(), deleteWorkoutPlanUseCaseProvider.get());
   }
 
   public static WorkoutListViewModel_Factory create(
       Provider<GetWorkoutPlansUseCase> getWorkoutPlansUseCaseProvider,
-      Provider<ToggleFavoriteUseCase> toggleFavoriteUseCaseProvider) {
-    return new WorkoutListViewModel_Factory(getWorkoutPlansUseCaseProvider, toggleFavoriteUseCaseProvider);
+      Provider<ToggleFavoriteUseCase> toggleFavoriteUseCaseProvider,
+      Provider<GetUserUseCase> getUserUseCaseProvider,
+      Provider<SaveWorkoutPlanUseCase> saveWorkoutPlanUseCaseProvider,
+      Provider<DeleteWorkoutPlanUseCase> deleteWorkoutPlanUseCaseProvider) {
+    return new WorkoutListViewModel_Factory(getWorkoutPlansUseCaseProvider, toggleFavoriteUseCaseProvider, getUserUseCaseProvider, saveWorkoutPlanUseCaseProvider, deleteWorkoutPlanUseCaseProvider);
   }
 
   public static WorkoutListViewModel newInstance(GetWorkoutPlansUseCase getWorkoutPlansUseCase,
-      ToggleFavoriteUseCase toggleFavoriteUseCase) {
-    return new WorkoutListViewModel(getWorkoutPlansUseCase, toggleFavoriteUseCase);
+      ToggleFavoriteUseCase toggleFavoriteUseCase, GetUserUseCase getUserUseCase,
+      SaveWorkoutPlanUseCase saveWorkoutPlanUseCase,
+      DeleteWorkoutPlanUseCase deleteWorkoutPlanUseCase) {
+    return new WorkoutListViewModel(getWorkoutPlansUseCase, toggleFavoriteUseCase, getUserUseCase, saveWorkoutPlanUseCase, deleteWorkoutPlanUseCase);
   }
 }

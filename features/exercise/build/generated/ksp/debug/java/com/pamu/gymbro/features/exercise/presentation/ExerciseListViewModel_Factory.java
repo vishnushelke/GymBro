@@ -2,7 +2,7 @@ package com.pamu.gymbro.features.exercise.presentation;
 
 import com.pamu.gymbro.domain.usecase.exercise.GetCategoriesUseCase;
 import com.pamu.gymbro.domain.usecase.exercise.GetExercisesUseCase;
-import com.pamu.gymbro.domain.usecase.favorite.ToggleFavoriteUseCase;
+import com.pamu.gymbro.domain.usecase.user.GetUserUseCase;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Provider;
@@ -31,30 +31,30 @@ public final class ExerciseListViewModel_Factory implements Factory<ExerciseList
 
   private final Provider<GetCategoriesUseCase> getCategoriesUseCaseProvider;
 
-  private final Provider<ToggleFavoriteUseCase> toggleFavoriteUseCaseProvider;
+  private final Provider<GetUserUseCase> getUserUseCaseProvider;
 
   private ExerciseListViewModel_Factory(Provider<GetExercisesUseCase> getExercisesUseCaseProvider,
       Provider<GetCategoriesUseCase> getCategoriesUseCaseProvider,
-      Provider<ToggleFavoriteUseCase> toggleFavoriteUseCaseProvider) {
+      Provider<GetUserUseCase> getUserUseCaseProvider) {
     this.getExercisesUseCaseProvider = getExercisesUseCaseProvider;
     this.getCategoriesUseCaseProvider = getCategoriesUseCaseProvider;
-    this.toggleFavoriteUseCaseProvider = toggleFavoriteUseCaseProvider;
+    this.getUserUseCaseProvider = getUserUseCaseProvider;
   }
 
   @Override
   public ExerciseListViewModel get() {
-    return newInstance(getExercisesUseCaseProvider.get(), getCategoriesUseCaseProvider.get(), toggleFavoriteUseCaseProvider.get());
+    return newInstance(getExercisesUseCaseProvider.get(), getCategoriesUseCaseProvider.get(), getUserUseCaseProvider.get());
   }
 
   public static ExerciseListViewModel_Factory create(
       Provider<GetExercisesUseCase> getExercisesUseCaseProvider,
       Provider<GetCategoriesUseCase> getCategoriesUseCaseProvider,
-      Provider<ToggleFavoriteUseCase> toggleFavoriteUseCaseProvider) {
-    return new ExerciseListViewModel_Factory(getExercisesUseCaseProvider, getCategoriesUseCaseProvider, toggleFavoriteUseCaseProvider);
+      Provider<GetUserUseCase> getUserUseCaseProvider) {
+    return new ExerciseListViewModel_Factory(getExercisesUseCaseProvider, getCategoriesUseCaseProvider, getUserUseCaseProvider);
   }
 
   public static ExerciseListViewModel newInstance(GetExercisesUseCase getExercisesUseCase,
-      GetCategoriesUseCase getCategoriesUseCase, ToggleFavoriteUseCase toggleFavoriteUseCase) {
-    return new ExerciseListViewModel(getExercisesUseCase, getCategoriesUseCase, toggleFavoriteUseCase);
+      GetCategoriesUseCase getCategoriesUseCase, GetUserUseCase getUserUseCase) {
+    return new ExerciseListViewModel(getExercisesUseCase, getCategoriesUseCase, getUserUseCase);
   }
 }

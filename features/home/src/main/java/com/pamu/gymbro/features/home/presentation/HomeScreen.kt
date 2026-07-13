@@ -56,6 +56,7 @@ fun HomeScreen(
     val summary by viewModel.summary.collectAsState()
     val favorites by viewModel.favorites.collectAsState()
     val networkStatus by viewModel.networkStatus.collectAsState()
+    val user by viewModel.user.collectAsState()
 
     Column(
         modifier = Modifier
@@ -110,7 +111,7 @@ fun HomeScreen(
                         .padding(bottom = 16.dp)
                 )
                 Text(
-                    text = "Welcome Back, Bro!",
+                    text = if (user != null) "Welcome Back, ${user?.name}!" else "Welcome Back, Bro!",
                     style = MaterialTheme.typography.headlineLarge.copy(
                         fontWeight = FontWeight.Black,
                         color = Color.White,

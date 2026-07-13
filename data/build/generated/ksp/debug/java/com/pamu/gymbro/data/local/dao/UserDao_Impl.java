@@ -38,7 +38,7 @@ public final class UserDao_Impl implements UserDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `user_profile` (`id`,`name`,`age`,`gender`,`heightCm`,`weightKg`,`fitnessGoal`,`experienceLevel`,`workoutDurationMinutes`,`workoutDaysPerWeek`,`injuries`,`availableEquipment`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `user_profile` (`id`,`name`,`isVegetarian`,`experienceLevel`,`fitnessGoal`,`isProfileCompleted`) VALUES (?,?,?,?,?,?)";
       }
 
       @Override
@@ -46,23 +46,19 @@ public final class UserDao_Impl implements UserDao {
           @NonNull final UserProfileEntity entity) {
         statement.bindLong(1, entity.getId());
         statement.bindString(2, entity.getName());
-        statement.bindLong(3, entity.getAge());
-        statement.bindString(4, entity.getGender());
-        statement.bindDouble(5, entity.getHeightCm());
-        statement.bindDouble(6, entity.getWeightKg());
-        statement.bindString(7, entity.getFitnessGoal());
-        statement.bindString(8, entity.getExperienceLevel());
-        statement.bindLong(9, entity.getWorkoutDurationMinutes());
-        statement.bindLong(10, entity.getWorkoutDaysPerWeek());
-        statement.bindString(11, entity.getInjuries());
-        statement.bindString(12, entity.getAvailableEquipment());
+        final int _tmp = entity.isVegetarian() ? 1 : 0;
+        statement.bindLong(3, _tmp);
+        statement.bindString(4, entity.getExperienceLevel());
+        statement.bindString(5, entity.getFitnessGoal());
+        final int _tmp_1 = entity.isProfileCompleted() ? 1 : 0;
+        statement.bindLong(6, _tmp_1);
       }
     };
     this.__updateAdapterOfUserProfileEntity = new EntityDeletionOrUpdateAdapter<UserProfileEntity>(__db) {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `user_profile` SET `id` = ?,`name` = ?,`age` = ?,`gender` = ?,`heightCm` = ?,`weightKg` = ?,`fitnessGoal` = ?,`experienceLevel` = ?,`workoutDurationMinutes` = ?,`workoutDaysPerWeek` = ?,`injuries` = ?,`availableEquipment` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `user_profile` SET `id` = ?,`name` = ?,`isVegetarian` = ?,`experienceLevel` = ?,`fitnessGoal` = ?,`isProfileCompleted` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -70,17 +66,13 @@ public final class UserDao_Impl implements UserDao {
           @NonNull final UserProfileEntity entity) {
         statement.bindLong(1, entity.getId());
         statement.bindString(2, entity.getName());
-        statement.bindLong(3, entity.getAge());
-        statement.bindString(4, entity.getGender());
-        statement.bindDouble(5, entity.getHeightCm());
-        statement.bindDouble(6, entity.getWeightKg());
-        statement.bindString(7, entity.getFitnessGoal());
-        statement.bindString(8, entity.getExperienceLevel());
-        statement.bindLong(9, entity.getWorkoutDurationMinutes());
-        statement.bindLong(10, entity.getWorkoutDaysPerWeek());
-        statement.bindString(11, entity.getInjuries());
-        statement.bindString(12, entity.getAvailableEquipment());
-        statement.bindLong(13, entity.getId());
+        final int _tmp = entity.isVegetarian() ? 1 : 0;
+        statement.bindLong(3, _tmp);
+        statement.bindString(4, entity.getExperienceLevel());
+        statement.bindString(5, entity.getFitnessGoal());
+        final int _tmp_1 = entity.isProfileCompleted() ? 1 : 0;
+        statement.bindLong(6, _tmp_1);
+        statement.bindLong(7, entity.getId());
       }
     };
   }
@@ -121,43 +113,29 @@ public final class UserDao_Impl implements UserDao {
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
           final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
-          final int _cursorIndexOfAge = CursorUtil.getColumnIndexOrThrow(_cursor, "age");
-          final int _cursorIndexOfGender = CursorUtil.getColumnIndexOrThrow(_cursor, "gender");
-          final int _cursorIndexOfHeightCm = CursorUtil.getColumnIndexOrThrow(_cursor, "heightCm");
-          final int _cursorIndexOfWeightKg = CursorUtil.getColumnIndexOrThrow(_cursor, "weightKg");
-          final int _cursorIndexOfFitnessGoal = CursorUtil.getColumnIndexOrThrow(_cursor, "fitnessGoal");
+          final int _cursorIndexOfIsVegetarian = CursorUtil.getColumnIndexOrThrow(_cursor, "isVegetarian");
           final int _cursorIndexOfExperienceLevel = CursorUtil.getColumnIndexOrThrow(_cursor, "experienceLevel");
-          final int _cursorIndexOfWorkoutDurationMinutes = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutDurationMinutes");
-          final int _cursorIndexOfWorkoutDaysPerWeek = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutDaysPerWeek");
-          final int _cursorIndexOfInjuries = CursorUtil.getColumnIndexOrThrow(_cursor, "injuries");
-          final int _cursorIndexOfAvailableEquipment = CursorUtil.getColumnIndexOrThrow(_cursor, "availableEquipment");
+          final int _cursorIndexOfFitnessGoal = CursorUtil.getColumnIndexOrThrow(_cursor, "fitnessGoal");
+          final int _cursorIndexOfIsProfileCompleted = CursorUtil.getColumnIndexOrThrow(_cursor, "isProfileCompleted");
           final UserProfileEntity _result;
           if (_cursor.moveToFirst()) {
             final long _tmpId;
             _tmpId = _cursor.getLong(_cursorIndexOfId);
             final String _tmpName;
             _tmpName = _cursor.getString(_cursorIndexOfName);
-            final int _tmpAge;
-            _tmpAge = _cursor.getInt(_cursorIndexOfAge);
-            final String _tmpGender;
-            _tmpGender = _cursor.getString(_cursorIndexOfGender);
-            final float _tmpHeightCm;
-            _tmpHeightCm = _cursor.getFloat(_cursorIndexOfHeightCm);
-            final float _tmpWeightKg;
-            _tmpWeightKg = _cursor.getFloat(_cursorIndexOfWeightKg);
-            final String _tmpFitnessGoal;
-            _tmpFitnessGoal = _cursor.getString(_cursorIndexOfFitnessGoal);
+            final boolean _tmpIsVegetarian;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsVegetarian);
+            _tmpIsVegetarian = _tmp != 0;
             final String _tmpExperienceLevel;
             _tmpExperienceLevel = _cursor.getString(_cursorIndexOfExperienceLevel);
-            final int _tmpWorkoutDurationMinutes;
-            _tmpWorkoutDurationMinutes = _cursor.getInt(_cursorIndexOfWorkoutDurationMinutes);
-            final int _tmpWorkoutDaysPerWeek;
-            _tmpWorkoutDaysPerWeek = _cursor.getInt(_cursorIndexOfWorkoutDaysPerWeek);
-            final String _tmpInjuries;
-            _tmpInjuries = _cursor.getString(_cursorIndexOfInjuries);
-            final String _tmpAvailableEquipment;
-            _tmpAvailableEquipment = _cursor.getString(_cursorIndexOfAvailableEquipment);
-            _result = new UserProfileEntity(_tmpId,_tmpName,_tmpAge,_tmpGender,_tmpHeightCm,_tmpWeightKg,_tmpFitnessGoal,_tmpExperienceLevel,_tmpWorkoutDurationMinutes,_tmpWorkoutDaysPerWeek,_tmpInjuries,_tmpAvailableEquipment);
+            final String _tmpFitnessGoal;
+            _tmpFitnessGoal = _cursor.getString(_cursorIndexOfFitnessGoal);
+            final boolean _tmpIsProfileCompleted;
+            final int _tmp_1;
+            _tmp_1 = _cursor.getInt(_cursorIndexOfIsProfileCompleted);
+            _tmpIsProfileCompleted = _tmp_1 != 0;
+            _result = new UserProfileEntity(_tmpId,_tmpName,_tmpIsVegetarian,_tmpExperienceLevel,_tmpFitnessGoal,_tmpIsProfileCompleted);
           } else {
             _result = null;
           }

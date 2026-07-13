@@ -50,10 +50,10 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(19) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(20) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS `user_profile` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `age` INTEGER NOT NULL, `gender` TEXT NOT NULL, `heightCm` REAL NOT NULL, `weightKg` REAL NOT NULL, `fitnessGoal` TEXT NOT NULL, `experienceLevel` TEXT NOT NULL, `workoutDurationMinutes` INTEGER NOT NULL, `workoutDaysPerWeek` INTEGER NOT NULL, `injuries` TEXT NOT NULL, `availableEquipment` TEXT NOT NULL, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `user_profile` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `isVegetarian` INTEGER NOT NULL, `experienceLevel` TEXT NOT NULL, `fitnessGoal` TEXT NOT NULL, `isProfileCompleted` INTEGER NOT NULL, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `exercise_categories` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `exercises` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `categoryId` INTEGER NOT NULL, `difficulty` TEXT NOT NULL, `equipment` TEXT NOT NULL, `primaryMuscle` TEXT NOT NULL, `secondaryMuscles` TEXT NOT NULL, `exerciseType` TEXT NOT NULL, `movementPattern` TEXT NOT NULL, `caloriesBurnedEstimate` INTEGER NOT NULL, `description` TEXT NOT NULL, `benefits` TEXT NOT NULL, `commonMistakes` TEXT NOT NULL, `safetyWarnings` TEXT NOT NULL, `beginnerVariation` TEXT NOT NULL, `intermediateVariation` TEXT NOT NULL, `advancedVariation` TEXT NOT NULL, `instructions` TEXT NOT NULL, `thumbnailUrl` TEXT NOT NULL, `videoFrontUrl` TEXT NOT NULL, `videoSideUrl` TEXT NOT NULL, `videoDuration` INTEGER NOT NULL, `videoFps` INTEGER NOT NULL, `videoResolution` TEXT NOT NULL, `isFavorite` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`categoryId`) REFERENCES `exercise_categories`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_exercises_categoryId` ON `exercises` (`categoryId`)");
@@ -68,7 +68,7 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_meals_dietPlanId` ON `meals` (`dietPlanId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `progress_entries` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `weight` REAL NOT NULL, `chest` REAL NOT NULL, `waist` REAL NOT NULL, `hips` REAL NOT NULL, `arms` REAL NOT NULL, `thighs` REAL NOT NULL, `bodyFat` REAL NOT NULL, `notes` TEXT NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'aa0bb0660030506e516c544497091384')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '82ab1ab6dd8efbd457863f9f45248181')");
       }
 
       @Override
@@ -126,19 +126,13 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
       @NonNull
       public RoomOpenHelper.ValidationResult onValidateSchema(
           @NonNull final SupportSQLiteDatabase db) {
-        final HashMap<String, TableInfo.Column> _columnsUserProfile = new HashMap<String, TableInfo.Column>(12);
+        final HashMap<String, TableInfo.Column> _columnsUserProfile = new HashMap<String, TableInfo.Column>(6);
         _columnsUserProfile.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserProfile.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserProfile.put("age", new TableInfo.Column("age", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserProfile.put("gender", new TableInfo.Column("gender", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserProfile.put("heightCm", new TableInfo.Column("heightCm", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserProfile.put("weightKg", new TableInfo.Column("weightKg", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserProfile.put("fitnessGoal", new TableInfo.Column("fitnessGoal", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserProfile.put("isVegetarian", new TableInfo.Column("isVegetarian", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserProfile.put("experienceLevel", new TableInfo.Column("experienceLevel", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserProfile.put("workoutDurationMinutes", new TableInfo.Column("workoutDurationMinutes", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserProfile.put("workoutDaysPerWeek", new TableInfo.Column("workoutDaysPerWeek", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserProfile.put("injuries", new TableInfo.Column("injuries", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserProfile.put("availableEquipment", new TableInfo.Column("availableEquipment", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserProfile.put("fitnessGoal", new TableInfo.Column("fitnessGoal", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserProfile.put("isProfileCompleted", new TableInfo.Column("isProfileCompleted", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysUserProfile = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesUserProfile = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoUserProfile = new TableInfo("user_profile", _columnsUserProfile, _foreignKeysUserProfile, _indicesUserProfile);
@@ -310,7 +304,7 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "aa0bb0660030506e516c544497091384", "80285255cb63c636c6c44f46f00c34ac");
+    }, "82ab1ab6dd8efbd457863f9f45248181", "613e2b5e842277c2e3e0d69282b95dd9");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;

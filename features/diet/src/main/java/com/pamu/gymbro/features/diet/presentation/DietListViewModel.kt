@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pamu.gymbro.domain.model.DietPlan
 import com.pamu.gymbro.domain.model.Meal
+import com.pamu.gymbro.domain.model.User
 import com.pamu.gymbro.domain.usecase.diet.DeleteDietPlanUseCase
 import com.pamu.gymbro.domain.usecase.diet.GetDietPlansUseCase
 import com.pamu.gymbro.domain.usecase.diet.SaveDietPlanUseCase
-import com.pamu.gymbro.domain.usecase.favorite.FavoriteType
-import com.pamu.gymbro.domain.usecase.favorite.ToggleFavoriteUseCase
+import com.pamu.gymbro.domain.usecase.user.GetUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -17,9 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class DietListViewModel @Inject constructor(
     private val getDietPlansUseCase: GetDietPlansUseCase,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val saveDietPlanUseCase: SaveDietPlanUseCase,
-    private val deleteDietPlanUseCase: DeleteDietPlanUseCase
+    private val deleteDietPlanUseCase: DeleteDietPlanUseCase,
+    private val getUserUseCase: GetUserUseCase
 ) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(true)
@@ -33,9 +33,35 @@ class DietListViewModel @Inject constructor(
             initialValue = emptyList()
         )
 
-    fun toggleFavorite(plan: DietPlan) {
+    private var currentUser: User? = null
+
+    init {
+        observeUser()
+    }
+
+    private fun observeUser() {
         viewModelScope.launch {
-            toggleFavoriteUseCase(plan.id, FavoriteType.DIET, !plan.isFavorite)
+            getUserUseCase().collect { user ->
+                currentUser = user
+                checkAndAutoUpdateDefaultPlan()
+            }
+        }
+    }
+
+    private fun checkAndAutoUpdateDefaultPlan() {
+        val user = currentUser ?: return
+        val existingDefault = hasDefaultPlan()
+        if (existingDefault != null) {
+            // Check if level, goal or veg preference changed in plan name/goal
+            val isVeg = user.isVegetarian
+            val expectedNamePrefix = "Default ${if (isVeg) "Vegetarian" else "Non-Vegetarian"}"
+            
+            if (!existingDefault.name.startsWith(expectedNamePrefix) || existingDefault.goal != user.goal) {
+                generateDefaultDiet(replaceExistingId = existingDefault.id)
+            }
+        } else {
+            // Auto generate for first time after onboarding
+            generateDefaultDiet()
         }
     }
 
@@ -53,17 +79,20 @@ class DietListViewModel @Inject constructor(
         }
     }
 
-    fun generateDefaultDiet(isVeg: Boolean, isBeginner: Boolean, goal: String, replaceExistingId: Long? = null) {
+    fun generateDefaultDiet(replaceExistingId: Long? = null) {
         viewModelScope.launch {
+            val user = currentUser ?: return@launch
             _isLoading.value = true
             
-            // Delete existing default if requested
             replaceExistingId?.let { 
                 deleteDietPlanUseCase(it)
             }
 
+            val isVeg = user.isVegetarian
+            val level = user.level
+            val goal = user.goal
+            
             val name = if (isVeg) "Vegetarian" else "Non-Vegetarian"
-            val level = if (isBeginner) "Beginner" else "Advanced"
             
             val meals = when (goal) {
                 "Weight Loss" -> if (isVeg) {

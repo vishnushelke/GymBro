@@ -5,16 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "user_profile")
 data class UserProfileEntity(
-    @PrimaryKey val id: Long = 1L, // Single user profile
+    @PrimaryKey val id: Long = 1L,
     val name: String,
-    val age: Int,
-    val gender: String,
-    val heightCm: Float,
-    val weightKg: Float,
-    val fitnessGoal: String,
+    val isVegetarian: Boolean,
     val experienceLevel: String,
-    val workoutDurationMinutes: Int,
-    val workoutDaysPerWeek: Int,
-    val injuries: String,
-    val availableEquipment: String
+    val fitnessGoal: String,
+    val isProfileCompleted: Boolean
 )

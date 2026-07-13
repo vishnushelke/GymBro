@@ -7,10 +7,13 @@ import com.pamu.gymbro.domain.model.DashboardSummary
 import com.pamu.gymbro.domain.usecase.dashboard.GetDashboardSummaryUseCase
 import com.pamu.gymbro.domain.usecase.favorite.FavoriteItems
 import com.pamu.gymbro.domain.usecase.favorite.GetFavoriteItemsUseCase
+import com.pamu.gymbro.domain.model.User
+import com.pamu.gymbro.domain.usecase.user.GetUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,8 +21,12 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(
     private val getDashboardSummaryUseCase: GetDashboardSummaryUseCase,
     private val getFavoriteItemsUseCase: GetFavoriteItemsUseCase,
-    private val connectivityObserver: ConnectivityObserver
+    private val connectivityObserver: ConnectivityObserver,
+    private val getUserUseCase: GetUserUseCase
 ) : ViewModel() {
+
+    private val _user = MutableStateFlow<User?>(null)
+    val user: StateFlow<User?> = _user.asStateFlow()
 
     private val _summary = MutableStateFlow<DashboardSummary?>(null)
     val summary: StateFlow<DashboardSummary?> = _summary.asStateFlow()
@@ -34,6 +41,15 @@ class DashboardViewModel @Inject constructor(
         loadSummary()
         loadFavorites()
         observeNetwork()
+        observeUser()
+    }
+
+    private fun observeUser() {
+        viewModelScope.launch {
+            getUserUseCase().collect {
+                _user.value = it
+            }
+        }
     }
 
     private fun loadSummary() {
