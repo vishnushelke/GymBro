@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.pamu.gymbro.features.diet.presentation.DietBuilderScreen
 import com.pamu.gymbro.features.diet.presentation.DietDetailScreen
 import com.pamu.gymbro.features.diet.presentation.DietListScreen
 import com.pamu.gymbro.features.exercise.presentation.ExerciseDetailScreen
@@ -101,6 +102,12 @@ class MainActivity : ComponentActivity() {
                             DietListScreen(
                                 onDietClick = { id ->
                                     navController.navigate("diet_detail/$id")
+                                },
+                                onAddDietClick = {
+                                    navController.navigate("diet_builder")
+                                },
+                                onEditDietClick = { id ->
+                                    navController.navigate("diet_builder?planId=$id")
                                 }
                             )
                         }
@@ -109,7 +116,24 @@ class MainActivity : ComponentActivity() {
                             arguments = listOf(navArgument("planId") { type = NavType.LongType })
                         ) { backStackEntry ->
                             val id = backStackEntry.arguments?.getLong("planId") ?: 0L
-                            DietDetailScreen(planId = id)
+                            DietDetailScreen(
+                                planId = id,
+                                onBackClick = { navController.popBackStack() }
+                            )
+                        }
+                        composable("diet_builder?planId={planId}",
+                            arguments = listOf(navArgument("planId") { 
+                                type = NavType.LongType
+                                defaultValue = 0L
+                            })
+                        ) { backStackEntry ->
+                            val planId = backStackEntry.arguments?.getLong("planId")?.takeIf { it > 0L }
+                            DietBuilderScreen(
+                                planId = planId,
+                                onBack = {
+                                    navController.popBackStack()
+                                }
+                            )
                         }
                         composable("progress") {
                             ProgressScreen()

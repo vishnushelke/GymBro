@@ -13,7 +13,8 @@ fun DietPlanEntity.toDomain(): DietPlan {
         calories = calories,
         protein = protein,
         carbs = carbs,
-        fats = fats
+        fats = fats,
+        isFavorite = isFavorite
     )
 }
 
@@ -25,7 +26,8 @@ fun DietPlan.toEntity(): DietPlanEntity {
         calories = calories,
         protein = protein,
         carbs = carbs,
-        fats = fats
+        fats = fats,
+        isFavorite = isFavorite
     )
 }
 

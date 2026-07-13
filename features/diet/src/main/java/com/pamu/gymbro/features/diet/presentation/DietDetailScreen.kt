@@ -9,12 +9,18 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.BakeryDining
+import androidx.compose.material.icons.filled.Bolt
+import androidx.compose.material.icons.filled.Coffee
+import androidx.compose.material.icons.filled.DinnerDining
+import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -132,12 +138,20 @@ fun DietDetailScreen(
                     modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 16.dp)
                 )
 
+                val sortedMeals = remember(details.meals) {
+                    val order = listOf("Pre-Workout", "Post-Workout", "Breakfast", "Lunch", "Dinner", "Snack")
+                    details.meals.sortedBy { meal ->
+                        val index = order.indexOf(meal.mealType)
+                        if (index == -1) 100 else index
+                    }
+                }
+
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(start = 20.dp, end = 20.dp, bottom = 24.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    items(details.meals) { meal ->
+                    items(items = sortedMeals) { meal ->
                         MealItem(meal = meal)
                     }
                 }
@@ -165,36 +179,53 @@ fun MacroCard(modifier: Modifier = Modifier, label: String, value: String, color
 
 @Composable
 fun MealItem(meal: Meal) {
+    val icon = when (meal.mealType) {
+        "Pre-Workout" -> Icons.Default.Bolt
+        "Post-Workout" -> Icons.Default.FitnessCenter
+        "Breakfast" -> Icons.Default.Coffee
+        "Lunch" -> Icons.Default.Restaurant
+        "Dinner" -> Icons.Default.DinnerDining
+        else -> Icons.Default.BakeryDining
+    }
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
-                    .size(48.dp)
-                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), RoundedCornerShape(12.dp)),
+                    .size(56.dp)
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), RoundedCornerShape(16.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(Icons.Default.Restaurant, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(24.dp))
+                Icon(
+                    imageVector = icon, 
+                    contentDescription = null, 
+                    tint = MaterialTheme.colorScheme.primary, 
+                    modifier = Modifier.size(28.dp)
+                )
             }
             
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(20.dp))
             
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = meal.mealType,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold
+                    text = meal.mealType.uppercase(),
+                    style = MaterialTheme.typography.labelLarge.copy(
+                        letterSpacing = 1.sp,
+                        fontWeight = FontWeight.Black
+                    ),
+                    color = MaterialTheme.colorScheme.primary
                 )
                 Text(
                     text = meal.name,
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    modifier = Modifier.padding(vertical = 2.dp)
                 )
                 Text(
                     text = "${meal.calories} kcal • P: ${meal.protein}g • C: ${meal.carbs}g • F: ${meal.fats}g",

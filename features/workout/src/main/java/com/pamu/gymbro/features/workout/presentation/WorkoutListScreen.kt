@@ -10,8 +10,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -110,8 +108,7 @@ fun WorkoutListScreen(
                             WorkoutPlanItem(
                                 modifier = Modifier.animateItem(),
                                 plan = plan,
-                                onClick = { onWorkoutClick(plan.id) },
-                                onToggleFavorite = { viewModel.toggleFavorite(plan) }
+                                onClick = { onWorkoutClick(plan.id) }
                             )
                         }
 
@@ -129,8 +126,7 @@ fun WorkoutListScreen(
 fun WorkoutPlanItem(
     modifier: Modifier = Modifier,
     plan: WorkoutPlan,
-    onClick: () -> Unit,
-    onToggleFavorite: () -> Unit
+    onClick: () -> Unit
 ) {
     val image = when(plan.name.lowercase()) {
         "chest" -> "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=500"
@@ -204,19 +200,6 @@ fun WorkoutPlanItem(
                             color = Color.White.copy(alpha = 0.7f)
                         )
                     }
-                }
-
-                IconButton(
-                    onClick = onToggleFavorite,
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .background(Color.White.copy(alpha = 0.2f))
-                ) {
-                    Icon(
-                        imageVector = if (plan.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                        contentDescription = "Toggle Favorite",
-                        tint = if (plan.isFavorite) MaterialTheme.colorScheme.primary else Color.White
-                    )
                 }
             }
         }

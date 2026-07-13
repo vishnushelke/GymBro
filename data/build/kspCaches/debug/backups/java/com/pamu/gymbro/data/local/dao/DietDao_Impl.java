@@ -34,6 +34,8 @@ public final class DietDao_Impl implements DietDao {
 
   private final EntityInsertionAdapter<MealEntity> __insertionAdapterOfMealEntity;
 
+  private final SharedSQLiteStatement __preparedStmtOfDeleteMealsForPlan;
+
   private final SharedSQLiteStatement __preparedStmtOfDeleteDietPlan;
 
   private final SharedSQLiteStatement __preparedStmtOfUpdateFavoriteStatus;
@@ -81,6 +83,14 @@ public final class DietDao_Impl implements DietDao {
         statement.bindLong(8, entity.getFats());
       }
     };
+    this.__preparedStmtOfDeleteMealsForPlan = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "DELETE FROM meals WHERE dietPlanId = ?";
+        return _query;
+      }
+    };
     this.__preparedStmtOfDeleteDietPlan = new SharedSQLiteStatement(__db) {
       @Override
       @NonNull
@@ -121,6 +131,25 @@ public final class DietDao_Impl implements DietDao {
       __db.setTransactionSuccessful();
     } finally {
       __db.endTransaction();
+    }
+  }
+
+  @Override
+  public void deleteMealsForPlan(final long planId) {
+    __db.assertNotSuspendingTransaction();
+    final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteMealsForPlan.acquire();
+    int _argIndex = 1;
+    _stmt.bindLong(_argIndex, planId);
+    try {
+      __db.beginTransaction();
+      try {
+        _stmt.executeUpdateDelete();
+        __db.setTransactionSuccessful();
+      } finally {
+        __db.endTransaction();
+      }
+    } finally {
+      __preparedStmtOfDeleteMealsForPlan.release(_stmt);
     }
   }
 

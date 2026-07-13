@@ -25,6 +25,9 @@ interface DietDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMeals(meals: List<MealEntity>)
 
+    @Query("DELETE FROM meals WHERE dietPlanId = :planId")
+    fun deleteMealsForPlan(planId: Long)
+
     @Query("DELETE FROM diet_plans WHERE id = :planId")
     fun deleteDietPlan(planId: Long)
 

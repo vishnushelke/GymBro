@@ -6,16 +6,18 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,6 +27,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.pamu.gymbro.domain.model.DietPlan
@@ -32,13 +35,51 @@ import com.pamu.gymbro.domain.model.DietPlan
 @Composable
 fun DietListScreen(
     viewModel: DietListViewModel = hiltViewModel(),
-    onDietClick: (Long) -> Unit
+    onDietClick: (Long) -> Unit,
+    onAddDietClick: () -> Unit,
+    onEditDietClick: (Long) -> Unit
 ) {
     val dietPlans by viewModel.dietPlans.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
 
+    var showDefaultDietPicker by remember { mutableStateOf(false) }
+    var pendingDietConfig by remember { mutableStateOf<Triple<Boolean, Boolean, String>?>(null) }
+    var showReplaceConfirmation by remember { mutableStateOf(false) }
+    var showCustomReplaceConfirmation by remember { mutableStateOf(false) }
+
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = MaterialTheme.colorScheme.background,
+        floatingActionButton = {
+            Column(
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                SmallFloatingActionButton(
+                    onClick = { showDefaultDietPicker = true },
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    shape = CircleShape
+                ) {
+                    Icon(Icons.Default.AutoAwesome, contentDescription = "Default Diet")
+                }
+                
+                FloatingActionButton(
+                    onClick = {
+                        val existing = viewModel.hasCustomPlan()
+                        if (existing != null) {
+                            showCustomReplaceConfirmation = true
+                        } else {
+                            onAddDietClick()
+                        }
+                    },
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    shape = CircleShape
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = "Add Custom Diet")
+                }
+            }
+        }
     ) { padding ->
         Column(
             modifier = Modifier
@@ -60,40 +101,196 @@ fun DietListScreen(
                         modifier = Modifier.align(Alignment.Center),
                         color = MaterialTheme.colorScheme.primary
                     )
-                } else if (dietPlans.isEmpty()) {
-                    Column(
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .padding(32.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.List,
-                            contentDescription = null,
-                            modifier = Modifier.size(64.dp),
-                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(
-                            text = "No diet plans available",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                        )
-                    }
                 } else {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        items(dietPlans, key = { it.id }) { plan ->
-                            DietPlanItem(
-                                modifier = Modifier.animateItem(),
-                                plan = plan,
-                                onClick = { onDietClick(plan.id) },
-                                onToggleFavorite = { viewModel.toggleFavorite(plan) }
+                    if (dietPlans.isEmpty()) {
+                        Column(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .padding(32.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Restaurant,
+                                contentDescription = null,
+                                modifier = Modifier.size(64.dp),
+                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
                             )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text(
+                                text = "No diet plans available",
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                            )
+                            Button(
+                                onClick = { showDefaultDietPicker = true },
+                                modifier = Modifier.padding(top = 16.dp),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text("Generate Default Diet")
+                            }
                         }
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                        ) {
+                            items(dietPlans, key = { it.id }) { plan ->
+                                val isCustom = !plan.name.startsWith("Default")
+                                DietPlanItem(
+                                    modifier = Modifier.animateItem(),
+                                    plan = plan,
+                                    onClick = { onDietClick(plan.id) },
+                                    onEditClick = if (isCustom) { { onEditDietClick(plan.id) } } else null
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (showDefaultDietPicker) {
+        DefaultDietPicker(
+            onDismiss = { showDefaultDietPicker = false },
+            onDietSelected = { isVeg, isBeginner, goal ->
+                val existing = viewModel.hasDefaultPlan()
+                if (existing != null) {
+                    pendingDietConfig = Triple(isVeg, isBeginner, goal)
+                    showReplaceConfirmation = true
+                } else {
+                    viewModel.generateDefaultDiet(isVeg, isBeginner, goal)
+                }
+                showDefaultDietPicker = false
+            }
+        )
+    }
+
+    if (showReplaceConfirmation && pendingDietConfig != null) {
+        AlertDialog(
+            onDismissRequest = { showReplaceConfirmation = false },
+            title = { Text("Replace Default Plan?") },
+            text = { Text("You already have a default diet plan. Would you like to replace it with a new one?") },
+            confirmButton = {
+                Button(onClick = {
+                    val existing = viewModel.hasDefaultPlan()
+                    viewModel.generateDefaultDiet(
+                        pendingDietConfig!!.first,
+                        pendingDietConfig!!.second,
+                        pendingDietConfig!!.third,
+                        replaceExistingId = existing?.id
+                    )
+                    showReplaceConfirmation = false
+                    pendingDietConfig = null
+                }) {
+                    Text("REPLACE")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { 
+                    showReplaceConfirmation = false
+                    pendingDietConfig = null
+                }) {
+                    Text("CANCEL")
+                }
+            }
+        )
+    }
+
+    if (showCustomReplaceConfirmation) {
+        AlertDialog(
+            onDismissRequest = { showCustomReplaceConfirmation = false },
+            title = { Text("Custom Plan Exists") },
+            text = { Text("You already have a custom diet plan. You can either edit the existing plan or replace it with a new one.") },
+            confirmButton = {
+                Button(onClick = {
+                    val existing = viewModel.hasCustomPlan()
+                    existing?.let { viewModel.deletePlan(it.id) }
+                    showCustomReplaceConfirmation = false
+                    onAddDietClick()
+                }) {
+                    Text("REPLACE")
+                }
+            },
+            dismissButton = {
+                Row {
+                    TextButton(onClick = { showCustomReplaceConfirmation = false }) {
+                        Text("CANCEL")
+                    }
+                    TextButton(onClick = { 
+                        val existing = viewModel.hasCustomPlan()
+                        existing?.let { onEditDietClick(it.id) }
+                        showCustomReplaceConfirmation = false
+                    }) {
+                        Text("EDIT")
+                    }
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun DefaultDietPicker(
+    onDismiss: () -> Unit,
+    onDietSelected: (Boolean, Boolean, String) -> Unit
+) {
+    var isVeg by remember { mutableStateOf(true) }
+    var isBeginner by remember { mutableStateOf(true) }
+    var selectedGoal by remember { mutableStateOf("Maintenance") }
+
+    val goals = listOf("Weight Loss", "Weight Gain", "Maintenance")
+
+    Dialog(onDismissRequest = onDismiss) {
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(24.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(24.dp)
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text(text = "Personalize Your Diet", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                
+                Text(text = "Food Preference", style = MaterialTheme.typography.labelLarge)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(selected = isVeg, onClick = { isVeg = true })
+                    Text("Vegetarian (No Eggs)", modifier = Modifier.clickable { isVeg = true })
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(selected = !isVeg, onClick = { isVeg = false })
+                    Text("Non-Vegetarian (Incl. Eggs)", modifier = Modifier.clickable { isVeg = false })
+                }
+
+                HorizontalDivider()
+
+                Text(text = "Experience Level", style = MaterialTheme.typography.labelLarge)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(selected = isBeginner, onClick = { isBeginner = true })
+                    Text("Beginner", modifier = Modifier.clickable { isBeginner = true })
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(selected = !isBeginner, onClick = { isBeginner = false })
+                    Text("Intermediate/Expert", modifier = Modifier.clickable { isBeginner = false })
+                }
+
+                HorizontalDivider()
+
+                Text(text = "Fitness Goal", style = MaterialTheme.typography.labelLarge)
+                goals.forEach { goal ->
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        RadioButton(selected = selectedGoal == goal, onClick = { selectedGoal = goal })
+                        Text(goal, modifier = Modifier.clickable { selectedGoal = goal })
+                    }
+                }
+
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    TextButton(onClick = onDismiss) { Text("CANCEL") }
+                    Button(onClick = { onDietSelected(isVeg, isBeginner, selectedGoal) }) {
+                        Text("GENERATE")
                     }
                 }
             }
@@ -106,12 +303,14 @@ fun DietPlanItem(
     modifier: Modifier = Modifier,
     plan: DietPlan,
     onClick: () -> Unit,
-    onToggleFavorite: () -> Unit
+    onEditClick: (() -> Unit)? = null
 ) {
-    val image = when {
-        plan.name.lowercase().contains("veg") -> "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=500"
-        plan.name.lowercase().contains("protein") -> "https://images.unsplash.com/photo-1532550907401-a500c9a57435?q=80&w=500"
-        else -> "https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=500"
+    val image = remember(plan.name) {
+        when {
+            plan.name.lowercase().contains("veg") -> "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=500"
+            plan.name.lowercase().contains("protein") -> "https://images.unsplash.com/photo-1532550907401-a500c9a57435?q=80&w=500"
+            else -> "https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=500"
+        }
     }
 
     Card(
@@ -168,17 +367,19 @@ fun DietPlanItem(
                     }
                 }
 
-                IconButton(
-                    onClick = onToggleFavorite,
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .background(Color.White.copy(alpha = 0.2f))
-                ) {
-                    Icon(
-                        imageVector = if (plan.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                        contentDescription = "Toggle Favorite",
-                        tint = if (plan.isFavorite) MaterialTheme.colorScheme.primary else Color.White
-                    )
+                if (onEditClick != null) {
+                    IconButton(
+                        onClick = onEditClick,
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .background(Color.White.copy(alpha = 0.2f))
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = "Edit Diet",
+                            tint = Color.White
+                        )
+                    }
                 }
             }
         }
