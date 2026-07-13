@@ -214,8 +214,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/decline-bench-press.mp4",
+      "videoSideUrl": "asset:///videos/decline-bench-press.mp4"
     },
     {
       "exerciseId": 10,
@@ -233,11 +233,30 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
+      "videoFrontUrl": "asset:///videos/pec-deck.mp4",
+      "videoSideUrl": "asset:///videos/pec-deck.mp4"
+    },
+    {
+      "exerciseId": 11,
+      "name": "Machine Chest Press",
+      "category": "CHEST",
+      "difficulty": "Beginner",
+      "equipment": "machine",
+      "primaryMuscle": "\u092a\u0947\u0915\u094d\u091f\u094b\u0930\u0932 \u092e\u0947\u091c\u0930",
+      "secondaryMuscles": "\u091f\u094d\u0930\u093e\u092f\u0938\u0947\u092a\u094d\u0938, \u092b\u094d\u0930\u0902\u091f \u0921\u0947\u0932\u094d\u091f",
+      "description": "A chest exercise focusing on Machine Chest Press.",
+      "instructions": "\u092e\u0936\u0940\u0928\u0935\u0930 \u092c\u0938\u093e,  \u092a\u093e\u0920 \u092a\u0945\u0921\u0932\u093e \u0918\u091f\u094d\u091f \u0932\u093e\u0935\u093e., \u0939\u0901\u0921\u0932 \u091b\u093e\u0924\u0940\u091a\u094d\u092f\u093e \u092a\u093e\u0924\u0933\u0940\u0935\u0930 \u0938\u0947\u091f \u0915\u0930\u093e., \u0939\u0901\u0921\u0932 \u092a\u0941\u0922\u0947 \u0922\u0915\u0932\u093e,  \u0915\u094b\u092a\u0930 \u092a\u0942\u0930\u094d\u0923 \u0932\u0949\u0915 \u0915\u0930\u0942 \u0928\u0915\u093e., \u0939\u0933\u0942 \u092a\u0930\u0924 \u092f\u093e.",
+      "benefits": "\u0938\u094d\u0925\u093f\u0930 \u0939\u093e\u0932\u091a\u093e\u0932, \u0928\u0935\u0936\u093f\u0915\u094d\u092f\u093e\u0902\u0938\u093e\u0920\u0940 \u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924 \u092c\u0947\u0902\u091a \u092a\u094d\u0930\u0947\u0938 \u092a\u0930\u094d\u092f\u093e\u092f",
+      "commonMistakes": "\u092f\u094b\u0917\u094d\u092f \u0938\u0940\u091f \u0909\u0902\u091a\u0940 \u0920\u0947\u0935\u093e",
+      "safetyWarnings": "Maintain proper form and breathe regularly.",
+      "beginnerVariation": "",
+      "intermediateVariation": "",
+      "advancedVariation": "",
       "videoFrontUrl": "",
       "videoSideUrl": ""
     },
     {
-      "exerciseId": 11,
+      "exerciseId": 12,
       "name": "Dumbbell Pullover",
       "category": "CHEST",
       "difficulty": "Intermediate",
@@ -252,11 +271,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/dumbbell-pullover.mp4",
+      "videoSideUrl": "asset:///videos/dumbbell-pullover.mp4"
     },
     {
-      "exerciseId": 12,
+      "exerciseId": 13,
       "name": "Landmine Press",
       "category": "CHEST",
       "difficulty": "Intermediate",
@@ -271,11 +290,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/landmine-press.mp4",
+      "videoSideUrl": "asset:///videos/landmine-press.mp4"
     },
     {
-      "exerciseId": 13,
+      "exerciseId": 14,
       "name": "Svend Press",
       "category": "CHEST",
       "difficulty": "Beginner",
@@ -290,11 +309,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/svend-press.mp4",
+      "videoSideUrl": "asset:///videos/svend-press.mp4"
     },
     {
-      "exerciseId": 14,
+      "exerciseId": 15,
       "name": "Pull-Ups",
       "category": "BACK",
       "difficulty": "Expert",
@@ -313,7 +332,7 @@
       "videoSideUrl": "asset:///videos/pullups.mp4"
     },
     {
-      "exerciseId": 15,
+      "exerciseId": 16,
       "name": "Chin-Ups",
       "category": "BACK",
       "difficulty": "Intermediate",
@@ -332,7 +351,7 @@
       "videoSideUrl": "asset:///videos/chinup.mp4"
     },
     {
-      "exerciseId": 16,
+      "exerciseId": 17,
       "name": "Deadlift",
       "category": "BACK",
       "difficulty": "Expert",
@@ -351,7 +370,7 @@
       "videoSideUrl": "asset:///videos/deadlift.mp4"
     },
     {
-      "exerciseId": 17,
+      "exerciseId": 18,
       "name": "Lat Pulldown",
       "category": "BACK",
       "difficulty": "Beginner",
@@ -370,7 +389,7 @@
       "videoSideUrl": "asset:///videos/lat-pulldown.mp4"
     },
     {
-      "exerciseId": 18,
+      "exerciseId": 19,
       "name": "Barbell Row",
       "category": "BACK",
       "difficulty": "Intermediate",
@@ -389,7 +408,7 @@
       "videoSideUrl": "asset:///videos/rows.mp4"
     },
     {
-      "exerciseId": 19,
+      "exerciseId": 20,
       "name": "One-Arm Dumbbell Row",
       "category": "BACK",
       "difficulty": "Beginner",
@@ -408,7 +427,7 @@
       "videoSideUrl": "asset:///videos/db-row.mp4"
     },
     {
-      "exerciseId": 20,
+      "exerciseId": 21,
       "name": "Seated Cable Row",
       "category": "BACK",
       "difficulty": "Beginner",
@@ -427,7 +446,7 @@
       "videoSideUrl": "asset:///videos/seated-row.mp4"
     },
     {
-      "exerciseId": 21,
+      "exerciseId": 22,
       "name": "Back Hyperextension",
       "category": "BACK",
       "difficulty": "Beginner",
@@ -446,7 +465,7 @@
       "videoSideUrl": "asset:///videos/hyperextension.mp4"
     },
     {
-      "exerciseId": 22,
+      "exerciseId": 23,
       "name": "Face Pull",
       "category": "BACK",
       "difficulty": "Beginner",
@@ -465,7 +484,7 @@
       "videoSideUrl": "asset:///videos/face-pull.mp4"
     },
     {
-      "exerciseId": 23,
+      "exerciseId": 24,
       "name": "Dumbbell Shrugs",
       "category": "BACK",
       "difficulty": "Beginner",
@@ -480,11 +499,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/dumbbell-shrugs.mp4",
+      "videoSideUrl": "asset:///videos/dumbbell-shrugs.mp4"
     },
     {
-      "exerciseId": 24,
+      "exerciseId": 25,
       "name": "Superman",
       "category": "BACK",
       "difficulty": "Beginner",
@@ -499,11 +518,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/superman.mp4",
+      "videoSideUrl": "asset:///videos/superman.mp4"
     },
     {
-      "exerciseId": 25,
+      "exerciseId": 26,
       "name": "Stability Ball Hyperextension",
       "category": "BACK",
       "difficulty": "Beginner",
@@ -518,11 +537,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/sb-hyperextension.mp4",
+      "videoSideUrl": "asset:///videos/sb-hyperextension.mp4"
     },
     {
-      "exerciseId": 26,
+      "exerciseId": 27,
       "name": "T-Bar Row",
       "category": "BACK",
       "difficulty": "Intermediate",
@@ -537,11 +556,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/t-bar-row.mp4",
+      "videoSideUrl": "asset:///videos/t-bar-row.mp4"
     },
     {
-      "exerciseId": 27,
+      "exerciseId": 28,
       "name": "EZ Curl Bar Deadlift",
       "category": "BACK",
       "difficulty": "Intermediate",
@@ -556,11 +575,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/ez-bar-deadlift.mp4",
+      "videoSideUrl": "asset:///videos/ez-bar-deadlift.mp4"
     },
     {
-      "exerciseId": 28,
+      "exerciseId": 29,
       "name": "Barbell Good Morning",
       "category": "BACK",
       "difficulty": "Intermediate",
@@ -575,11 +594,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/good-morning.mp4",
+      "videoSideUrl": "asset:///videos/good-morning.mp4"
     },
     {
-      "exerciseId": 29,
+      "exerciseId": 30,
       "name": "Overhead Press",
       "category": "SHOULDERS",
       "difficulty": "Intermediate",
@@ -598,7 +617,7 @@
       "videoSideUrl": "asset:///videos/shoulder-press.mp4"
     },
     {
-      "exerciseId": 30,
+      "exerciseId": 31,
       "name": "Dumbbell Shoulder Press",
       "category": "SHOULDERS",
       "difficulty": "Beginner",
@@ -617,7 +636,7 @@
       "videoSideUrl": "asset:///videos/shoulder-press.mp4"
     },
     {
-      "exerciseId": 31,
+      "exerciseId": 32,
       "name": "Lateral Raise",
       "category": "SHOULDERS",
       "difficulty": "Beginner",
@@ -636,7 +655,7 @@
       "videoSideUrl": ""
     },
     {
-      "exerciseId": 32,
+      "exerciseId": 33,
       "name": "Front Raise",
       "category": "SHOULDERS",
       "difficulty": "Beginner",
@@ -655,7 +674,7 @@
       "videoSideUrl": "asset:///videos/front-raise.mp4"
     },
     {
-      "exerciseId": 33,
+      "exerciseId": 34,
       "name": "Rear Delt Fly",
       "category": "SHOULDERS",
       "difficulty": "Intermediate",
@@ -674,7 +693,7 @@
       "videoSideUrl": "asset:///videos/rear-delt-fly.mp4"
     },
     {
-      "exerciseId": 34,
+      "exerciseId": 35,
       "name": "Arnold Press",
       "category": "SHOULDERS",
       "difficulty": "Intermediate",
@@ -693,7 +712,7 @@
       "videoSideUrl": "asset:///videos/arnold-press.mp4"
     },
     {
-      "exerciseId": 35,
+      "exerciseId": 36,
       "name": "Upright Row",
       "category": "SHOULDERS",
       "difficulty": "Intermediate",
@@ -712,7 +731,7 @@
       "videoSideUrl": "asset:///videos/upright-row.mp4"
     },
     {
-      "exerciseId": 36,
+      "exerciseId": 37,
       "name": "Dumbbell Shrugs",
       "category": "SHOULDERS",
       "difficulty": "Beginner",
@@ -731,7 +750,7 @@
       "videoSideUrl": "asset:///videos/shrugs.mp4"
     },
     {
-      "exerciseId": 37,
+      "exerciseId": 38,
       "name": "Military Press (Behind Neck)",
       "category": "SHOULDERS",
       "difficulty": "Expert",
@@ -746,11 +765,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/military-press-behind.mp4",
+      "videoSideUrl": "asset:///videos/military-press-behind.mp4"
     },
     {
-      "exerciseId": 38,
+      "exerciseId": 39,
       "name": "Seated Barbell Shoulder Press",
       "category": "SHOULDERS",
       "difficulty": "Intermediate",
@@ -765,11 +784,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/seated-barbell-press.mp4",
+      "videoSideUrl": "asset:///videos/seated-barbell-press.mp4"
     },
     {
-      "exerciseId": 39,
+      "exerciseId": 40,
       "name": "Cable Lateral Raise",
       "category": "SHOULDERS",
       "difficulty": "Intermediate",
@@ -784,11 +803,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/cable-lateral-raise.mp4",
+      "videoSideUrl": "asset:///videos/cable-lateral-raise.mp4"
     },
     {
-      "exerciseId": 40,
+      "exerciseId": 41,
       "name": "Cable Front Raise",
       "category": "SHOULDERS",
       "difficulty": "Beginner",
@@ -803,11 +822,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/cable-front-raise.mp4",
+      "videoSideUrl": "asset:///videos/cable-front-raise.mp4"
     },
     {
-      "exerciseId": 41,
+      "exerciseId": 42,
       "name": "Reverse Pec Deck",
       "category": "SHOULDERS",
       "difficulty": "Beginner",
@@ -822,11 +841,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/reverse-pec-deck.mp4",
+      "videoSideUrl": "asset:///videos/reverse-pec-deck.mp4"
     },
     {
-      "exerciseId": 42,
+      "exerciseId": 43,
       "name": "Dumbbell Snatch",
       "category": "SHOULDERS",
       "difficulty": "Expert",
@@ -841,11 +860,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/dumbbell-snatch.mp4",
+      "videoSideUrl": "asset:///videos/dumbbell-snatch.mp4"
     },
     {
-      "exerciseId": 43,
+      "exerciseId": 44,
       "name": "Dumbbell Bicep Curl",
       "category": "BICEPS",
       "difficulty": "Beginner",
@@ -864,7 +883,7 @@
       "videoSideUrl": "asset:///videos/bicep-curls.mp4"
     },
     {
-      "exerciseId": 44,
+      "exerciseId": 45,
       "name": "Hammer Curl",
       "category": "BICEPS",
       "difficulty": "Beginner",
@@ -883,7 +902,7 @@
       "videoSideUrl": "asset:///videos/hammer-curls.mp4"
     },
     {
-      "exerciseId": 45,
+      "exerciseId": 46,
       "name": "Barbell Curl",
       "category": "BICEPS",
       "difficulty": "Intermediate",
@@ -902,7 +921,7 @@
       "videoSideUrl": "asset:///videos/barbell-curl.mp4"
     },
     {
-      "exerciseId": 46,
+      "exerciseId": 47,
       "name": "Preacher Curl",
       "category": "BICEPS",
       "difficulty": "Intermediate",
@@ -921,7 +940,7 @@
       "videoSideUrl": "asset:///videos/preacher-curl.mp4"
     },
     {
-      "exerciseId": 47,
+      "exerciseId": 48,
       "name": "Concentration Curl",
       "category": "BICEPS",
       "difficulty": "Beginner",
@@ -940,7 +959,7 @@
       "videoSideUrl": "asset:///videos/concentration-curl.mp4"
     },
     {
-      "exerciseId": 48,
+      "exerciseId": 49,
       "name": "Incline Dumbbell Curl",
       "category": "BICEPS",
       "difficulty": "Intermediate",
@@ -959,7 +978,7 @@
       "videoSideUrl": "asset:///videos/incline-db-curl.mp4"
     },
     {
-      "exerciseId": 49,
+      "exerciseId": 50,
       "name": "Cable Curl",
       "category": "BICEPS",
       "difficulty": "Beginner",
@@ -978,7 +997,7 @@
       "videoSideUrl": "asset:///videos/cable-curl.mp4"
     },
     {
-      "exerciseId": 50,
+      "exerciseId": 51,
       "name": "Zottman Curl",
       "category": "BICEPS",
       "difficulty": "Intermediate",
@@ -993,11 +1012,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/zottman-curl.mp4",
+      "videoSideUrl": "asset:///videos/zottman-curl.mp4"
     },
     {
-      "exerciseId": 51,
+      "exerciseId": 52,
       "name": "Spider Curl",
       "category": "BICEPS",
       "difficulty": "Intermediate",
@@ -1012,11 +1031,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/spider-curl.mp4",
+      "videoSideUrl": "asset:///videos/spider-curl.mp4"
     },
     {
-      "exerciseId": 52,
+      "exerciseId": 53,
       "name": "EZ-Bar Curl",
       "category": "BICEPS",
       "difficulty": "Beginner",
@@ -1031,11 +1050,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/ez-bar-curl.mp4",
+      "videoSideUrl": "asset:///videos/ez-bar-curl.mp4"
     },
     {
-      "exerciseId": 53,
+      "exerciseId": 54,
       "name": "Rope Hammer Curl",
       "category": "BICEPS",
       "difficulty": "Beginner",
@@ -1050,11 +1069,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/rope-hammer-curl.mp4",
+      "videoSideUrl": "asset:///videos/rope-hammer-curl.mp4"
     },
     {
-      "exerciseId": 54,
+      "exerciseId": 55,
       "name": "21s Bicep Curl",
       "category": "BICEPS",
       "difficulty": "Expert",
@@ -1069,11 +1088,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/twentyone-curl.mp4",
+      "videoSideUrl": "asset:///videos/twentyone-curl.mp4"
     },
     {
-      "exerciseId": 55,
+      "exerciseId": 56,
       "name": "Cross-Body Hammer Curl",
       "category": "BICEPS",
       "difficulty": "Beginner",
@@ -1088,11 +1107,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/cross-body-hammer.mp4",
+      "videoSideUrl": "asset:///videos/cross-body-hammer.mp4"
     },
     {
-      "exerciseId": 56,
+      "exerciseId": 57,
       "name": "Tricep Pushdown",
       "category": "TRICEPS",
       "difficulty": "Beginner",
@@ -1111,7 +1130,7 @@
       "videoSideUrl": "asset:///videos/pushdowns.mp4"
     },
     {
-      "exerciseId": 57,
+      "exerciseId": 58,
       "name": "Tricep Dips",
       "category": "TRICEPS",
       "difficulty": "Intermediate",
@@ -1130,7 +1149,7 @@
       "videoSideUrl": "asset:///videos/tricep-dips.mp4"
     },
     {
-      "exerciseId": 58,
+      "exerciseId": 59,
       "name": "Skull Crusher",
       "category": "TRICEPS",
       "difficulty": "Intermediate",
@@ -1149,7 +1168,7 @@
       "videoSideUrl": "asset:///videos/skull-crusher.mp4"
     },
     {
-      "exerciseId": 59,
+      "exerciseId": 60,
       "name": "Overhead Tricep Extension",
       "category": "TRICEPS",
       "difficulty": "Beginner",
@@ -1168,7 +1187,26 @@
       "videoSideUrl": "asset:///videos/overhead-tricep.mp4"
     },
     {
-      "exerciseId": 60,
+      "exerciseId": 61,
+      "name": "Close-Grip Bench Press",
+      "category": "TRICEPS",
+      "difficulty": "Intermediate",
+      "equipment": "barbell",
+      "primaryMuscle": "\u091f\u094d\u0930\u093e\u092f\u0938\u0947\u092a\u094d\u0938",
+      "secondaryMuscles": "\u091b\u093e\u0924\u0940",
+      "description": "A triceps exercise focusing on Close-Grip Bench Press.",
+      "instructions": "\u092c\u093e\u0930 \u0916\u093e\u0902\u0926\u094d\u092f\u093e\u0939\u0942\u0928 \u0925\u094b\u0921\u093e \u0915\u092e\u0940 \u092a\u0915\u0921\u093e., \u092c\u093e\u0930 \u091b\u093e\u0924\u0940\u091c\u0935\u0933 \u0906\u0923\u0942\u0928 \u0935\u0930 \u0922\u0915\u0932\u093e.",
+      "benefits": "\u091c\u0921 \u0935\u091c\u0928\u093e\u0924 \u091f\u094d\u0930\u093e\u092f\u0938\u0947\u092a\u094d\u0938",
+      "commonMistakes": "\u0915\u094b\u092a\u0930 \u0936\u0930\u0940\u0930\u093e\u0932\u093e",
+      "safetyWarnings": "Maintain proper form and breathe regularly.",
+      "beginnerVariation": "",
+      "intermediateVariation": "",
+      "advancedVariation": "",
+      "videoFrontUrl": "",
+      "videoSideUrl": ""
+    },
+    {
+      "exerciseId": 62,
       "name": "Tricep Kickback",
       "category": "TRICEPS",
       "difficulty": "Beginner",
@@ -1187,7 +1225,7 @@
       "videoSideUrl": "asset:///videos/kickback.mp4"
     },
     {
-      "exerciseId": 61,
+      "exerciseId": 63,
       "name": "Diamond Push-Ups",
       "category": "TRICEPS",
       "difficulty": "Intermediate",
@@ -1206,7 +1244,7 @@
       "videoSideUrl": "asset:///videos/diamond-pushup.mp4"
     },
     {
-      "exerciseId": 62,
+      "exerciseId": 64,
       "name": "One-Arm Reverse Pushdown",
       "category": "TRICEPS",
       "difficulty": "Intermediate",
@@ -1221,11 +1259,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/one-arm-reverse-pushdown.mp4",
+      "videoSideUrl": "asset:///videos/one-arm-reverse-pushdown.mp4"
     },
     {
-      "exerciseId": 63,
+      "exerciseId": 65,
       "name": "Bench Dip",
       "category": "TRICEPS",
       "difficulty": "Beginner",
@@ -1240,11 +1278,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/bench-dip.mp4",
+      "videoSideUrl": "asset:///videos/bench-dip.mp4"
     },
     {
-      "exerciseId": 64,
+      "exerciseId": 66,
       "name": "Seated Triceps Extension",
       "category": "TRICEPS",
       "difficulty": "Beginner",
@@ -1259,11 +1297,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/seated-tricep-extension.mp4",
+      "videoSideUrl": "asset:///videos/seated-tricep-extension.mp4"
     },
     {
-      "exerciseId": 65,
+      "exerciseId": 67,
       "name": "Stability Ball French Press",
       "category": "TRICEPS",
       "difficulty": "Intermediate",
@@ -1278,11 +1316,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/sb-french-press.mp4",
+      "videoSideUrl": "asset:///videos/sb-french-press.mp4"
     },
     {
-      "exerciseId": 66,
+      "exerciseId": 68,
       "name": "Diamond Push-Up on Bench",
       "category": "TRICEPS",
       "difficulty": "Beginner",
@@ -1297,11 +1335,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/diamond-pushup-bench.mp4",
+      "videoSideUrl": "asset:///videos/diamond-pushup-bench.mp4"
     },
     {
-      "exerciseId": 67,
+      "exerciseId": 69,
       "name": "Standing Single-Arm Triceps Extension",
       "category": "TRICEPS",
       "difficulty": "Beginner",
@@ -1316,11 +1354,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/standing-single-tricep.mp4",
+      "videoSideUrl": "asset:///videos/standing-single-tricep.mp4"
     },
     {
-      "exerciseId": 68,
+      "exerciseId": 70,
       "name": "Wrist Curl",
       "category": "FOREARMS",
       "difficulty": "Beginner",
@@ -1339,7 +1377,121 @@
       "videoSideUrl": "asset:///videos/wrist-curl.mp4"
     },
     {
-      "exerciseId": 69,
+      "exerciseId": 71,
+      "name": "Reverse Wrist Curl",
+      "category": "FOREARMS",
+      "difficulty": "Beginner",
+      "equipment": "dumbbell",
+      "primaryMuscle": "\u090f\u0915\u094d\u0938\u094d\u091f\u0947\u0902\u0938\u0930",
+      "secondaryMuscles": "",
+      "description": "A forearms exercise focusing on Reverse Wrist Curl.",
+      "instructions": "\u0924\u0933\u0935\u0947 \u0916\u093e\u0932\u0940 \u092a\u0915\u0921\u093e., \u092e\u0928\u0917\u091f \u0935\u0930 \u0909\u091a\u0932\u093e.",
+      "benefits": "\u090f\u0915\u094d\u0938\u094d\u091f\u0947\u0902\u0938\u0930",
+      "commonMistakes": "\u0939\u0932\u0915\u0947 \u0935\u091c\u0928",
+      "safetyWarnings": "Maintain proper form and breathe regularly.",
+      "beginnerVariation": "",
+      "intermediateVariation": "",
+      "advancedVariation": "",
+      "videoFrontUrl": "",
+      "videoSideUrl": ""
+    },
+    {
+      "exerciseId": 72,
+      "name": "Farmer's Walk",
+      "category": "FOREARMS",
+      "difficulty": "Intermediate",
+      "equipment": "dumbbell, kettlebell",
+      "primaryMuscle": "\u092b\u094b\u0930\u0906\u0930\u094d\u092e",
+      "secondaryMuscles": "\u091f\u094d\u0930\u0945\u092a\u094d\u0938, \u0915\u094b\u0930",
+      "description": "A forearms exercise focusing on Farmer's Walk.",
+      "instructions": "\u091c\u0921 \u0921\u0902\u092c\u0947\u0932/\u0915\u0947\u091f\u0932\u092c\u0947\u0932 \u0926\u094b\u0928\u094d\u0939\u0940 \u0939\u093e\u0924\u093e\u0924., \u0938\u0930\u0933 \u091a\u093e\u0932\u0924 \u0930\u0939\u093e 20-40 \u092e\u0940\u091f\u0930.",
+      "benefits": "\u092a\u0915\u0921 + \u0915\u094b\u0930",
+      "commonMistakes": "\u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924 \u092e\u093e\u0930\u094d\u0917",
+      "safetyWarnings": "Maintain proper form and breathe regularly.",
+      "beginnerVariation": "",
+      "intermediateVariation": "",
+      "advancedVariation": "",
+      "videoFrontUrl": "",
+      "videoSideUrl": ""
+    },
+    {
+      "exerciseId": 73,
+      "name": "Reverse Curl",
+      "category": "FOREARMS",
+      "difficulty": "Beginner",
+      "equipment": "barbell, dumbbell",
+      "primaryMuscle": "\u092b\u094b\u0930\u0906\u0930\u094d\u092e",
+      "secondaryMuscles": "\u092c\u093e\u092f\u0938\u0947\u092a\u094d\u0938",
+      "description": "A forearms exercise focusing on Reverse Curl.",
+      "instructions": "\u092c\u093e\u0930 \u0924\u0933\u0935\u0947 \u0916\u093e\u0932\u0940 \u092a\u0915\u0921\u093e., \u0935\u0930 \u0915\u0930\u094d\u0932 \u0915\u0930\u093e.",
+      "benefits": "\u092c\u094d\u0930\u0945\u0915\u093f\u0913\u0930\u093e\u0921\u093f\u092f\u093e\u0932\u093f\u0938",
+      "commonMistakes": "\u0939\u0932\u0915\u0947 \u0935\u091c\u0928",
+      "safetyWarnings": "Maintain proper form and breathe regularly.",
+      "beginnerVariation": "",
+      "intermediateVariation": "",
+      "advancedVariation": "",
+      "videoFrontUrl": "",
+      "videoSideUrl": ""
+    },
+    {
+      "exerciseId": 74,
+      "name": "Dead Hang",
+      "category": "FOREARMS",
+      "difficulty": "Beginner",
+      "equipment": "bodyweight",
+      "primaryMuscle": "\u092b\u094b\u0930\u0906\u0930\u094d\u092e",
+      "secondaryMuscles": "\u0932\u0945\u091f\u094d\u0938",
+      "description": "A forearms exercise focusing on Dead Hang.",
+      "instructions": "\u092a\u0941\u0932-\u0905\u092a \u092c\u093e\u0930\u0935\u0930 \u0932\u091f\u0915\u093e., \u0936\u0915\u094d\u092f \u0924\u093f\u0924\u0915\u093e \u0935\u0947\u0933 \u0927\u0930\u093e.",
+      "benefits": "\u092a\u0915\u0921 + \u0916\u093e\u0902\u0926\u093e \u0921\u0940\u0915\u0902\u092a\u094d\u0930\u0947\u0938",
+      "commonMistakes": "\u0939\u0933\u0942 \u0938\u094b\u0921\u093e",
+      "safetyWarnings": "Maintain proper form and breathe regularly.",
+      "beginnerVariation": "",
+      "intermediateVariation": "",
+      "advancedVariation": "",
+      "videoFrontUrl": "",
+      "videoSideUrl": ""
+    },
+    {
+      "exerciseId": 75,
+      "name": "Behind-the-Back Barbell Wrist Curl",
+      "category": "FOREARMS",
+      "difficulty": "Intermediate",
+      "equipment": "barbell",
+      "primaryMuscle": "\u092b\u094d\u0932\u0947\u0915\u094d\u0938\u0930",
+      "secondaryMuscles": "\u092b\u094b\u0930\u0906\u0930\u094d\u092e",
+      "description": "A forearms exercise focusing on Behind-the-Back Barbell Wrist Curl.",
+      "instructions": "\u092c\u093e\u0930\u094d\u092c\u0947\u0932 \u092a\u093e\u0920\u0940\u092e\u093e\u0917\u0947 \u0924\u0933\u0935\u0947 \u092e\u093e\u0917\u0947 \u0924\u094b\u0902\u0921 \u0915\u0930\u0942\u0928 \u092a\u0915\u0921\u093e., \u092e\u0928\u0917\u091f \u0916\u093e\u0932\u0940 \u0938\u094b\u0921\u093e,  \u0928\u0902\u0924\u0930 \u0935\u0930 \u0915\u0930\u094d\u0932 \u0915\u0930\u093e., \u092b\u094b\u0930\u0906\u0930\u094d\u092e \u092b\u094d\u0932\u0947\u0915\u094d\u0938\u0930 \u0906\u0915\u0941\u0902\u091a\u0928 \u0915\u0930\u093e.",
+      "benefits": "\u092b\u094d\u0932\u0947\u0915\u094d\u0938\u0930 \u0935\u0947\u0917\u0933\u0947 \u0932\u0915\u094d\u0937, \u092a\u0902\u092a \u0935\u093e\u0922",
+      "commonMistakes": "\u0939\u0932\u0915\u0947 \u0935\u091c\u0928, \u092e\u0928\u0917\u091f \u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924",
+      "safetyWarnings": "Maintain proper form and breathe regularly.",
+      "beginnerVariation": "",
+      "intermediateVariation": "",
+      "advancedVariation": "",
+      "videoFrontUrl": "",
+      "videoSideUrl": ""
+    },
+    {
+      "exerciseId": 76,
+      "name": "Plate Pinch Hold",
+      "category": "FOREARMS",
+      "difficulty": "Intermediate",
+      "equipment": "dumbbell",
+      "primaryMuscle": "\u092b\u094b\u0930\u0906\u0930\u094d\u092e",
+      "secondaryMuscles": "\u092c\u094b\u091f\u0947",
+      "description": "A forearms exercise focusing on Plate Pinch Hold.",
+      "instructions": "\u0926\u094b\u0928 \u092a\u094d\u0932\u0947\u091f \u090f\u0915\u0924\u094d\u0930,  \u0917\u0941\u0933\u0917\u0941\u0933\u0940\u0924 \u092c\u093e\u091c\u0942 \u092c\u093e\u0939\u0947\u0930 \u092a\u0915\u0921\u093e., \u092c\u094b\u091f\u093e\u0902\u0928\u0940 \u0918\u091f\u094d\u091f \u092a\u093f\u0902\u091a \u0915\u0930\u093e., \u0936\u0915\u094d\u092f \u0924\u093f\u0924\u0915\u093e \u0935\u0947\u0933 \u0927\u0930\u093e.",
+      "benefits": "\u092a\u093f\u0902\u091a \u0917\u094d\u0930\u093f\u092a, \u092c\u094b\u091f\u093e\u0902\u091a\u0940 \u0924\u093e\u0915\u0926",
+      "commonMistakes": "\u092a\u093e\u092f\u093e\u0935\u0930 \u092a\u0921\u0942 \u0928\u092f\u0947",
+      "safetyWarnings": "Maintain proper form and breathe regularly.",
+      "beginnerVariation": "",
+      "intermediateVariation": "",
+      "advancedVariation": "",
+      "videoFrontUrl": "",
+      "videoSideUrl": ""
+    },
+    {
+      "exerciseId": 77,
       "name": "Wrist Roller",
       "category": "FOREARMS",
       "difficulty": "Intermediate",
@@ -1358,7 +1510,7 @@
       "videoSideUrl": "asset:///videos/wrist-roller.mp4"
     },
     {
-      "exerciseId": 70,
+      "exerciseId": 78,
       "name": "Towel Pull-Up Hang",
       "category": "FOREARMS",
       "difficulty": "Intermediate",
@@ -1377,7 +1529,7 @@
       "videoSideUrl": "asset:///videos/towel-hang.mp4"
     },
     {
-      "exerciseId": 71,
+      "exerciseId": 79,
       "name": "Barbell Grip Hold",
       "category": "FOREARMS",
       "difficulty": "Expert",
@@ -1396,7 +1548,7 @@
       "videoSideUrl": "asset:///videos/barbell-hold.mp4"
     },
     {
-      "exerciseId": 72,
+      "exerciseId": 80,
       "name": "Barbell Squat",
       "category": "LEGS",
       "difficulty": "Intermediate",
@@ -1415,7 +1567,7 @@
       "videoSideUrl": "asset:///videos/squats.mp4"
     },
     {
-      "exerciseId": 73,
+      "exerciseId": 81,
       "name": "Bodyweight Squat",
       "category": "LEGS",
       "difficulty": "Beginner",
@@ -1434,7 +1586,7 @@
       "videoSideUrl": "asset:///videos/bodyweight-squat.mp4"
     },
     {
-      "exerciseId": 74,
+      "exerciseId": 82,
       "name": "Lunges",
       "category": "LEGS",
       "difficulty": "Beginner",
@@ -1453,7 +1605,7 @@
       "videoSideUrl": "asset:///videos/lunges.mp4"
     },
     {
-      "exerciseId": 75,
+      "exerciseId": 83,
       "name": "Bulgarian Split Squat",
       "category": "LEGS",
       "difficulty": "Intermediate",
@@ -1472,7 +1624,7 @@
       "videoSideUrl": "asset:///videos/bulgarian-split.mp4"
     },
     {
-      "exerciseId": 76,
+      "exerciseId": 84,
       "name": "Leg Press",
       "category": "LEGS",
       "difficulty": "Beginner",
@@ -1491,7 +1643,7 @@
       "videoSideUrl": "asset:///videos/leg-press.mp4"
     },
     {
-      "exerciseId": 77,
+      "exerciseId": 85,
       "name": "Leg Extension",
       "category": "LEGS",
       "difficulty": "Beginner",
@@ -1510,7 +1662,26 @@
       "videoSideUrl": "asset:///videos/leg-extension.mp4"
     },
     {
-      "exerciseId": 78,
+      "exerciseId": 86,
+      "name": "Leg Curl",
+      "category": "LEGS",
+      "difficulty": "Beginner",
+      "equipment": "machine",
+      "primaryMuscle": "\u0939\u0945\u092e\u0938\u094d\u091f\u094d\u0930\u093f\u0902\u0917",
+      "secondaryMuscles": "",
+      "description": "A legs exercise focusing on Leg Curl.",
+      "instructions": "\u092e\u0936\u0940\u0928\u0935\u0930 \u092a\u093e\u0920/\u092a\u094b\u091f\u093e\u0935\u0930., \u092a\u093e\u092f \u0935\u093e\u0915\u0935\u0942\u0928 \u092a\u0945\u0921 \u0935\u0930 \u0916\u0947\u091a\u093e.",
+      "benefits": "\u0939\u0945\u092e\u0938\u094d\u091f\u094d\u0930\u093f\u0902\u0917",
+      "commonMistakes": "\u0939\u093f\u092a \u091c\u092e\u093f\u0928\u0940\u0935\u0930",
+      "safetyWarnings": "Maintain proper form and breathe regularly.",
+      "beginnerVariation": "",
+      "intermediateVariation": "",
+      "advancedVariation": "",
+      "videoFrontUrl": "",
+      "videoSideUrl": ""
+    },
+    {
+      "exerciseId": 87,
       "name": "Romanian Deadlift",
       "category": "LEGS",
       "difficulty": "Intermediate",
@@ -1529,7 +1700,7 @@
       "videoSideUrl": "asset:///videos/romanian-deadlift.mp4"
     },
     {
-      "exerciseId": 79,
+      "exerciseId": 88,
       "name": "Hip Thrust",
       "category": "LEGS",
       "difficulty": "Intermediate",
@@ -1548,7 +1719,7 @@
       "videoSideUrl": "asset:///videos/hip-thrust.mp4"
     },
     {
-      "exerciseId": 80,
+      "exerciseId": 89,
       "name": "Goblet Squat",
       "category": "LEGS",
       "difficulty": "Beginner",
@@ -1567,7 +1738,7 @@
       "videoSideUrl": "asset:///videos/goblet-squat.mp4"
     },
     {
-      "exerciseId": 81,
+      "exerciseId": 90,
       "name": "Front Squat",
       "category": "LEGS",
       "difficulty": "Intermediate",
@@ -1582,11 +1753,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/front-squat.mp4",
+      "videoSideUrl": "asset:///videos/front-squat.mp4"
     },
     {
-      "exerciseId": 82,
+      "exerciseId": 91,
       "name": "Hack Squat",
       "category": "LEGS",
       "difficulty": "Intermediate",
@@ -1601,11 +1772,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/hack-squat.mp4",
+      "videoSideUrl": "asset:///videos/hack-squat.mp4"
     },
     {
-      "exerciseId": 83,
+      "exerciseId": 92,
       "name": "Sumo Deadlift",
       "category": "LEGS",
       "difficulty": "Intermediate",
@@ -1620,11 +1791,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/sumo-deadlift.mp4",
+      "videoSideUrl": "asset:///videos/sumo-deadlift.mp4"
     },
     {
-      "exerciseId": 84,
+      "exerciseId": 93,
       "name": "Dumbbell Step-Up",
       "category": "LEGS",
       "difficulty": "Beginner",
@@ -1639,11 +1810,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/step-up.mp4",
+      "videoSideUrl": "asset:///videos/step-up.mp4"
     },
     {
-      "exerciseId": 85,
+      "exerciseId": 94,
       "name": "Glute Bridge",
       "category": "LEGS",
       "difficulty": "Beginner",
@@ -1658,11 +1829,30 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
+      "videoFrontUrl": "asset:///videos/glute-bridge.mp4",
+      "videoSideUrl": "asset:///videos/glute-bridge.mp4"
+    },
+    {
+      "exerciseId": 95,
+      "name": "Wall Sit",
+      "category": "LEGS",
+      "difficulty": "Beginner",
+      "equipment": "bodyweight",
+      "primaryMuscle": "\u0915\u094d\u0935\u093e\u0921\u094d\u0930\u093f\u0938\u0947\u092a\u094d\u0938",
+      "secondaryMuscles": "\u0917\u094d\u0932\u0942\u091f\u094d\u0938",
+      "description": "A legs exercise focusing on Wall Sit.",
+      "instructions": "\u092a\u093e\u0920 \u092d\u093f\u0902\u0924\u0940\u0932\u093e \u091f\u0947\u0915\u0935\u093e., \u092a\u093e\u092f \u092a\u0941\u0922\u0947 \u0938\u0930\u0915\u093e,  \u0916\u093e\u0932\u0940 \u0938\u0930\u0915\u0942\u0928 \u0917\u0941\u0921\u0918\u0947 90\u00b0., \u092e\u093e\u0902\u0921\u0940 \u091c\u092e\u093f\u0928\u0940\u0936\u0940 \u0938\u092e\u093e\u0902\u0924\u0930 \u0920\u0947\u0935\u093e,  \u0938\u094d\u0925\u093f\u0930 \u0930\u0939\u093e., \u0935\u0947\u0933 \u092a\u0942\u0930\u094d\u0923 \u0939\u094b\u0908\u092a\u0930\u094d\u092f\u0902\u0924 \u0939\u094b\u0932\u094d\u0921.",
+      "benefits": "\u0906\u092f\u0938\u094b\u092e\u0947\u091f\u094d\u0930\u093f\u0915 \u0915\u094d\u0935\u093e\u0921 \u0938\u0939\u0928\u0936\u0915\u094d\u0924\u0940",
+      "commonMistakes": "\u0917\u0941\u0921\u0918\u0947 90\u00b0 \u091a\u094d\u092f\u093e \u092a\u0941\u0922\u0947 \u0928\u0915\u094b",
+      "safetyWarnings": "Maintain proper form and breathe regularly.",
+      "beginnerVariation": "",
+      "intermediateVariation": "",
+      "advancedVariation": "",
       "videoFrontUrl": "",
       "videoSideUrl": ""
     },
     {
-      "exerciseId": 86,
+      "exerciseId": 96,
       "name": "Standing Calf Raise",
       "category": "CALVES",
       "difficulty": "Beginner",
@@ -1681,7 +1871,7 @@
       "videoSideUrl": "asset:///videos/calf-raises.mp4"
     },
     {
-      "exerciseId": 87,
+      "exerciseId": 97,
       "name": "Seated Calf Raise",
       "category": "CALVES",
       "difficulty": "Beginner",
@@ -1700,7 +1890,7 @@
       "videoSideUrl": "asset:///videos/seated-calf.mp4"
     },
     {
-      "exerciseId": 88,
+      "exerciseId": 98,
       "name": "Donkey Calf Raise",
       "category": "CALVES",
       "difficulty": "Intermediate",
@@ -1719,7 +1909,7 @@
       "videoSideUrl": "asset:///videos/donkey-calf.mp4"
     },
     {
-      "exerciseId": 89,
+      "exerciseId": 99,
       "name": "Single-Leg Calf Raise",
       "category": "CALVES",
       "difficulty": "Intermediate",
@@ -1738,7 +1928,7 @@
       "videoSideUrl": "asset:///videos/single-leg-calf.mp4"
     },
     {
-      "exerciseId": 90,
+      "exerciseId": 100,
       "name": "Jump Rope",
       "category": "CALVES",
       "difficulty": "Beginner",
@@ -1757,7 +1947,7 @@
       "videoSideUrl": "asset:///videos/jump-rope.mp4"
     },
     {
-      "exerciseId": 91,
+      "exerciseId": 101,
       "name": "Leg Press Calf Raise",
       "category": "CALVES",
       "difficulty": "Intermediate",
@@ -1776,7 +1966,7 @@
       "videoSideUrl": "asset:///videos/leg-press-calf.mp4"
     },
     {
-      "exerciseId": 92,
+      "exerciseId": 102,
       "name": "Smith Machine Calf Raise",
       "category": "CALVES",
       "difficulty": "Intermediate",
@@ -1795,7 +1985,7 @@
       "videoSideUrl": "asset:///videos/smith-calf.mp4"
     },
     {
-      "exerciseId": 93,
+      "exerciseId": 103,
       "name": "Tibialis Raise",
       "category": "CALVES",
       "difficulty": "Beginner",
@@ -1814,7 +2004,7 @@
       "videoSideUrl": "asset:///videos/tibialis-raise.mp4"
     },
     {
-      "exerciseId": 94,
+      "exerciseId": 104,
       "name": "Box Jump",
       "category": "CALVES",
       "difficulty": "Intermediate",
@@ -1833,7 +2023,7 @@
       "videoSideUrl": "asset:///videos/box-jump.mp4"
     },
     {
-      "exerciseId": 95,
+      "exerciseId": 105,
       "name": "Farmer's Walk on Toes",
       "category": "CALVES",
       "difficulty": "Intermediate",
@@ -1852,7 +2042,7 @@
       "videoSideUrl": "asset:///videos/farmer-toes.mp4"
     },
     {
-      "exerciseId": 96,
+      "exerciseId": 106,
       "name": "Bent-Knee Calf Raise",
       "category": "CALVES",
       "difficulty": "Beginner",
@@ -1871,7 +2061,7 @@
       "videoSideUrl": "asset:///videos/bent-knee-calf.mp4"
     },
     {
-      "exerciseId": 97,
+      "exerciseId": 107,
       "name": "Crunches",
       "category": "ABS",
       "difficulty": "Beginner",
@@ -1890,7 +2080,7 @@
       "videoSideUrl": "asset:///videos/crunches.mp4"
     },
     {
-      "exerciseId": 98,
+      "exerciseId": 108,
       "name": "Plank",
       "category": "ABS",
       "difficulty": "Beginner",
@@ -1909,7 +2099,7 @@
       "videoSideUrl": "asset:///videos/plank.mp4"
     },
     {
-      "exerciseId": 99,
+      "exerciseId": 109,
       "name": "Side Plank",
       "category": "ABS",
       "difficulty": "Intermediate",
@@ -1928,7 +2118,7 @@
       "videoSideUrl": "asset:///videos/side-plank.mp4"
     },
     {
-      "exerciseId": 100,
+      "exerciseId": 110,
       "name": "Leg Raise",
       "category": "ABS",
       "difficulty": "Intermediate",
@@ -1947,7 +2137,7 @@
       "videoSideUrl": "asset:///videos/leg-raises.mp4"
     },
     {
-      "exerciseId": 101,
+      "exerciseId": 111,
       "name": "Bicycle Crunch",
       "category": "ABS",
       "difficulty": "Beginner",
@@ -1966,7 +2156,7 @@
       "videoSideUrl": "asset:///videos/bicycle-crunch.mp4"
     },
     {
-      "exerciseId": 102,
+      "exerciseId": 112,
       "name": "Russian Twist",
       "category": "ABS",
       "difficulty": "Intermediate",
@@ -1985,7 +2175,7 @@
       "videoSideUrl": "asset:///videos/russian-twist.mp4"
     },
     {
-      "exerciseId": 103,
+      "exerciseId": 113,
       "name": "Mountain Climber",
       "category": "ABS",
       "difficulty": "Beginner",
@@ -2004,7 +2194,7 @@
       "videoSideUrl": "asset:///videos/mountain-climber.mp4"
     },
     {
-      "exerciseId": 104,
+      "exerciseId": 114,
       "name": "Hanging Leg Raise",
       "category": "ABS",
       "difficulty": "Expert",
@@ -2023,7 +2213,7 @@
       "videoSideUrl": ""
     },
     {
-      "exerciseId": 105,
+      "exerciseId": 115,
       "name": "Ab Wheel Rollout",
       "category": "ABS",
       "difficulty": "Expert",
@@ -2042,7 +2232,7 @@
       "videoSideUrl": "asset:///videos/ab-rollout.mp4"
     },
     {
-      "exerciseId": 106,
+      "exerciseId": 116,
       "name": "Cable Crunch",
       "category": "ABS",
       "difficulty": "Intermediate",
@@ -2061,7 +2251,7 @@
       "videoSideUrl": "asset:///videos/cable-crunch.mp4"
     },
     {
-      "exerciseId": 107,
+      "exerciseId": 117,
       "name": "Decline Sit-Up",
       "category": "ABS",
       "difficulty": "Intermediate",
@@ -2080,7 +2270,7 @@
       "videoSideUrl": "asset:///videos/decline-situp.mp4"
     },
     {
-      "exerciseId": 108,
+      "exerciseId": 118,
       "name": "V-Up",
       "category": "ABS",
       "difficulty": "Intermediate",
@@ -2099,7 +2289,7 @@
       "videoSideUrl": "asset:///videos/v-up.mp4"
     },
     {
-      "exerciseId": 109,
+      "exerciseId": 119,
       "name": "Dead Bug",
       "category": "ABS",
       "difficulty": "Beginner",
@@ -2118,7 +2308,7 @@
       "videoSideUrl": "asset:///videos/dead-bug.mp4"
     },
     {
-      "exerciseId": 110,
+      "exerciseId": 120,
       "name": "Toes-to-Bar",
       "category": "ABS",
       "difficulty": "Expert",
@@ -2137,7 +2327,7 @@
       "videoSideUrl": "asset:///videos/toes-to-bar.mp4"
     },
     {
-      "exerciseId": 111,
+      "exerciseId": 121,
       "name": "Pallof Press",
       "category": "ABS",
       "difficulty": "Intermediate",
@@ -2156,7 +2346,7 @@
       "videoSideUrl": "asset:///videos/pallof-press.mp4"
     },
     {
-      "exerciseId": 112,
+      "exerciseId": 122,
       "name": "Jumping Jacks",
       "category": "CARDIO",
       "difficulty": "Beginner",
@@ -2175,7 +2365,7 @@
       "videoSideUrl": "asset:///videos/cardio.mp4"
     },
     {
-      "exerciseId": 113,
+      "exerciseId": 123,
       "name": "Burpee",
       "category": "CARDIO",
       "difficulty": "Intermediate",
@@ -2194,7 +2384,7 @@
       "videoSideUrl": "asset:///videos/burpee.mp4"
     },
     {
-      "exerciseId": 114,
+      "exerciseId": 124,
       "name": "High Knees",
       "category": "CARDIO",
       "difficulty": "Beginner",
@@ -2213,7 +2403,7 @@
       "videoSideUrl": "asset:///videos/high-knees.mp4"
     },
     {
-      "exerciseId": 115,
+      "exerciseId": 125,
       "name": "Treadmill Running",
       "category": "CARDIO",
       "difficulty": "Beginner",
@@ -2232,7 +2422,7 @@
       "videoSideUrl": "asset:///videos/treadmill-run.mp4"
     },
     {
-      "exerciseId": 116,
+      "exerciseId": 126,
       "name": "Full-Body Stretching",
       "category": "FULLBODY",
       "difficulty": "Beginner",
@@ -2251,7 +2441,7 @@
       "videoSideUrl": "asset:///videos/stretching.mp4"
     },
     {
-      "exerciseId": 117,
+      "exerciseId": 127,
       "name": "Mobility Drills",
       "category": "FULLBODY",
       "difficulty": "Beginner",
@@ -2270,7 +2460,7 @@
       "videoSideUrl": "asset:///videos/mobility.mp4"
     },
     {
-      "exerciseId": 118,
+      "exerciseId": 128,
       "name": "Battle Ropes",
       "category": "CARDIO",
       "difficulty": "Intermediate",
@@ -2289,7 +2479,7 @@
       "videoSideUrl": "asset:///videos/battle-ropes.mp4"
     },
     {
-      "exerciseId": 119,
+      "exerciseId": 129,
       "name": "Rowing Machine",
       "category": "CARDIO",
       "difficulty": "Beginner",
@@ -2308,7 +2498,7 @@
       "videoSideUrl": "asset:///videos/rowing.mp4"
     },
     {
-      "exerciseId": 120,
+      "exerciseId": 130,
       "name": "Stationary Bike",
       "category": "CARDIO",
       "difficulty": "Beginner",
@@ -2323,11 +2513,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/bike.mp4",
+      "videoSideUrl": "asset:///videos/bike.mp4"
     },
     {
-      "exerciseId": 121,
+      "exerciseId": 131,
       "name": "Kettlebell Swing",
       "category": "FULLBODY",
       "difficulty": "Intermediate",
@@ -2342,11 +2532,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/kb-swing.mp4",
+      "videoSideUrl": "asset:///videos/kb-swing.mp4"
     },
     {
-      "exerciseId": 122,
+      "exerciseId": 132,
       "name": "Dumbbell Thruster",
       "category": "FULLBODY",
       "difficulty": "Intermediate",
@@ -2361,11 +2551,11 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/thruster.mp4",
+      "videoSideUrl": "asset:///videos/thruster.mp4"
     },
     {
-      "exerciseId": 123,
+      "exerciseId": 133,
       "name": "Bear Crawl",
       "category": "FULLBODY",
       "difficulty": "Beginner",
@@ -2380,8 +2570,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/bear-crawl.mp4",
+      "videoSideUrl": "asset:///videos/bear-crawl.mp4"
     }
   ]
 }

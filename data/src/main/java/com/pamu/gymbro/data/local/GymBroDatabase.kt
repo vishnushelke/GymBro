@@ -31,7 +31,7 @@ import com.pamu.gymbro.data.local.entity.WorkoutPlanEntity
         MealEntity::class,
         ProgressEntryEntity::class
     ],
-    version = 16,
+    version = 17,
     exportSchema = false
 )
 @TypeConverters(DateConverter::class)
