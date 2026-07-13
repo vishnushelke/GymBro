@@ -40,6 +40,8 @@ public final class WorkoutDao_Impl implements WorkoutDao {
 
   private final SharedSQLiteStatement __preparedStmtOfDeleteWorkoutPlan;
 
+  private final SharedSQLiteStatement __preparedStmtOfDeleteDaysForPlan;
+
   private final SharedSQLiteStatement __preparedStmtOfUpdateFavoriteStatus;
 
   public WorkoutDao_Impl(@NonNull final RoomDatabase __db) {
@@ -103,6 +105,14 @@ public final class WorkoutDao_Impl implements WorkoutDao {
       @NonNull
       public String createQuery() {
         final String _query = "DELETE FROM workout_plans WHERE id = ?";
+        return _query;
+      }
+    };
+    this.__preparedStmtOfDeleteDaysForPlan = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "DELETE FROM workout_days WHERE workoutPlanId = ?";
         return _query;
       }
     };
@@ -170,6 +180,25 @@ public final class WorkoutDao_Impl implements WorkoutDao {
       }
     } finally {
       __preparedStmtOfDeleteWorkoutPlan.release(_stmt);
+    }
+  }
+
+  @Override
+  public void deleteDaysForPlan(final long planId) {
+    __db.assertNotSuspendingTransaction();
+    final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteDaysForPlan.acquire();
+    int _argIndex = 1;
+    _stmt.bindLong(_argIndex, planId);
+    try {
+      __db.beginTransaction();
+      try {
+        _stmt.executeUpdateDelete();
+        __db.setTransactionSuccessful();
+      } finally {
+        __db.endTransaction();
+      }
+    } finally {
+      __preparedStmtOfDeleteDaysForPlan.release(_stmt);
     }
   }
 

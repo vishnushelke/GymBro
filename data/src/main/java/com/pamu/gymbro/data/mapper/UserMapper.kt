@@ -9,6 +9,10 @@ fun UserProfileEntity.toDomain(): User {
         isVegetarian = isVegetarian,
         level = experienceLevel,
         goal = fitnessGoal,
+        email = email,
+        phone = phone,
+        age = age,
+        sex = sex,
         isProfileCompleted = isProfileCompleted
     )
 }
@@ -20,6 +24,10 @@ fun User.toEntity(): UserProfileEntity {
         isVegetarian = isVegetarian,
         experienceLevel = level,
         fitnessGoal = goal,
+        email = email,
+        phone = phone,
+        age = age,
+        sex = sex,
         isProfileCompleted = isProfileCompleted
     )
 }

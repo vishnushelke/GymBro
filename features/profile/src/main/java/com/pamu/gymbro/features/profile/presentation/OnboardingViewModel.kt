@@ -24,13 +24,25 @@ class OnboardingViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _user.value = getUserUseCase().first() ?: User("", false, "Beginner", "Maintenance", false)
+            _user.value = getUserUseCase().first() ?: User(
+                name = "",
+                isVegetarian = false,
+                level = "Beginner",
+                goal = "Maintenance",
+                isProfileCompleted = false
+            )
         }
     }
 
     fun updateProfile(name: String, isVegetarian: Boolean, level: String, goal: String) {
         viewModelScope.launch {
-            val updatedUser = User(name, isVegetarian, level, goal, true)
+            val updatedUser = User(
+                name = name,
+                isVegetarian = isVegetarian,
+                level = level,
+                goal = goal,
+                isProfileCompleted = true
+            )
             saveUserUseCase(updatedUser)
             _user.value = updatedUser
         }

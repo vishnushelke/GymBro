@@ -27,6 +27,7 @@ import com.pamu.gymbro.features.exercise.presentation.ExerciseDetailScreen
 import com.pamu.gymbro.features.exercise.presentation.ExerciseListScreen
 import com.pamu.gymbro.features.home.presentation.HomeScreen
 import com.pamu.gymbro.features.profile.presentation.OnboardingScreen
+import com.pamu.gymbro.features.profile.presentation.ProfileScreen
 import com.pamu.gymbro.features.progress.presentation.ProgressScreen
 import com.pamu.gymbro.features.reminder.presentation.ReminderSettingsScreen
 import com.pamu.gymbro.features.workout.presentation.WorkoutBuilderScreen
@@ -76,8 +77,14 @@ class MainActivity : ComponentActivity() {
                                     },
                                     onNavigateToReminders = {
                                         navController.navigate("reminders")
+                                    },
+                                    onNavigateToProfile = {
+                                        navController.navigate("profile")
                                     }
                                 )
+                            }
+                            composable("profile") {
+                                ProfileScreen(onBack = { navController.popBackStack() })
                             }
                             composable("exercises") {
                                 ExerciseListScreen(

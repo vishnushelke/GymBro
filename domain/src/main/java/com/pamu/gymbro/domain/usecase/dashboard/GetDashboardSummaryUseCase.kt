@@ -5,7 +5,7 @@ import com.pamu.gymbro.domain.repository.DietRepository
 import com.pamu.gymbro.domain.repository.WorkoutRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 class GetDashboardSummaryUseCase @Inject constructor(
@@ -14,22 +14,20 @@ class GetDashboardSummaryUseCase @Inject constructor(
 ) {
     operator fun invoke(): Flow<DashboardSummary> {
         return combine(
-            workoutRepository.getAllWorkoutPlans(),
-            dietRepository.getAllDietPlans()
+            workoutRepository.getAllWorkoutPlans().onStart { emit(emptyList()) },
+            dietRepository.getAllDietPlans().onStart { emit(emptyList()) }
         ) { workouts, diets ->
-            // In a real app, we'd fetch the active plan and current day's progress
-            // Here we provide a summary based on available data or defaults
             val activeWorkout = workouts.firstOrNull()?.name ?: "No active plan"
             val activeDiet = diets.firstOrNull()
             
             DashboardSummary(
                 todayWorkout = activeWorkout,
-                workoutCompletionPercentage = 0, // Placeholder
-                currentWeightKg = 75.0f, // Placeholder, would come from ProgressRepository
-                currentStreakDays = 3, // Placeholder
+                workoutCompletionPercentage = 0,
+                currentWeightKg = 75.0f,
+                currentStreakDays = 3,
                 calorieGoal = activeDiet?.calories ?: 2500,
-                caloriesConsumed = 0, // Placeholder
-                waterIntakeMl = 1200, // Placeholder
+                caloriesConsumed = 0,
+                waterIntakeMl = 1200,
                 waterGoalMl = 2500
             )
         }

@@ -10,5 +10,9 @@ data class UserProfileEntity(
     val isVegetarian: Boolean,
     val experienceLevel: String,
     val fitnessGoal: String,
+    val email: String = "",
+    val phone: String = "",
+    val age: Int = 0,
+    val sex: String = "",
     val isProfileCompleted: Boolean
 )

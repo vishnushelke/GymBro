@@ -12,10 +12,7 @@ import com.pamu.gymbro.domain.usecase.workout.GetWorkoutPlansUseCase
 import com.pamu.gymbro.domain.usecase.workout.SaveWorkoutPlanUseCase
 import com.pamu.gymbro.domain.usecase.workout.WorkoutGenerator
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,49 +25,47 @@ class WorkoutListViewModel @Inject constructor(
     private val deleteWorkoutPlanUseCase: DeleteWorkoutPlanUseCase
 ) : ViewModel() {
 
-    private val _workoutPlans = MutableStateFlow<List<WorkoutPlan>>(emptyList())
-    val workoutPlans: StateFlow<List<WorkoutPlan>> = _workoutPlans.asStateFlow()
-
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+    val workoutPlans: StateFlow<List<WorkoutPlan>> = getWorkoutPlansUseCase()
+        .onEach { _isLoading.value = false }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = emptyList()
+        )
 
     private var currentUser: User? = null
 
     init {
-        loadWorkoutPlans()
         observeUser()
-    }
-
-    private fun loadWorkoutPlans() {
-        viewModelScope.launch {
-            getWorkoutPlansUseCase().collect {
-                _workoutPlans.value = it
-                _isLoading.value = false
-            }
-        }
     }
 
     private fun observeUser() {
         viewModelScope.launch {
-            getUserUseCase().collect { user ->
+            combine(getUserUseCase(), workoutPlans) { user, plans ->
+                user to plans
+            }.collect { (user, plans) ->
                 currentUser = user
-                checkAndAutoUpdateDefaultPlan()
+                if (user != null) {
+                    checkAndAutoUpdateDefaultPlan(user, plans)
+                }
             }
         }
     }
 
-    private fun checkAndAutoUpdateDefaultPlan() {
-        val user = currentUser ?: return
-        val existingDefault = hasDefaultPlan()
+    private fun checkAndAutoUpdateDefaultPlan(user: User, plans: List<WorkoutPlan>) {
+        // Wait for initial DB emission before deciding to generate
+        if (_isLoading.value && plans.isEmpty()) return 
+
+        val existingDefault = plans.find { it.name.startsWith("Default") }
         if (existingDefault != null) {
-            // Check if level or goal changed
             if (existingDefault.level != user.level || existingDefault.goal != user.goal) {
                 generateDefaultWorkout(replaceExistingId = existingDefault.id)
             }
-        } else {
-            // Auto generate for first time after onboarding
-            generateDefaultWorkout()
         }
+        // Removed auto-generation if not found
     }
 
     fun hasDefaultPlan(): WorkoutPlan? {
@@ -85,11 +80,14 @@ class WorkoutListViewModel @Inject constructor(
         viewModelScope.launch {
             val user = currentUser ?: return@launch
             _isLoading.value = true
-            
-            replaceExistingId?.let { deleteWorkoutPlanUseCase(it) }
-
-            val (plan, days) = WorkoutGenerator.generateDefaultPlan(user.level, user.goal)
-            saveWorkoutPlanUseCase(plan, days)
+            try {
+                replaceExistingId?.let { deleteWorkoutPlanUseCase(it) }
+                val (plan, days) = WorkoutGenerator.generateDefaultPlan(user.level, user.goal)
+                saveWorkoutPlanUseCase(plan, days)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _isLoading.value = false
+            }
         }
     }
 

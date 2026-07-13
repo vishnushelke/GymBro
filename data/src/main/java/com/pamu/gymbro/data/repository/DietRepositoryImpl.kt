@@ -35,7 +35,7 @@ class DietRepositoryImpl @Inject constructor(
     override suspend fun insertDietPlan(plan: DietPlan, meals: List<Meal>) = withContext(Dispatchers.IO) {
         val planId = dao.insertDietPlan(plan.toEntity())
         dao.deleteMealsForPlan(planId)
-        dao.insertMeals(meals.map { it.toEntity().copy(dietPlanId = planId, id = 0) }) // Ensure id=0 for new meals
+        dao.insertMeals(meals.map { it.toEntity().copy(dietPlanId = planId, id = 0) })
     }
 
     override suspend fun deleteDietPlan(planId: Long) = withContext(Dispatchers.IO) {

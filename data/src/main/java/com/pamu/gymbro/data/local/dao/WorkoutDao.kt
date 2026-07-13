@@ -33,9 +33,11 @@ interface WorkoutDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWorkoutExercises(exercises: List<WorkoutExerciseEntity>)
 
-    @Transaction
     @Query("DELETE FROM workout_plans WHERE id = :planId")
     fun deleteWorkoutPlan(planId: Long)
+
+    @Query("DELETE FROM workout_days WHERE workoutPlanId = :planId")
+    fun deleteDaysForPlan(planId: Long)
 
     @Query("UPDATE workout_plans SET isFavorite = :isFavorite WHERE id = :id")
     fun updateFavoriteStatus(id: Long, isFavorite: Boolean)

@@ -38,7 +38,7 @@ public final class UserDao_Impl implements UserDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `user_profile` (`id`,`name`,`isVegetarian`,`experienceLevel`,`fitnessGoal`,`isProfileCompleted`) VALUES (?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `user_profile` (`id`,`name`,`isVegetarian`,`experienceLevel`,`fitnessGoal`,`email`,`phone`,`age`,`sex`,`isProfileCompleted`) VALUES (?,?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -50,15 +50,19 @@ public final class UserDao_Impl implements UserDao {
         statement.bindLong(3, _tmp);
         statement.bindString(4, entity.getExperienceLevel());
         statement.bindString(5, entity.getFitnessGoal());
+        statement.bindString(6, entity.getEmail());
+        statement.bindString(7, entity.getPhone());
+        statement.bindLong(8, entity.getAge());
+        statement.bindString(9, entity.getSex());
         final int _tmp_1 = entity.isProfileCompleted() ? 1 : 0;
-        statement.bindLong(6, _tmp_1);
+        statement.bindLong(10, _tmp_1);
       }
     };
     this.__updateAdapterOfUserProfileEntity = new EntityDeletionOrUpdateAdapter<UserProfileEntity>(__db) {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `user_profile` SET `id` = ?,`name` = ?,`isVegetarian` = ?,`experienceLevel` = ?,`fitnessGoal` = ?,`isProfileCompleted` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `user_profile` SET `id` = ?,`name` = ?,`isVegetarian` = ?,`experienceLevel` = ?,`fitnessGoal` = ?,`email` = ?,`phone` = ?,`age` = ?,`sex` = ?,`isProfileCompleted` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -70,9 +74,13 @@ public final class UserDao_Impl implements UserDao {
         statement.bindLong(3, _tmp);
         statement.bindString(4, entity.getExperienceLevel());
         statement.bindString(5, entity.getFitnessGoal());
+        statement.bindString(6, entity.getEmail());
+        statement.bindString(7, entity.getPhone());
+        statement.bindLong(8, entity.getAge());
+        statement.bindString(9, entity.getSex());
         final int _tmp_1 = entity.isProfileCompleted() ? 1 : 0;
-        statement.bindLong(6, _tmp_1);
-        statement.bindLong(7, entity.getId());
+        statement.bindLong(10, _tmp_1);
+        statement.bindLong(11, entity.getId());
       }
     };
   }
@@ -116,6 +124,10 @@ public final class UserDao_Impl implements UserDao {
           final int _cursorIndexOfIsVegetarian = CursorUtil.getColumnIndexOrThrow(_cursor, "isVegetarian");
           final int _cursorIndexOfExperienceLevel = CursorUtil.getColumnIndexOrThrow(_cursor, "experienceLevel");
           final int _cursorIndexOfFitnessGoal = CursorUtil.getColumnIndexOrThrow(_cursor, "fitnessGoal");
+          final int _cursorIndexOfEmail = CursorUtil.getColumnIndexOrThrow(_cursor, "email");
+          final int _cursorIndexOfPhone = CursorUtil.getColumnIndexOrThrow(_cursor, "phone");
+          final int _cursorIndexOfAge = CursorUtil.getColumnIndexOrThrow(_cursor, "age");
+          final int _cursorIndexOfSex = CursorUtil.getColumnIndexOrThrow(_cursor, "sex");
           final int _cursorIndexOfIsProfileCompleted = CursorUtil.getColumnIndexOrThrow(_cursor, "isProfileCompleted");
           final UserProfileEntity _result;
           if (_cursor.moveToFirst()) {
@@ -131,11 +143,19 @@ public final class UserDao_Impl implements UserDao {
             _tmpExperienceLevel = _cursor.getString(_cursorIndexOfExperienceLevel);
             final String _tmpFitnessGoal;
             _tmpFitnessGoal = _cursor.getString(_cursorIndexOfFitnessGoal);
+            final String _tmpEmail;
+            _tmpEmail = _cursor.getString(_cursorIndexOfEmail);
+            final String _tmpPhone;
+            _tmpPhone = _cursor.getString(_cursorIndexOfPhone);
+            final int _tmpAge;
+            _tmpAge = _cursor.getInt(_cursorIndexOfAge);
+            final String _tmpSex;
+            _tmpSex = _cursor.getString(_cursorIndexOfSex);
             final boolean _tmpIsProfileCompleted;
             final int _tmp_1;
             _tmp_1 = _cursor.getInt(_cursorIndexOfIsProfileCompleted);
             _tmpIsProfileCompleted = _tmp_1 != 0;
-            _result = new UserProfileEntity(_tmpId,_tmpName,_tmpIsVegetarian,_tmpExperienceLevel,_tmpFitnessGoal,_tmpIsProfileCompleted);
+            _result = new UserProfileEntity(_tmpId,_tmpName,_tmpIsVegetarian,_tmpExperienceLevel,_tmpFitnessGoal,_tmpEmail,_tmpPhone,_tmpAge,_tmpSex,_tmpIsProfileCompleted);
           } else {
             _result = null;
           }

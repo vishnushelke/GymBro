@@ -20,14 +20,22 @@ import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.automirrored.filled.ShowChart
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Explore
+import androidx.compose.material.icons.filled.Help
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocalDrink
+import androidx.compose.material.icons.filled.Logout
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.filled.Whatshot
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,38 +59,111 @@ fun HomeScreen(
     onNavigateToWorkouts: () -> Unit = {},
     onNavigateToDiets: () -> Unit = {},
     onNavigateToProgress: () -> Unit = {},
-    onNavigateToReminders: () -> Unit = {}
+    onNavigateToReminders: () -> Unit = {},
+    onNavigateToProfile: () -> Unit = {}
 ) {
     val summary by viewModel.summary.collectAsState()
     val favorites by viewModel.favorites.collectAsState()
     val networkStatus by viewModel.networkStatus.collectAsState()
     val user by viewModel.user.collectAsState()
+    
+    var selectedTab by remember { mutableIntStateOf(1) } // Start on Home
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(rememberScrollState())
-    ) {
+    Scaffold(
+        bottomBar = {
+            NavigationBar(
+                containerColor = MaterialTheme.colorScheme.surface,
+                tonalElevation = 8.dp
+            ) {
+                NavigationBarItem(
+                    selected = selectedTab == 0,
+                    onClick = { selectedTab = 0 },
+                    icon = { Icon(Icons.Default.Explore, contentDescription = null) },
+                    label = { Text("Explore") }
+                )
+                NavigationBarItem(
+                    selected = selectedTab == 1,
+                    onClick = { selectedTab = 1 },
+                    icon = { Icon(Icons.Default.Home, contentDescription = null) },
+                    label = { Text("Home") }
+                )
+                NavigationBarItem(
+                    selected = selectedTab == 2,
+                    onClick = { selectedTab = 2 },
+                    icon = { 
+                        Box(
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clip(CircleShape)
+                                .background(if (selectedTab == 2) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = user?.name?.firstOrNull()?.toString()?.uppercase() ?: "U",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Black,
+                                color = if (selectedTab == 2) Color.Black else Color.White
+                            )
+                        }
+                    },
+                    label = { Text("Profile") }
+                )
+            }
+        }
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .background(MaterialTheme.colorScheme.background)
+        ) {
+            when (selectedTab) {
+                0 -> ExploreTab(
+                    onNavigateToExercises = onNavigateToExercises,
+                    onWorkoutsClick = onNavigateToWorkouts,
+                    onDietsClick = onNavigateToDiets,
+                    onProgressClick = onNavigateToProgress
+                )
+                1 -> HomeTab(
+                    user = user,
+                    summary = summary,
+                    networkStatus = networkStatus,
+                    favorites = favorites
+                )
+                2 -> ProfileContent(
+                    user = user,
+                    onEditProfileClick = onNavigateToProfile
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun HomeTab(
+    user: com.pamu.gymbro.domain.model.User?,
+    summary: DashboardSummary?,
+    networkStatus: ConnectivityObserver.Status,
+    favorites: FavoriteItems?
+) {
+    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
         // Hero Section
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(300.dp)
+                .height(280.dp)
         ) {
             Image(
-                painter = rememberAsyncImagePainter(model = "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=1000"),
+                painter = rememberAsyncImagePainter(model = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000"),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
-            // Dark scrim for overall image contrast
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Black.copy(alpha = 0.4f))
             )
-            // Bottom gradient for text readability and smooth transition
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -97,7 +178,6 @@ fun HomeScreen(
                         )
                     )
             )
-            // Column for Logo and Welcome Text
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
@@ -107,23 +187,15 @@ fun HomeScreen(
                     painter = rememberAsyncImagePainter(model = com.pamu.gymbro.core.R.drawable.app_logo),
                     contentDescription = "GymBro Logo",
                     modifier = Modifier
-                        .size(80.dp)
-                        .padding(bottom = 16.dp)
+                        .size(60.dp)
+                        .padding(bottom = 12.dp)
                 )
                 Text(
-                    text = if (user != null) "Welcome Back, ${user?.name}!" else "Welcome Back, Bro!",
+                    text = if (user != null) "Crush it, ${user.name}!" else "Welcome Back, Bro!",
                     style = MaterialTheme.typography.headlineLarge.copy(
                         fontWeight = FontWeight.Black,
                         color = Color.White,
-                        letterSpacing = (-1).sp,
-                        lineHeight = 40.sp
-                    )
-                )
-                Text(
-                    text = "Ready to crush your goals today?",
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontWeight = FontWeight.Medium,
-                        color = Color.White.copy(alpha = 0.8f)
+                        letterSpacing = (-1).sp
                     )
                 )
             }
@@ -137,42 +209,16 @@ fun HomeScreen(
             OfflineIndicator()
         }
 
-        if (summary == null) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
-            }
-        }
-
         Column(modifier = Modifier.padding(horizontal = 20.dp)) {
             summary?.let { data ->
                 DashboardHeader(data)
                 Spacer(modifier = Modifier.height(24.dp))
-                
                 QuickStatsRow(data)
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(32.dp))
             }
-
-            Text(
-                text = "Explore",
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            ExploreGrid(
-                onLibraryClick = onNavigateToExercises,
-                onWorkoutsClick = onNavigateToWorkouts,
-                onDietsClick = onNavigateToDiets,
-                onProgressClick = onNavigateToProgress
-            )
 
             favorites?.let { favs ->
                 if (favs.exercises.isNotEmpty() || favs.workouts.isNotEmpty() || favs.diets.isNotEmpty()) {
-                    Spacer(modifier = Modifier.height(32.dp))
                     Text(
                         text = "Your Favorites",
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
@@ -184,6 +230,175 @@ fun HomeScreen(
             
             Spacer(modifier = Modifier.height(32.dp))
         }
+    }
+}
+
+@Composable
+fun ExploreTab(
+    onNavigateToExercises: () -> Unit,
+    onWorkoutsClick: () -> Unit,
+    onDietsClick: () -> Unit,
+    onProgressClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        Text(
+            text = "Explore Tools",
+            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Black),
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+
+        ExploreGrid(
+            onLibraryClick = onNavigateToExercises,
+            onWorkoutsClick = onWorkoutsClick,
+            onDietsClick = onDietsClick,
+            onProgressClick = onProgressClick
+        )
+    }
+}
+
+@Composable
+fun ProfileContent(
+    user: com.pamu.gymbro.domain.model.User?,
+    onEditProfileClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "My Profile",
+            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Black),
+            modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp)
+        )
+
+        user?.let { profile ->
+            UserProfileCard(user = profile, onEditClick = onEditProfileClick)
+            
+            Spacer(modifier = Modifier.height(32.dp))
+            
+            // Additional Profile Options
+            MenuOption(icon = Icons.Default.Settings, title = "App Settings")
+            MenuOption(icon = Icons.Default.Help, title = "Help & Support")
+            MenuOption(icon = Icons.Default.Logout, title = "Logout", color = MaterialTheme.colorScheme.error)
+        } ?: Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+    }
+}
+
+@Composable
+fun MenuOption(icon: ImageVector, title: String, color: Color = MaterialTheme.colorScheme.onSurface) {
+    Surface(
+        onClick = { /* Handle Click */ },
+        color = Color.Transparent
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(icon, contentDescription = null, tint = color.copy(alpha = 0.7f), modifier = Modifier.size(24.dp))
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(text = title, style = MaterialTheme.typography.bodyLarge, color = color)
+            Spacer(modifier = Modifier.weight(1f))
+            Icon(Icons.Default.ChevronRight, contentDescription = null, tint = color.copy(alpha = 0.3f))
+        }
+    }
+}
+
+@Composable
+fun UserProfileCard(user: com.pamu.gymbro.domain.model.User, onEditClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onEditClick() },
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Column(modifier = Modifier.padding(20.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(64.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primary),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = user.name.firstOrNull()?.toString() ?: "U",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Black,
+                        color = Color.Black
+                    )
+                }
+                
+                Spacer(modifier = Modifier.width(16.dp))
+                
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = user.name,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "${user.level} • ${user.goal}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
+                }
+                
+                IconButton(onClick = onEditClick) {
+                    Icon(Icons.Default.Edit, contentDescription = "Edit Profile", tint = MaterialTheme.colorScheme.primary)
+                }
+            }
+
+            if (user.email.isNotBlank() || user.phone.isNotBlank() || user.age > 0 || user.sex.isNotBlank()) {
+                Spacer(modifier = Modifier.height(16.dp))
+                HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    if (user.email.isNotBlank()) {
+                        ProfileInfoItem(icon = Icons.Default.Email, text = user.email)
+                    }
+                    if (user.phone.isNotBlank()) {
+                        ProfileInfoItem(icon = Icons.Default.Phone, text = user.phone)
+                    }
+                    if (user.age > 0 || user.sex.isNotBlank()) {
+                        val ageText = if (user.age > 0) "${user.age} years" else ""
+                        val sexText = user.sex
+                        val combined = listOf(ageText, sexText).filter { it.isNotBlank() }.joinToString(" • ")
+                        ProfileInfoItem(icon = Icons.Default.Info, text = combined)
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ProfileInfoItem(icon: ImageVector, text: String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(16.dp),
+            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+        )
     }
 }
 

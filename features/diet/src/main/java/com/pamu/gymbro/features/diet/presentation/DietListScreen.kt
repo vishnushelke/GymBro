@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -215,73 +214,6 @@ fun DietListScreen(
                 }
             }
         )
-    }
-}
-
-@Composable
-fun DefaultDietPicker(
-    onDismiss: () -> Unit,
-    onDietSelected: (Boolean, Boolean, String) -> Unit
-) {
-    var isVeg by remember { mutableStateOf(true) }
-    var isBeginner by remember { mutableStateOf(true) }
-    var selectedGoal by remember { mutableStateOf("Maintenance") }
-
-    val goals = listOf("Weight Loss", "Weight Gain", "Maintenance")
-
-    Dialog(onDismissRequest = onDismiss) {
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(24.dp)
-        ) {
-            Column(
-                modifier = Modifier
-                    .padding(24.dp)
-                    .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text(text = "Personalize Your Diet", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                
-                Text(text = "Food Preference", style = MaterialTheme.typography.labelLarge)
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    RadioButton(selected = isVeg, onClick = { isVeg = true })
-                    Text("Vegetarian (No Eggs)", modifier = Modifier.clickable { isVeg = true })
-                }
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    RadioButton(selected = !isVeg, onClick = { isVeg = false })
-                    Text("Non-Vegetarian (Incl. Eggs)", modifier = Modifier.clickable { isVeg = false })
-                }
-
-                HorizontalDivider()
-
-                Text(text = "Experience Level", style = MaterialTheme.typography.labelLarge)
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    RadioButton(selected = isBeginner, onClick = { isBeginner = true })
-                    Text("Beginner", modifier = Modifier.clickable { isBeginner = true })
-                }
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    RadioButton(selected = !isBeginner, onClick = { isBeginner = false })
-                    Text("Intermediate/Expert", modifier = Modifier.clickable { isBeginner = false })
-                }
-
-                HorizontalDivider()
-
-                Text(text = "Fitness Goal", style = MaterialTheme.typography.labelLarge)
-                goals.forEach { goal ->
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        RadioButton(selected = selectedGoal == goal, onClick = { selectedGoal = goal })
-                        Text(goal, modifier = Modifier.clickable { selectedGoal = goal })
-                    }
-                }
-
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                    TextButton(onClick = onDismiss) { Text("CANCEL") }
-                    Button(onClick = { onDietSelected(isVeg, isBeginner, selectedGoal) }) {
-                        Text("GENERATE")
-                    }
-                }
-            }
-        }
     }
 }
 
