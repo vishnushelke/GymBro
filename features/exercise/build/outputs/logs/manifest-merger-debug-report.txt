@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6938653791243425434.xml:2:13-83
-INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6938653791243425434.xml:2:13-83
+ADDED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13504971914955911732.xml:2:13-83
+INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13504971914955911732.xml:2:13-83
 	package
-		INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6938653791243425434.xml
+		INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13504971914955911732.xml
 	xmlns:android
-		ADDED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6938653791243425434.xml:2:23-81
+		ADDED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13504971914955911732.xml:2:23-81
 uses-sdk
-INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6938653791243425434.xml reason: use-sdk injection requested
-INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6938653791243425434.xml
-INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6938653791243425434.xml
+INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13504971914955911732.xml reason: use-sdk injection requested
+INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13504971914955911732.xml
+INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13504971914955911732.xml
 	android:targetSdkVersion
-		INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6938653791243425434.xml
+		INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13504971914955911732.xml
 	android:minSdkVersion
-		INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6938653791243425434.xml
+		INJECTED from /home/vishnu/AndroidStudioProjects/GymBro/features/exercise/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest13504971914955911732.xml
