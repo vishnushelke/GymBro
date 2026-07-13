@@ -252,8 +252,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/machine-chest-press.mp4",
+      "videoSideUrl": "asset:///videos/machine-chest-press.mp4"
     },
     {
       "exerciseId": 12,
@@ -651,8 +651,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/lateral-raise.mp4",
+      "videoSideUrl": "asset:///videos/lateral-raise.mp4"
     },
     {
       "exerciseId": 33,
@@ -1202,8 +1202,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/close-grip-bench.mp4",
+      "videoSideUrl": "asset:///videos/close-grip-bench.mp4"
     },
     {
       "exerciseId": 62,
@@ -1392,8 +1392,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/reverse-wrist-curl.mp4",
+      "videoSideUrl": "asset:///videos/reverse-wrist-curl.mp4"
     },
     {
       "exerciseId": 72,
@@ -1411,8 +1411,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/farmer-walk.mp4",
+      "videoSideUrl": "asset:///videos/farmer-walk.mp4"
     },
     {
       "exerciseId": 73,
@@ -1430,8 +1430,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/reverse-curl.mp4",
+      "videoSideUrl": "asset:///videos/reverse-curl.mp4"
     },
     {
       "exerciseId": 74,
@@ -1449,8 +1449,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/dead-hang.mp4",
+      "videoSideUrl": "asset:///videos/dead-hang.mp4"
     },
     {
       "exerciseId": 75,
@@ -1468,8 +1468,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/behind-back-wrist.mp4",
+      "videoSideUrl": "asset:///videos/behind-back-wrist.mp4"
     },
     {
       "exerciseId": 76,
@@ -1487,8 +1487,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/plate-pinch.mp4",
+      "videoSideUrl": "asset:///videos/plate-pinch.mp4"
     },
     {
       "exerciseId": 77,
@@ -1677,8 +1677,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/leg-curl.mp4",
+      "videoSideUrl": "asset:///videos/leg-curl.mp4"
     },
     {
       "exerciseId": 87,
@@ -1848,8 +1848,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/wall-sit.mp4",
+      "videoSideUrl": "asset:///videos/wall-sit.mp4"
     },
     {
       "exerciseId": 96,
@@ -2209,8 +2209,8 @@
       "beginnerVariation": "",
       "intermediateVariation": "",
       "advancedVariation": "",
-      "videoFrontUrl": "",
-      "videoSideUrl": ""
+      "videoFrontUrl": "asset:///videos/hanging-leg-raise.mp4",
+      "videoSideUrl": "asset:///videos/hanging-leg-raise.mp4"
     },
     {
       "exerciseId": 115,
