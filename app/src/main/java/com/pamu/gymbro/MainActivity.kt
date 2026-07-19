@@ -172,7 +172,10 @@ class MainActivity : ComponentActivity() {
                                         navController.navigate("workout_session/$planId/$dayId")
                                     },
                                     onResumeWorkout = {
-                                        navController.navigate("workout_session/0/0") // Use 0 to indicate resume
+                                        navController.navigate("workout_session/0/0")
+                                    },
+                                    onAddWater = { amount ->
+                                        viewModel.addWater(amount)
                                     }
                                 )
                             }

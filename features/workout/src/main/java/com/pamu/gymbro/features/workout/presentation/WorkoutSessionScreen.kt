@@ -36,6 +36,7 @@ fun WorkoutSessionScreen(
     val workoutDay by viewModel.workoutDay.collectAsState()
     val timerSeconds by viewModel.timerSeconds.collectAsState()
     val timerType by viewModel.timerType.collectAsState()
+    val currentCalories by viewModel.currentCaloriesBurned.collectAsState()
 
     var showExitDialog by remember { mutableStateOf(false) }
 
@@ -78,11 +79,19 @@ fun WorkoutSessionScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { 
-                    Text(
-                        text = "EXERCISE ${ (session?.currentExerciseIndex ?: 0) + 1 } OF ${workoutDay?.exercises?.size}",
-                        style = MaterialTheme.typography.labelLarge,
-                        fontWeight = FontWeight.Black
-                    ) 
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = "EXERCISE ${ (session?.currentExerciseIndex ?: 0) + 1 } OF ${workoutDay?.exercises?.size}",
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = FontWeight.Black
+                        ) 
+                        Text(
+                            text = "🔥 $currentCalories KCAL",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
                 },
                 navigationIcon = {
                     IconButton(onClick = { showExitDialog = true }) {

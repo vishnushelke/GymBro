@@ -9,6 +9,7 @@ import com.pamu.gymbro.domain.usecase.dashboard.GetDashboardSummaryUseCase
 import com.pamu.gymbro.domain.usecase.favorite.FavoriteItems
 import com.pamu.gymbro.domain.usecase.favorite.GetFavoriteItemsUseCase
 import com.pamu.gymbro.domain.model.User
+import com.pamu.gymbro.domain.usecase.stats.AddWaterUseCase
 import com.pamu.gymbro.domain.usecase.user.GetUserUseCase
 import com.pamu.gymbro.domain.usecase.workout.GetActiveWorkoutSessionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +23,8 @@ class DashboardViewModel @Inject constructor(
     private val getFavoriteItemsUseCase: GetFavoriteItemsUseCase,
     private val connectivityObserver: ConnectivityObserver,
     private val getUserUseCase: GetUserUseCase,
-    private val getActiveWorkoutSessionUseCase: GetActiveWorkoutSessionUseCase
+    private val getActiveWorkoutSessionUseCase: GetActiveWorkoutSessionUseCase,
+    private val addWaterUseCase: AddWaterUseCase
 ) : ViewModel() {
 
     private val _user = MutableStateFlow<User?>(null)
@@ -85,6 +87,12 @@ class DashboardViewModel @Inject constructor(
             getActiveWorkoutSessionUseCase().collect {
                 _activeSession.value = it
             }
+        }
+    }
+
+    fun addWater(amountMl: Int) {
+        viewModelScope.launch {
+            addWaterUseCase(amountMl)
         }
     }
 }

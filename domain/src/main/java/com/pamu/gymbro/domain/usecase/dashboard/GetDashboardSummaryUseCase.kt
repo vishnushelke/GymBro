@@ -55,6 +55,16 @@ class GetDashboardSummaryUseCase @Inject constructor(
                         else -> s?.workoutProgressPercentage ?: 0
                     }
 
+                    // Estimate calories burned so far if in a session
+                    var estimatedBurned = s?.caloriesBurned ?: 0
+                    if (currentSession != null && s?.workoutCompleted != true) {
+                        val durationMillis = Date().time - currentSession.startTime.time
+                        val durationMinutes = (durationMillis / (1000 * 60)).toInt().coerceAtLeast(1)
+                        // Simple estimate: 5 MET * 75kg * duration
+                        val sessionEstimate = (5.0 * 75.0 * (durationMinutes / 60.0)).toInt()
+                        estimatedBurned += sessionEstimate
+                    }
+
                     DashboardSummary(
                         todayWorkout = if (targetDay != null) "${activePlan.name} - ${targetDay.title}" else activePlan.name,
                         workoutPlanId = activePlan.id,
@@ -64,7 +74,7 @@ class GetDashboardSummaryUseCase @Inject constructor(
                         currentStreakDays = 3,
                         calorieGoal = d.firstOrNull()?.calories ?: 2500,
                         caloriesConsumed = 0,
-                        caloriesBurned = s?.caloriesBurned ?: 0,
+                        caloriesBurned = estimatedBurned,
                         waterIntakeMl = s?.waterIntakeMl ?: 0,
                         waterGoalMl = 2500
                     )

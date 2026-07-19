@@ -6,6 +6,7 @@ import com.pamu.gymbro.domain.model.DailyStats
 import com.pamu.gymbro.domain.repository.DailyStatsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -23,7 +24,12 @@ class DailyStatsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun addWater(date: String, amount: Int) = withContext(Dispatchers.IO) {
-        dao.updateWaterIntake(date, amount)
+        val existing = dao.getStatsForDate(date).first()
+        if (existing == null) {
+            dao.insertStats(DailyStatsEntity(date = date, waterIntakeMl = amount))
+        } else {
+            dao.updateWaterIntake(date, amount)
+        }
     }
 
     private fun DailyStatsEntity.toDomain() = DailyStats(

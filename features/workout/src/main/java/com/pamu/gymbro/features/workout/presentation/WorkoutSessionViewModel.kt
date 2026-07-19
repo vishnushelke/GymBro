@@ -32,8 +32,17 @@ class WorkoutSessionViewModel @Inject constructor(
     private val _isFinished = MutableSharedFlow<DailyStats>()
     val isFinished = _isFinished.asSharedFlow()
 
+    private val _currentCaloriesBurned = MutableStateFlow(0)
+    val currentCaloriesBurned: StateFlow<Int> = _currentCaloriesBurned.asStateFlow()
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val session: StateFlow<WorkoutSession?> = getActiveWorkoutSessionUseCase()
+        .onEach { s ->
+            if (s != null) {
+                val durationMinutes = (System.currentTimeMillis() - s.startTime.time) / (1000 * 60)
+                _currentCaloriesBurned.value = (5.0 * 75.0 * (durationMinutes / 60.0)).toInt()
+            }
+        }
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
     @OptIn(ExperimentalCoroutinesApi::class)

@@ -120,7 +120,8 @@ fun HomeScreen(
                     onNavigateToProfile = onNavigateToProfile,
                     hasActiveSession = activeSession != null,
                     onStartWorkout = onStartWorkout,
-                    onResumeWorkout = onResumeWorkout
+                    onResumeWorkout = onResumeWorkout,
+                    onAddWater = viewModel::addWater
                 )
                 2 -> ProfileContent(
                     user = user,
@@ -140,7 +141,8 @@ fun HomeTab(
     onNavigateToProfile: () -> Unit,
     hasActiveSession: Boolean,
     onStartWorkout: (Long, Long) -> Unit,
-    onResumeWorkout: () -> Unit
+    onResumeWorkout: () -> Unit,
+    onAddWater: (Int) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
         // Hero Section
@@ -214,7 +216,7 @@ fun HomeTab(
                     onResumeWorkout = onResumeWorkout
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                QuickStatsRow(data)
+                QuickStatsRow(data, onAddWater)
                 Spacer(modifier = Modifier.height(32.dp))
             }
 
@@ -478,29 +480,62 @@ fun DashboardHeader(
 }
 
 @Composable
-fun QuickStatsRow(summary: DashboardSummary) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+fun QuickStatsRow(summary: DashboardSummary, onAddWater: (Int) -> Unit) {
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            StatCard(
+                modifier = Modifier.weight(1f),
+                label = "Active Burn",
+                value = "${summary.caloriesBurned}",
+                unit = "kcal",
+                icon = Icons.Default.Whatshot,
+                color = Color(0xFFFF5722),
+                progress = summary.caloriesBurned.toFloat() / 500f
+            )
+            StatCard(
+                modifier = Modifier.weight(1f),
+                label = "Hydration",
+                value = "${summary.waterIntakeMl}",
+                unit = "ml",
+                icon = Icons.Default.LocalDrink,
+                color = Color(0xFF2196F3),
+                progress = summary.waterIntakeMl.toFloat() / summary.waterGoalMl.toFloat()
+            )
+        }
+
+        // Quick Water Actions
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f))
+        ) {
+            Row(
+                modifier = Modifier.padding(12.dp).fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("Log Water:", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                WaterActionButton(amount = 250, onClick = { onAddWater(250) })
+                WaterActionButton(amount = 500, onClick = { onAddWater(500) })
+            }
+        }
+    }
+}
+
+@Composable
+fun WaterActionButton(amount: Int, onClick: () -> Unit) {
+    OutlinedButton(
+        onClick = onClick,
+        modifier = Modifier.height(36.dp),
+        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
+        shape = RoundedCornerShape(8.dp)
     ) {
-        StatCard(
-            modifier = Modifier.weight(1f),
-            label = "Burned",
-            value = "${summary.caloriesBurned}",
-            unit = "kcal",
-            icon = Icons.Default.Whatshot,
-            color = Color(0xFFFF5722),
-            progress = summary.caloriesBurned.toFloat() / 500f // Placeholder daily goal
-        )
-        StatCard(
-            modifier = Modifier.weight(1f),
-            label = "Water",
-            value = "${summary.waterIntakeMl}",
-            unit = "ml",
-            icon = Icons.Default.LocalDrink,
-            color = Color(0xFF2196F3),
-            progress = summary.waterIntakeMl.toFloat() / summary.waterGoalMl.toFloat()
-        )
+        Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
+        Spacer(modifier = Modifier.width(4.dp))
+        Text("+$amount ml", style = MaterialTheme.typography.labelSmall)
     }
 }
 
