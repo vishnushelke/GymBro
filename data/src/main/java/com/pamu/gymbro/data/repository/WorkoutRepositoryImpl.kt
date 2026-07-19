@@ -26,12 +26,10 @@ class WorkoutRepositoryImpl @Inject constructor(
     }
 
     override fun getWorkoutDayById(dayId: Long): Flow<WorkoutDay?> {
-        // Uses Room Relation to fetch everything in one IO transaction
         return dao.getWorkoutDayWithExercisesById(dayId).map { it?.toDomain() }.flowOn(Dispatchers.IO)
     }
 
     override fun getWorkoutDaysForPlan(planId: Long): Flow<List<WorkoutDay>> {
-        // Uses Room Relation to fetch everything in one IO transaction
         return dao.getWorkoutDaysWithExercisesForPlan(planId).map { list ->
             list.map { it.toDomain() }
         }.flowOn(Dispatchers.IO)

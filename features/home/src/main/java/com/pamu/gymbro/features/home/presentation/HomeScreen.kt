@@ -454,7 +454,9 @@ fun DashboardHeader(
 
             val pId = summary.workoutPlanId
             val dId = summary.workoutDayId
-            if (pId != null && dId != null) {
+            val isCompleted = summary.workoutCompletionPercentage >= 100
+
+            if (pId != null && dId != null && !isCompleted) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     onClick = { 
@@ -473,6 +475,33 @@ fun DashboardHeader(
                         text = if (hasActiveSession) "RESUME WORKOUT" else "START WORKOUT",
                         fontWeight = FontWeight.Black
                     )
+                }
+            } else if (isCompleted) {
+                Spacer(modifier = Modifier.height(16.dp))
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.CheckCircle,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "WORKOUT COMPLETED",
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = FontWeight.Black,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
             }
         }
