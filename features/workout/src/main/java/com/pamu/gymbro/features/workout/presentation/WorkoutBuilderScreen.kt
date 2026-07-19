@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -11,6 +12,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -21,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pamu.gymbro.domain.model.Exercise
+import com.pamu.gymbro.domain.model.ExerciseCategory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,7 +34,6 @@ fun WorkoutBuilderScreen(
 ) {
     val planName by viewModel.planName.collectAsState()
     val days by viewModel.days.collectAsState()
-    val exercises by viewModel.exercises.collectAsState()
     
     LaunchedEffect(planId) {
         planId?.let { viewModel.loadExistingPlan(it) }
@@ -156,12 +158,23 @@ fun WorkoutBuilderScreen(
     }
 
     if (showExercisePickerForDay != null) {
+        val categories by viewModel.categories.collectAsState()
+        val filteredExercises by viewModel.filteredExercises.collectAsState()
+        val selectedCategoryId by viewModel.selectedCategoryId.collectAsState()
+
         ExercisePickerDialog(
-            exercises = exercises,
-            onDismiss = { showExercisePickerForDay = null },
+            categories = categories,
+            selectedCategoryId = selectedCategoryId,
+            exercises = filteredExercises,
+            onCategorySelected = viewModel::selectCategory,
+            onDismiss = { 
+                showExercisePickerForDay = null
+                viewModel.selectCategory(null)
+            },
             onExerciseSelected = { exercise ->
                 viewModel.addExerciseToDay(showExercisePickerForDay!!, exercise)
                 showExercisePickerForDay = null
+                viewModel.selectCategory(null)
             }
         )
     }
@@ -169,25 +182,139 @@ fun WorkoutBuilderScreen(
 
 @Composable
 fun ExercisePickerDialog(
+    categories: List<ExerciseCategory>,
+    selectedCategoryId: Long?,
     exercises: List<Exercise>,
+    onCategorySelected: (Long?) -> Unit,
     onDismiss: () -> Unit,
     onExerciseSelected: (Exercise) -> Unit
 ) {
     Dialog(onDismissRequest = onDismiss) {
-        Card(modifier = Modifier.fillMaxWidth().height(400.dp)) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(text = "Select Exercise", style = MaterialTheme.typography.titleLarge)
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.8f),
+            shape = RoundedCornerShape(24.dp)
+        ) {
+            Column(modifier = Modifier.padding(24.dp)) {
+                Text(
+                    text = "Add Exercise",
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Black
+                )
+                
                 Spacer(modifier = Modifier.height(16.dp))
-                LazyColumn {
-                    items(exercises) { exercise ->
+
+                // Category Selector
+                Text(
+                    text = "Select Muscle Group",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold
+                )
+                
+                var expanded by remember { mutableStateOf(false) }
+                val selectedCategoryName = categories.find { it.id == selectedCategoryId }?.name ?: "All Categories"
+
+                Box(modifier = Modifier.padding(vertical = 8.dp)) {
+                    OutlinedCard(
+                        onClick = { expanded = true },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = selectedCategoryName, modifier = Modifier.weight(1f))
+                            Icon(Icons.Default.KeyboardArrowDown, contentDescription = null)
+                        }
+                    }
+
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false },
+                        modifier = Modifier.fillMaxWidth(0.7f)
+                    ) {
+                        DropdownMenuItem(
+                            text = { Text("All Categories") },
+                            onClick = {
+                                onCategorySelected(null)
+                                expanded = false
+                            }
+                        )
+                        categories.forEach { category ->
+                            DropdownMenuItem(
+                                text = { Text(category.name) },
+                                onClick = {
+                                    onCategorySelected(category.id)
+                                    expanded = false
+                                }
+                            )
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = "Available Exercises",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                if (exercises.isEmpty()) {
+                    Box(modifier = Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
                         Text(
-                            text = exercise.name,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { onExerciseSelected(exercise) }
-                                .padding(vertical = 8.dp)
+                            text = "No exercises found.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
                         )
                     }
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(exercises) { exercise ->
+                            Surface(
+                                onClick = { onExerciseSelected(exercise) },
+                                shape = RoundedCornerShape(12.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                            ) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = exercise.name,
+                                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
+                                        modifier = Modifier.weight(1f)
+                                    )
+                                    Icon(
+                                        imageVector = Icons.Default.Add,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                TextButton(
+                    onClick = onDismiss,
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Text("CLOSE")
                 }
             }
         }

@@ -2,18 +2,14 @@ package com.pamu.gymbro.features.workout.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pamu.gymbro.domain.model.Exercise
-import com.pamu.gymbro.domain.model.WorkoutDay
-import com.pamu.gymbro.domain.model.WorkoutExercise
-import com.pamu.gymbro.domain.model.WorkoutPlan
+import com.pamu.gymbro.domain.model.*
+import com.pamu.gymbro.domain.usecase.exercise.GetCategoriesUseCase
 import com.pamu.gymbro.domain.usecase.exercise.GetExercisesUseCase
 import com.pamu.gymbro.domain.usecase.workout.GetWorkoutDetailsUseCase
 import com.pamu.gymbro.domain.usecase.workout.SaveWorkoutPlanUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +17,8 @@ import javax.inject.Inject
 class WorkoutBuilderViewModel @Inject constructor(
     private val saveWorkoutPlanUseCase: SaveWorkoutPlanUseCase,
     private val getExercisesUseCase: GetExercisesUseCase,
-    private val getWorkoutDetailsUseCase: GetWorkoutDetailsUseCase
+    private val getWorkoutDetailsUseCase: GetWorkoutDetailsUseCase,
+    private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
     private var editingPlanId: Long = 0
@@ -32,15 +29,35 @@ class WorkoutBuilderViewModel @Inject constructor(
     private val _days = MutableStateFlow<List<WorkoutDay>>(emptyList())
     val days: StateFlow<List<WorkoutDay>> = _days.asStateFlow()
 
-    private val _exercises = MutableStateFlow<List<Exercise>>(emptyList())
-    val exercises: StateFlow<List<Exercise>> = _exercises.asStateFlow()
+    private val _categories = MutableStateFlow<List<ExerciseCategory>>(emptyList())
+    val categories: StateFlow<List<ExerciseCategory>> = _categories.asStateFlow()
+
+    private val _selectedCategoryId = MutableStateFlow<Long?>(null)
+    val selectedCategoryId: StateFlow<Long?> = _selectedCategoryId.asStateFlow()
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val filteredExercises: StateFlow<List<Exercise>> = _selectedCategoryId.flatMapLatest { categoryId ->
+        getExercisesUseCase(categoryId, "")
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
 
     init {
+        loadCategories()
+    }
+
+    private fun loadCategories() {
         viewModelScope.launch {
-            getExercisesUseCase().collect {
-                _exercises.value = it
+            getCategoriesUseCase().collect {
+                _categories.value = it
             }
         }
+    }
+
+    fun selectCategory(categoryId: Long?) {
+        _selectedCategoryId.value = categoryId
     }
 
     fun loadExistingPlan(planId: Long) {

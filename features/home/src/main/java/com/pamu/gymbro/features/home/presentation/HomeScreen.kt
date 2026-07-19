@@ -17,23 +17,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.automirrored.filled.ShowChart
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Explore
-import androidx.compose.material.icons.filled.Help
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.LocalDrink
-import androidx.compose.material.icons.filled.Logout
-import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material.icons.filled.Whatshot
-import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -212,11 +197,6 @@ fun HomeTab(
         }
 
         Column(modifier = Modifier.padding(horizontal = 20.dp)) {
-            user?.let { profile ->
-                UserProfileCard(user = profile, onEditClick = onNavigateToProfile)
-                Spacer(modifier = Modifier.height(24.dp))
-            }
-
             summary?.let { data ->
                 DashboardHeader(data)
                 Spacer(modifier = Modifier.height(24.dp))
@@ -557,17 +537,17 @@ fun ExploreGrid(
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             ExploreCard(
                 modifier = Modifier.weight(1f),
-                title = "Library",
-                subtitle = "140+ Exercises",
+                title = "Exercise Guide",
+                subtitle = "Master every move",
                 image = "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=500",
                 icon = Icons.Default.Build,
                 onClick = onLibraryClick
             )
             ExploreCard(
                 modifier = Modifier.weight(1f),
-                title = "Workouts",
-                subtitle = "Daily Plans",
-                image = "https://images.unsplash.com/photo-1583454110551-21f2fa2ec617?q=80&w=500",
+                title = "Training Plans",
+                subtitle = "Goal-based routines",
+                image = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=500",
                 icon = Icons.Default.Star,
                 onClick = onWorkoutsClick
             )
@@ -575,16 +555,16 @@ fun ExploreGrid(
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             ExploreCard(
                 modifier = Modifier.weight(1f),
-                title = "Diets",
-                subtitle = "Healthy Food",
+                title = "Nutrition Hub",
+                subtitle = "Fuel your body",
                 image = "https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=500",
                 icon = Icons.AutoMirrored.Filled.List,
                 onClick = onDietsClick
             )
             ExploreCard(
                 modifier = Modifier.weight(1f),
-                title = "Stats",
-                subtitle = "Track Progress",
+                title = "Evolution Log",
+                subtitle = "Track your growth",
                 image = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500",
                 icon = Icons.AutoMirrored.Filled.ShowChart,
                 onClick = onProgressClick
