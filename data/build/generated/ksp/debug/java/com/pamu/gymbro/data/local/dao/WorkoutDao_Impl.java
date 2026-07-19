@@ -21,6 +21,7 @@ import com.pamu.gymbro.data.local.entity.WorkoutPlanEntity;
 import com.pamu.gymbro.data.local.model.WorkoutDayWithExercises;
 import com.pamu.gymbro.data.local.model.WorkoutExerciseWithExercise;
 import java.lang.Class;
+import java.lang.Double;
 import java.lang.Exception;
 import java.lang.Long;
 import java.lang.Override;
@@ -45,6 +46,8 @@ public final class WorkoutDao_Impl implements WorkoutDao {
   private final EntityInsertionAdapter<WorkoutDayEntity> __insertionAdapterOfWorkoutDayEntity;
 
   private final EntityInsertionAdapter<WorkoutExerciseEntity> __insertionAdapterOfWorkoutExerciseEntity;
+
+  private final SharedSQLiteStatement __preparedStmtOfUpdateExerciseWeight;
 
   private final SharedSQLiteStatement __preparedStmtOfDeleteWorkoutPlan;
 
@@ -94,7 +97,7 @@ public final class WorkoutDao_Impl implements WorkoutDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `workout_exercises` (`id`,`workoutDayId`,`exerciseId`,`sets`,`reps`,`restSeconds`) VALUES (nullif(?, 0),?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `workout_exercises` (`id`,`workoutDayId`,`exerciseId`,`sets`,`reps`,`restSeconds`,`comfortableWeight`,`weightUnit`) VALUES (nullif(?, 0),?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -106,6 +109,24 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         statement.bindLong(4, entity.getSets());
         statement.bindString(5, entity.getReps());
         statement.bindLong(6, entity.getRestSeconds());
+        if (entity.getComfortableWeight() == null) {
+          statement.bindNull(7);
+        } else {
+          statement.bindDouble(7, entity.getComfortableWeight());
+        }
+        if (entity.getWeightUnit() == null) {
+          statement.bindNull(8);
+        } else {
+          statement.bindString(8, entity.getWeightUnit());
+        }
+      }
+    };
+    this.__preparedStmtOfUpdateExerciseWeight = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "UPDATE workout_exercises SET comfortableWeight = ?, weightUnit = ? WHERE id = ?";
+        return _query;
       }
     };
     this.__preparedStmtOfDeleteWorkoutPlan = new SharedSQLiteStatement(__db) {
@@ -169,6 +190,37 @@ public final class WorkoutDao_Impl implements WorkoutDao {
       __db.setTransactionSuccessful();
     } finally {
       __db.endTransaction();
+    }
+  }
+
+  @Override
+  public void updateExerciseWeight(final long id, final Double weight, final String unit) {
+    __db.assertNotSuspendingTransaction();
+    final SupportSQLiteStatement _stmt = __preparedStmtOfUpdateExerciseWeight.acquire();
+    int _argIndex = 1;
+    if (weight == null) {
+      _stmt.bindNull(_argIndex);
+    } else {
+      _stmt.bindDouble(_argIndex, weight);
+    }
+    _argIndex = 2;
+    if (unit == null) {
+      _stmt.bindNull(_argIndex);
+    } else {
+      _stmt.bindString(_argIndex, unit);
+    }
+    _argIndex = 3;
+    _stmt.bindLong(_argIndex, id);
+    try {
+      __db.beginTransaction();
+      try {
+        _stmt.executeUpdateDelete();
+        __db.setTransactionSuccessful();
+      } finally {
+        __db.endTransaction();
+      }
+    } finally {
+      __preparedStmtOfUpdateExerciseWeight.release(_stmt);
     }
   }
 
@@ -663,7 +715,7 @@ public final class WorkoutDao_Impl implements WorkoutDao {
       return;
     }
     final StringBuilder _stringBuilder = StringUtil.newStringBuilder();
-    _stringBuilder.append("SELECT `id`,`workoutDayId`,`exerciseId`,`sets`,`reps`,`restSeconds` FROM `workout_exercises` WHERE `workoutDayId` IN (");
+    _stringBuilder.append("SELECT `id`,`workoutDayId`,`exerciseId`,`sets`,`reps`,`restSeconds`,`comfortableWeight`,`weightUnit` FROM `workout_exercises` WHERE `workoutDayId` IN (");
     final int _inputSize = _map.size();
     StringUtil.appendPlaceholders(_stringBuilder, _inputSize);
     _stringBuilder.append(")");
@@ -688,6 +740,8 @@ public final class WorkoutDao_Impl implements WorkoutDao {
       final int _cursorIndexOfSets = 3;
       final int _cursorIndexOfReps = 4;
       final int _cursorIndexOfRestSeconds = 5;
+      final int _cursorIndexOfComfortableWeight = 6;
+      final int _cursorIndexOfWeightUnit = 7;
       final LongSparseArray<ExerciseEntity> _collectionExercise = new LongSparseArray<ExerciseEntity>();
       while (_cursor.moveToNext()) {
         final long _tmpKey;
@@ -715,7 +769,19 @@ public final class WorkoutDao_Impl implements WorkoutDao {
           _tmpReps = _cursor.getString(_cursorIndexOfReps);
           final int _tmpRestSeconds;
           _tmpRestSeconds = _cursor.getInt(_cursorIndexOfRestSeconds);
-          _tmpWorkoutExercise = new WorkoutExerciseEntity(_tmpId,_tmpWorkoutDayId,_tmpExerciseId,_tmpSets,_tmpReps,_tmpRestSeconds);
+          final Double _tmpComfortableWeight;
+          if (_cursor.isNull(_cursorIndexOfComfortableWeight)) {
+            _tmpComfortableWeight = null;
+          } else {
+            _tmpComfortableWeight = _cursor.getDouble(_cursorIndexOfComfortableWeight);
+          }
+          final String _tmpWeightUnit;
+          if (_cursor.isNull(_cursorIndexOfWeightUnit)) {
+            _tmpWeightUnit = null;
+          } else {
+            _tmpWeightUnit = _cursor.getString(_cursorIndexOfWeightUnit);
+          }
+          _tmpWorkoutExercise = new WorkoutExerciseEntity(_tmpId,_tmpWorkoutDayId,_tmpExerciseId,_tmpSets,_tmpReps,_tmpRestSeconds,_tmpComfortableWeight,_tmpWeightUnit);
           final ExerciseEntity _tmpExercise;
           final long _tmpKey_2;
           _tmpKey_2 = _cursor.getLong(_cursorIndexOfExerciseId);

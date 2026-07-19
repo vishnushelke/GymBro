@@ -13,6 +13,7 @@ fun UserProfileEntity.toDomain(): User {
         phone = phone,
         age = age,
         sex = sex,
+        unitPreference = unitPreference,
         isProfileCompleted = isProfileCompleted
     )
 }
@@ -28,6 +29,7 @@ fun User.toEntity(): UserProfileEntity {
         phone = phone,
         age = age,
         sex = sex,
+        unitPreference = unitPreference,
         isProfileCompleted = isProfileCompleted
     )
 }

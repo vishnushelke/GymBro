@@ -38,6 +38,7 @@ fun ProfileScreen(
     var isVegetarian by remember { mutableStateOf(false) }
     var level by remember { mutableStateOf("Beginner") }
     var goal by remember { mutableStateOf("Maintenance") }
+    var unitPreference by remember { mutableStateOf("KG") }
 
     LaunchedEffect(userState) {
         userState?.let {
@@ -49,6 +50,7 @@ fun ProfileScreen(
             isVegetarian = it.isVegetarian
             level = it.level
             goal = it.goal
+            unitPreference = it.unitPreference
         }
     }
 
@@ -73,7 +75,8 @@ fun ProfileScreen(
                                     sex = sex,
                                     isVegetarian = isVegetarian,
                                     level = level,
-                                    goal = goal
+                                    goal = goal,
+                                    unitPreference = unitPreference
                                 )
                             )
                             onBack()
@@ -162,6 +165,24 @@ fun ProfileScreen(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(text = "Vegetarian Preference", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
                 Switch(checked = isVegetarian, onCheckedChange = { isVegetarian = it })
+            }
+
+            HorizontalDivider()
+
+            // Unit Preference Section
+            ProfileSectionTitle(title = "Units & Preferences")
+
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(text = "Weight Units", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    listOf("KG", "LBS").forEach { unit ->
+                        FilterChip(
+                            selected = unitPreference == unit,
+                            onClick = { unitPreference = unit },
+                            label = { Text(unit) }
+                        )
+                    }
+                }
             }
 
             Spacer(modifier = Modifier.height(32.dp))

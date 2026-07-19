@@ -61,7 +61,9 @@ fun WorkoutExerciseEntity.toDomain(exercise: Exercise? = null): WorkoutExercise 
         sets = sets,
         reps = reps,
         restSeconds = restSeconds,
-        exercise = exercise
+        exercise = exercise,
+        comfortableWeight = comfortableWeight,
+        weightUnit = weightUnit
     )
 }
 
@@ -76,6 +78,8 @@ fun WorkoutExercise.toEntity(): WorkoutExerciseEntity {
         exerciseId = exerciseId,
         sets = sets,
         reps = reps,
-        restSeconds = restSeconds
+        restSeconds = restSeconds,
+        comfortableWeight = comfortableWeight,
+        weightUnit = weightUnit
     )
 }

@@ -29,5 +29,7 @@ data class WorkoutExerciseEntity(
     val exerciseId: Long,
     val sets: Int,
     val reps: String,
-    val restSeconds: Int
+    val restSeconds: Int,
+    val comfortableWeight: Double? = null,
+    val weightUnit: String? = null
 )

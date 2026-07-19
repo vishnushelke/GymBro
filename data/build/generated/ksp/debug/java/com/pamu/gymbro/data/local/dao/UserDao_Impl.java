@@ -38,7 +38,7 @@ public final class UserDao_Impl implements UserDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `user_profile` (`id`,`name`,`isVegetarian`,`experienceLevel`,`fitnessGoal`,`email`,`phone`,`age`,`sex`,`isProfileCompleted`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `user_profile` (`id`,`name`,`isVegetarian`,`experienceLevel`,`fitnessGoal`,`email`,`phone`,`age`,`sex`,`unitPreference`,`isProfileCompleted`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -54,15 +54,16 @@ public final class UserDao_Impl implements UserDao {
         statement.bindString(7, entity.getPhone());
         statement.bindLong(8, entity.getAge());
         statement.bindString(9, entity.getSex());
+        statement.bindString(10, entity.getUnitPreference());
         final int _tmp_1 = entity.isProfileCompleted() ? 1 : 0;
-        statement.bindLong(10, _tmp_1);
+        statement.bindLong(11, _tmp_1);
       }
     };
     this.__updateAdapterOfUserProfileEntity = new EntityDeletionOrUpdateAdapter<UserProfileEntity>(__db) {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `user_profile` SET `id` = ?,`name` = ?,`isVegetarian` = ?,`experienceLevel` = ?,`fitnessGoal` = ?,`email` = ?,`phone` = ?,`age` = ?,`sex` = ?,`isProfileCompleted` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `user_profile` SET `id` = ?,`name` = ?,`isVegetarian` = ?,`experienceLevel` = ?,`fitnessGoal` = ?,`email` = ?,`phone` = ?,`age` = ?,`sex` = ?,`unitPreference` = ?,`isProfileCompleted` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -78,9 +79,10 @@ public final class UserDao_Impl implements UserDao {
         statement.bindString(7, entity.getPhone());
         statement.bindLong(8, entity.getAge());
         statement.bindString(9, entity.getSex());
+        statement.bindString(10, entity.getUnitPreference());
         final int _tmp_1 = entity.isProfileCompleted() ? 1 : 0;
-        statement.bindLong(10, _tmp_1);
-        statement.bindLong(11, entity.getId());
+        statement.bindLong(11, _tmp_1);
+        statement.bindLong(12, entity.getId());
       }
     };
   }
@@ -128,6 +130,7 @@ public final class UserDao_Impl implements UserDao {
           final int _cursorIndexOfPhone = CursorUtil.getColumnIndexOrThrow(_cursor, "phone");
           final int _cursorIndexOfAge = CursorUtil.getColumnIndexOrThrow(_cursor, "age");
           final int _cursorIndexOfSex = CursorUtil.getColumnIndexOrThrow(_cursor, "sex");
+          final int _cursorIndexOfUnitPreference = CursorUtil.getColumnIndexOrThrow(_cursor, "unitPreference");
           final int _cursorIndexOfIsProfileCompleted = CursorUtil.getColumnIndexOrThrow(_cursor, "isProfileCompleted");
           final UserProfileEntity _result;
           if (_cursor.moveToFirst()) {
@@ -151,11 +154,13 @@ public final class UserDao_Impl implements UserDao {
             _tmpAge = _cursor.getInt(_cursorIndexOfAge);
             final String _tmpSex;
             _tmpSex = _cursor.getString(_cursorIndexOfSex);
+            final String _tmpUnitPreference;
+            _tmpUnitPreference = _cursor.getString(_cursorIndexOfUnitPreference);
             final boolean _tmpIsProfileCompleted;
             final int _tmp_1;
             _tmp_1 = _cursor.getInt(_cursorIndexOfIsProfileCompleted);
             _tmpIsProfileCompleted = _tmp_1 != 0;
-            _result = new UserProfileEntity(_tmpId,_tmpName,_tmpIsVegetarian,_tmpExperienceLevel,_tmpFitnessGoal,_tmpEmail,_tmpPhone,_tmpAge,_tmpSex,_tmpIsProfileCompleted);
+            _result = new UserProfileEntity(_tmpId,_tmpName,_tmpIsVegetarian,_tmpExperienceLevel,_tmpFitnessGoal,_tmpEmail,_tmpPhone,_tmpAge,_tmpSex,_tmpUnitPreference,_tmpIsProfileCompleted);
           } else {
             _result = null;
           }

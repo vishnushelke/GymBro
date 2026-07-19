@@ -8,7 +8,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,6 +31,7 @@ fun WorkoutDayDetailScreen(
     onBackClick: () -> Unit
 ) {
     val workoutDay by viewModel.workoutDay.collectAsState()
+    val unitPreference by viewModel.unitPreference.collectAsState()
 
     LaunchedEffect(dayId) {
         viewModel.loadWorkoutDay(dayId)
@@ -113,6 +116,10 @@ fun WorkoutDayDetailScreen(
                     items(exercises) { exercise ->
                         WorkoutDayExerciseItem(
                             exercise = exercise,
+                            unitPreference = unitPreference,
+                            onWeightChange = { weight -> 
+                                viewModel.updateWeight(exercise.id, weight)
+                            },
                             onClick = { onExerciseClick(exercise.exerciseId) }
                         )
                     }
@@ -125,8 +132,14 @@ fun WorkoutDayDetailScreen(
 @Composable
 fun WorkoutDayExerciseItem(
     exercise: WorkoutExercise,
+    unitPreference: String,
+    onWeightChange: (Double?) -> Unit,
     onClick: () -> Unit
 ) {
+    val isMachine = exercise.exercise?.equipment?.lowercase()?.let { 
+        it.contains("machine") || it.contains("cable") 
+    } == true
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -134,38 +147,73 @@ fun WorkoutDayExerciseItem(
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .background(
-                        MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                        RoundedCornerShape(12.dp)
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.FitnessCenter,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                            RoundedCornerShape(12.dp)
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.FitnessCenter,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = exercise.exercise?.name ?: "Unknown Exercise",
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                    )
+                    Text(
+                        text = "${exercise.sets} sets • ${exercise.reps} reps",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = exercise.exercise?.name ?: "Unknown Exercise",
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
-                )
-                Text(
-                    text = "${exercise.sets} sets • ${exercise.reps} reps",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                )
+            if (isMachine) {
+                Spacer(modifier = Modifier.height(16.dp))
+                HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "Working Weight",
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                    
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        IconButton(onClick = { onWeightChange((exercise.comfortableWeight ?: 0.0) - 2.5) }) {
+                            Icon(Icons.Default.Remove, contentDescription = null, modifier = Modifier.size(20.dp))
+                        }
+                        
+                        Text(
+                            text = if (exercise.comfortableWeight != null) "${exercise.comfortableWeight} $unitPreference" else "Set Weight",
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.Black,
+                            color = if (exercise.comfortableWeight != null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                        
+                        IconButton(onClick = { onWeightChange((exercise.comfortableWeight ?: 0.0) + 2.5) }) {
+                            Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(20.dp))
+                        }
+                    }
+                }
             }
         }
     }

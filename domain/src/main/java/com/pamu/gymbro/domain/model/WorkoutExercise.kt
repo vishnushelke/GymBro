@@ -7,5 +7,7 @@ data class WorkoutExercise(
     val sets: Int,
     val reps: String,
     val restSeconds: Int,
-    val exercise: Exercise? = null
+    val exercise: Exercise? = null,
+    val comfortableWeight: Double? = null,
+    val weightUnit: String? = null
 )

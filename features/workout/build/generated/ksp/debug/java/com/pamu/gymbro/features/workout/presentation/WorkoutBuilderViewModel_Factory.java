@@ -2,6 +2,7 @@ package com.pamu.gymbro.features.workout.presentation;
 
 import com.pamu.gymbro.domain.usecase.exercise.GetCategoriesUseCase;
 import com.pamu.gymbro.domain.usecase.exercise.GetExercisesUseCase;
+import com.pamu.gymbro.domain.usecase.user.GetUserUseCase;
 import com.pamu.gymbro.domain.usecase.workout.GetWorkoutDetailsUseCase;
 import com.pamu.gymbro.domain.usecase.workout.SaveWorkoutPlanUseCase;
 import dagger.internal.DaggerGenerated;
@@ -36,33 +37,38 @@ public final class WorkoutBuilderViewModel_Factory implements Factory<WorkoutBui
 
   private final Provider<GetCategoriesUseCase> getCategoriesUseCaseProvider;
 
+  private final Provider<GetUserUseCase> getUserUseCaseProvider;
+
   private WorkoutBuilderViewModel_Factory(
       Provider<SaveWorkoutPlanUseCase> saveWorkoutPlanUseCaseProvider,
       Provider<GetExercisesUseCase> getExercisesUseCaseProvider,
       Provider<GetWorkoutDetailsUseCase> getWorkoutDetailsUseCaseProvider,
-      Provider<GetCategoriesUseCase> getCategoriesUseCaseProvider) {
+      Provider<GetCategoriesUseCase> getCategoriesUseCaseProvider,
+      Provider<GetUserUseCase> getUserUseCaseProvider) {
     this.saveWorkoutPlanUseCaseProvider = saveWorkoutPlanUseCaseProvider;
     this.getExercisesUseCaseProvider = getExercisesUseCaseProvider;
     this.getWorkoutDetailsUseCaseProvider = getWorkoutDetailsUseCaseProvider;
     this.getCategoriesUseCaseProvider = getCategoriesUseCaseProvider;
+    this.getUserUseCaseProvider = getUserUseCaseProvider;
   }
 
   @Override
   public WorkoutBuilderViewModel get() {
-    return newInstance(saveWorkoutPlanUseCaseProvider.get(), getExercisesUseCaseProvider.get(), getWorkoutDetailsUseCaseProvider.get(), getCategoriesUseCaseProvider.get());
+    return newInstance(saveWorkoutPlanUseCaseProvider.get(), getExercisesUseCaseProvider.get(), getWorkoutDetailsUseCaseProvider.get(), getCategoriesUseCaseProvider.get(), getUserUseCaseProvider.get());
   }
 
   public static WorkoutBuilderViewModel_Factory create(
       Provider<SaveWorkoutPlanUseCase> saveWorkoutPlanUseCaseProvider,
       Provider<GetExercisesUseCase> getExercisesUseCaseProvider,
       Provider<GetWorkoutDetailsUseCase> getWorkoutDetailsUseCaseProvider,
-      Provider<GetCategoriesUseCase> getCategoriesUseCaseProvider) {
-    return new WorkoutBuilderViewModel_Factory(saveWorkoutPlanUseCaseProvider, getExercisesUseCaseProvider, getWorkoutDetailsUseCaseProvider, getCategoriesUseCaseProvider);
+      Provider<GetCategoriesUseCase> getCategoriesUseCaseProvider,
+      Provider<GetUserUseCase> getUserUseCaseProvider) {
+    return new WorkoutBuilderViewModel_Factory(saveWorkoutPlanUseCaseProvider, getExercisesUseCaseProvider, getWorkoutDetailsUseCaseProvider, getCategoriesUseCaseProvider, getUserUseCaseProvider);
   }
 
   public static WorkoutBuilderViewModel newInstance(SaveWorkoutPlanUseCase saveWorkoutPlanUseCase,
       GetExercisesUseCase getExercisesUseCase, GetWorkoutDetailsUseCase getWorkoutDetailsUseCase,
-      GetCategoriesUseCase getCategoriesUseCase) {
-    return new WorkoutBuilderViewModel(saveWorkoutPlanUseCase, getExercisesUseCase, getWorkoutDetailsUseCase, getCategoriesUseCase);
+      GetCategoriesUseCase getCategoriesUseCase, GetUserUseCase getUserUseCase) {
+    return new WorkoutBuilderViewModel(saveWorkoutPlanUseCase, getExercisesUseCase, getWorkoutDetailsUseCase, getCategoriesUseCase, getUserUseCase);
   }
 }

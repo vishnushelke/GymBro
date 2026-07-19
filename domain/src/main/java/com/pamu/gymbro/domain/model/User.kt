@@ -9,5 +9,6 @@ data class User(
     val phone: String = "",
     val age: Int = 0,
     val sex: String = "",
+    val unitPreference: String = "KG", // KG, LBS
     val isProfileCompleted: Boolean = false
 )

@@ -14,5 +14,6 @@ data class UserProfileEntity(
     val phone: String = "",
     val age: Int = 0,
     val sex: String = "",
+    val unitPreference: String = "KG",
     val isProfileCompleted: Boolean
 )

@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -138,6 +139,21 @@ fun WorkoutBuilderScreen(
                                         Icon(androidx.compose.material.icons.Icons.Default.Close, contentDescription = "Remove Exercise", modifier = Modifier.size(16.dp))
                                     }
                                 }
+                                
+                                val isMachine = workoutExercise.exercise?.equipment?.lowercase()?.let { 
+                                    it.contains("machine") || it.contains("cable") 
+                                } == true
+
+                                if (isMachine) {
+                                    WeightInputRow(
+                                        weight = workoutExercise.comfortableWeight,
+                                        unit = workoutExercise.weightUnit ?: "KG",
+                                        onWeightChange = { 
+                                            viewModel.updateExerciseWeight(day.dayNumber, workoutExercise.exerciseId, it) 
+                                        }
+                                    )
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                }
                             }
 
                             Button(
@@ -177,6 +193,56 @@ fun WorkoutBuilderScreen(
                 viewModel.selectCategory(null)
             }
         )
+    }
+}
+
+@Composable
+fun WeightInputRow(
+    weight: Double?,
+    unit: String,
+    onWeightChange: (Double?) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 28.dp, end = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "Comfortable Weight:",
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+            modifier = Modifier.weight(1f)
+        )
+        
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            IconButton(
+                onClick = { onWeightChange((weight ?: 0.0) - 2.5) },
+                modifier = Modifier.size(32.dp)
+            ) {
+                Icon(Icons.Default.Remove, contentDescription = "Decrease", modifier = Modifier.size(16.dp))
+            }
+            
+            OutlinedTextField(
+                value = weight?.toString() ?: "",
+                onValueChange = { onWeightChange(it.toDoubleOrNull()) },
+                modifier = Modifier.width(80.dp),
+                textStyle = MaterialTheme.typography.bodySmall.copy(textAlign = androidx.compose.ui.text.style.TextAlign.Center),
+                singleLine = true,
+                keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Decimal),
+                trailingIcon = { Text(unit, style = MaterialTheme.typography.labelSmall) }
+            )
+            
+            IconButton(
+                onClick = { onWeightChange((weight ?: 0.0) + 2.5) },
+                modifier = Modifier.size(32.dp)
+            ) {
+                Icon(Icons.Default.Add, contentDescription = "Increase", modifier = Modifier.size(16.dp))
+            }
+        }
     }
 }
 

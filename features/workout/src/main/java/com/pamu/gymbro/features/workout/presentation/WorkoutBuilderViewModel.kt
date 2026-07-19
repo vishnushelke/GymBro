@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.pamu.gymbro.domain.model.*
 import com.pamu.gymbro.domain.usecase.exercise.GetCategoriesUseCase
 import com.pamu.gymbro.domain.usecase.exercise.GetExercisesUseCase
+import com.pamu.gymbro.domain.usecase.user.GetUserUseCase
 import com.pamu.gymbro.domain.usecase.workout.GetWorkoutDetailsUseCase
 import com.pamu.gymbro.domain.usecase.workout.SaveWorkoutPlanUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,10 +19,14 @@ class WorkoutBuilderViewModel @Inject constructor(
     private val saveWorkoutPlanUseCase: SaveWorkoutPlanUseCase,
     private val getExercisesUseCase: GetExercisesUseCase,
     private val getWorkoutDetailsUseCase: GetWorkoutDetailsUseCase,
-    private val getCategoriesUseCase: GetCategoriesUseCase
+    private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val getUserUseCase: GetUserUseCase
 ) : ViewModel() {
 
     private var editingPlanId: Long = 0
+
+    private val _user = MutableStateFlow<User?>(null)
+    val user: StateFlow<User?> = _user.asStateFlow()
 
     private val _planName = MutableStateFlow("")
     val planName: StateFlow<String> = _planName.asStateFlow()
@@ -46,6 +51,15 @@ class WorkoutBuilderViewModel @Inject constructor(
 
     init {
         loadCategories()
+        observeUser()
+    }
+
+    private fun observeUser() {
+        viewModelScope.launch {
+            getUserUseCase().collect {
+                _user.value = it
+            }
+        }
     }
 
     private fun loadCategories() {
@@ -107,9 +121,22 @@ class WorkoutBuilderViewModel @Inject constructor(
                     sets = 3,
                     reps = "12",
                     restSeconds = 60,
-                    exercise = exercise
+                    exercise = exercise,
+                    comfortableWeight = null,
+                    weightUnit = _user.value?.unitPreference
                 )
                 day.copy(exercises = day.exercises + newExercise)
+            } else day
+        }
+        _days.value = updatedDays
+    }
+
+    fun updateExerciseWeight(dayNumber: Int, exerciseId: Long, weight: Double?) {
+        val updatedDays = _days.value.map { day ->
+            if (day.dayNumber == dayNumber) {
+                day.copy(exercises = day.exercises.map { 
+                    if (it.exerciseId == exerciseId) it.copy(comfortableWeight = weight, weightUnit = _user.value?.unitPreference) else it 
+                })
             } else day
         }
         _days.value = updatedDays

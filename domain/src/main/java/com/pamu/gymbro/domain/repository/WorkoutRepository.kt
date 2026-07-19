@@ -12,5 +12,6 @@ interface WorkoutRepository {
     suspend fun insertWorkoutPlan(plan: WorkoutPlan, days: List<WorkoutDay>)
     suspend fun deleteWorkoutPlan(planId: Long)
     suspend fun updateFavoriteStatus(id: Long, isFavorite: Boolean)
+    suspend fun updateWorkoutExerciseWeight(id: Long, weight: Double?, unit: String?): Result<Unit>
     fun getFavoriteWorkoutPlans(): Flow<List<WorkoutPlan>>
 }

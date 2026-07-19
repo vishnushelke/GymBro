@@ -59,6 +59,15 @@ class WorkoutRepositoryImpl @Inject constructor(
         dao.updateFavoriteStatus(id, isFavorite)
     }
 
+    override suspend fun updateWorkoutExerciseWeight(id: Long, weight: Double?, unit: String?): Result<Unit> = withContext(Dispatchers.IO) {
+        try {
+            dao.updateExerciseWeight(id, weight, unit)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     override fun getFavoriteWorkoutPlans(): Flow<List<WorkoutPlan>> {
         return dao.getFavoriteWorkoutPlans().map { entities ->
             entities.map { it.toDomain() }

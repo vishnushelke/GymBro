@@ -35,6 +35,9 @@ interface WorkoutDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWorkoutExercises(exercises: List<WorkoutExerciseEntity>)
 
+    @Query("UPDATE workout_exercises SET comfortableWeight = :weight, weightUnit = :unit WHERE id = :id")
+    abstract fun updateExerciseWeight(id: Long, weight: Double?, unit: String?)
+
     @Query("DELETE FROM workout_plans WHERE id = :planId")
     fun deleteWorkoutPlan(planId: Long)
 
