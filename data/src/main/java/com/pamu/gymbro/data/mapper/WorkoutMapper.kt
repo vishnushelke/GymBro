@@ -68,7 +68,7 @@ fun WorkoutExerciseEntity.toDomain(exercise: Exercise? = null): WorkoutExercise 
 }
 
 fun com.pamu.gymbro.data.local.model.WorkoutExerciseWithExercise.toDomain(): WorkoutExercise {
-    return workoutExercise.toDomain(exercise.toDomain())
+    return workoutExercise.toDomain(exercise?.toDomain())
 }
 
 fun WorkoutExercise.toEntity(): WorkoutExerciseEntity {

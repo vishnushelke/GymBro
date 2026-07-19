@@ -3,11 +3,13 @@ package com.pamu.gymbro.data.di
 import android.content.Context
 import androidx.room.Room
 import com.pamu.gymbro.data.local.GymBroDatabase
+import com.pamu.gymbro.data.local.dao.DailyStatsDao
 import com.pamu.gymbro.data.local.dao.DietDao
 import com.pamu.gymbro.data.local.dao.ExerciseDao
 import com.pamu.gymbro.data.local.dao.ProgressDao
 import com.pamu.gymbro.data.local.dao.UserDao
 import com.pamu.gymbro.data.local.dao.WorkoutDao
+import com.pamu.gymbro.data.local.dao.WorkoutSessionDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,4 +51,12 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideProgressDao(db: GymBroDatabase): ProgressDao = db.progressDao()
+
+    @Provides
+    @Singleton
+    fun provideWorkoutSessionDao(db: GymBroDatabase): WorkoutSessionDao = db.workoutSessionDao()
+
+    @Provides
+    @Singleton
+    fun provideDailyStatsDao(db: GymBroDatabase): DailyStatsDao = db.dailyStatsDao()
 }

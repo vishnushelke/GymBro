@@ -137,7 +137,7 @@ fun WorkoutListScreen(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         items(workoutPlans, key = { it.id }) { plan ->
-                            val isCustom = !plan.name.startsWith("Default")
+                            val isCustom = !plan.name.startsWith("Default") && !plan.name.startsWith("Official")
                             WorkoutPlanItem(
                                 modifier = Modifier.animateItem(),
                                 plan = plan,

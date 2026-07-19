@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -42,10 +43,7 @@ import com.pamu.gymbro.features.profile.presentation.OnboardingScreen
 import com.pamu.gymbro.features.profile.presentation.ProfileScreen
 import com.pamu.gymbro.features.progress.presentation.ProgressScreen
 import com.pamu.gymbro.features.reminder.presentation.ReminderSettingsScreen
-import com.pamu.gymbro.features.workout.presentation.WorkoutBuilderScreen
-import com.pamu.gymbro.features.workout.presentation.WorkoutDayDetailScreen
-import com.pamu.gymbro.features.workout.presentation.WorkoutDetailScreen
-import com.pamu.gymbro.features.workout.presentation.WorkoutListScreen
+import com.pamu.gymbro.features.workout.presentation.*
 import com.pamu.gymbro.ui.theme.GymBroTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -161,13 +159,74 @@ class MainActivity : ComponentActivity() {
                                 val favorites by viewModel.favorites.collectAsState()
                                 val networkStatus by viewModel.networkStatus.collectAsState()
                                 val user by viewModel.user.collectAsState()
+                                val activeSession by viewModel.activeSession.collectAsState()
 
                                 HomeTab(
                                     user = user,
                                     summary = summary,
                                     networkStatus = networkStatus,
                                     favorites = favorites,
-                                    onNavigateToProfile = { navController.navigate("profile") }
+                                    onNavigateToProfile = { navController.navigate("profile") },
+                                    hasActiveSession = activeSession != null,
+                                    onStartWorkout = { planId, dayId ->
+                                        navController.navigate("workout_session/$planId/$dayId")
+                                    },
+                                    onResumeWorkout = {
+                                        navController.navigate("workout_session/0/0") // Use 0 to indicate resume
+                                    }
+                                )
+                            }
+                            composable(
+                                "workout_session/{planId}/{dayId}",
+                                arguments = listOf(
+                                    navArgument("planId") { type = NavType.LongType },
+                                    navArgument("dayId") { type = NavType.LongType }
+                                )
+                            ) { backStackEntry ->
+                                val planId = backStackEntry.arguments?.getLong("planId") ?: 0L
+                                val dayId = backStackEntry.arguments?.getLong("dayId") ?: 0L
+                                
+                                val viewModel: WorkoutSessionViewModel = hiltViewModel()
+                                LaunchedEffect(planId, dayId) {
+                                    if (planId > 0) {
+                                        viewModel.startWorkout(planId, dayId)
+                                    }
+                                }
+
+                                WorkoutSessionScreen(
+                                    viewModel = viewModel,
+                                    onFinish = { stats ->
+                                        // We can't easily pass the complex object.
+                                        // We'll navigate to celebration and it will show a generic message for now
+                                        // or we can pass basic stats in route.
+                                        navController.navigate("workout_celebration/${stats.caloriesBurned}/${stats.totalDurationMinutes}") {
+                                            popUpTo("home") { inclusive = false }
+                                        }
+                                    },
+                                    onClose = { navController.popBackStack() }
+                                )
+                            }
+                            composable(
+                                "workout_celebration/{calories}/{duration}",
+                                arguments = listOf(
+                                    navArgument("calories") { type = NavType.IntType },
+                                    navArgument("duration") { type = NavType.IntType }
+                                )
+                            ) { backStackEntry ->
+                                val calories = backStackEntry.arguments?.getInt("calories") ?: 0
+                                val duration = backStackEntry.arguments?.getInt("duration") ?: 0
+                                
+                                WorkoutCelebrationScreen(
+                                    stats = com.pamu.gymbro.domain.model.DailyStats(
+                                        date = "",
+                                        caloriesBurned = calories,
+                                        totalDurationMinutes = duration
+                                    ),
+                                    onFinish = {
+                                        navController.navigate("home") {
+                                            popUpTo("home") { inclusive = true }
+                                        }
+                                    }
                                 )
                             }
                             composable("explore") {

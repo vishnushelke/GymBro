@@ -7,7 +7,7 @@ import com.pamu.gymbro.domain.model.WorkoutPlan
 object WorkoutGenerator {
     
     fun generateDefaultPlan(level: String, goal: String): Pair<WorkoutPlan, List<WorkoutDay>> {
-        val planName = "Default $level Plan ($goal)"
+        val planName = "Official $level Plan ($goal)"
         val plan = WorkoutPlan(
             id = 0,
             name = planName,

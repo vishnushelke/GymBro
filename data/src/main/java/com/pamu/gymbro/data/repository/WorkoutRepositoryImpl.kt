@@ -18,21 +18,23 @@ class WorkoutRepositoryImpl @Inject constructor(
     override fun getAllWorkoutPlans(): Flow<List<WorkoutPlan>> {
         return dao.getAllWorkoutPlans().map { entities ->
             entities.map { it.toDomain() }
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     override fun getWorkoutPlanById(planId: Long): Flow<WorkoutPlan?> {
-        return dao.getWorkoutPlanById(planId).map { it?.toDomain() }
+        return dao.getWorkoutPlanById(planId).map { it?.toDomain() }.flowOn(Dispatchers.IO)
     }
 
     override fun getWorkoutDayById(dayId: Long): Flow<WorkoutDay?> {
-        return dao.getWorkoutDayWithExercisesById(dayId).map { it?.toDomain() }
+        // Uses Room Relation to fetch everything in one IO transaction
+        return dao.getWorkoutDayWithExercisesById(dayId).map { it?.toDomain() }.flowOn(Dispatchers.IO)
     }
 
     override fun getWorkoutDaysForPlan(planId: Long): Flow<List<WorkoutDay>> {
+        // Uses Room Relation to fetch everything in one IO transaction
         return dao.getWorkoutDaysWithExercisesForPlan(planId).map { list ->
             list.map { it.toDomain() }
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     override suspend fun insertWorkoutPlan(plan: WorkoutPlan, days: List<WorkoutDay>) {
@@ -71,6 +73,6 @@ class WorkoutRepositoryImpl @Inject constructor(
     override fun getFavoriteWorkoutPlans(): Flow<List<WorkoutPlan>> {
         return dao.getFavoriteWorkoutPlans().map { entities ->
             entities.map { it.toDomain() }
-        }
+        }.flowOn(Dispatchers.IO)
     }
 }

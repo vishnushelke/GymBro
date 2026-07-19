@@ -10,6 +10,7 @@ import com.pamu.gymbro.domain.model.ExerciseCategory
 import com.pamu.gymbro.domain.repository.ExerciseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -63,6 +64,10 @@ class ExerciseRepositoryImpl @Inject constructor(
     }
 
     override suspend fun importData() = withContext(Dispatchers.IO) {
+        // Only import if database is empty
+        val existingCategories = dao.getAllCategories().first()
+        if (existingCategories.isNotEmpty()) return@withContext
+
         val jsonString = assetReader.readAsset("data.json") ?: return@withContext
         try {
             val importData = json.decodeFromString<ImportDataJson>(jsonString)

@@ -11,6 +11,8 @@ import androidx.room.util.DBUtil;
 import androidx.room.util.TableInfo;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
+import com.pamu.gymbro.data.local.dao.DailyStatsDao;
+import com.pamu.gymbro.data.local.dao.DailyStatsDao_Impl;
 import com.pamu.gymbro.data.local.dao.DietDao;
 import com.pamu.gymbro.data.local.dao.DietDao_Impl;
 import com.pamu.gymbro.data.local.dao.ExerciseDao;
@@ -21,6 +23,8 @@ import com.pamu.gymbro.data.local.dao.UserDao;
 import com.pamu.gymbro.data.local.dao.UserDao_Impl;
 import com.pamu.gymbro.data.local.dao.WorkoutDao;
 import com.pamu.gymbro.data.local.dao.WorkoutDao_Impl;
+import com.pamu.gymbro.data.local.dao.WorkoutSessionDao;
+import com.pamu.gymbro.data.local.dao.WorkoutSessionDao_Impl;
 import java.lang.Class;
 import java.lang.Override;
 import java.lang.String;
@@ -47,10 +51,14 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
 
   private volatile ProgressDao _progressDao;
 
+  private volatile WorkoutSessionDao _workoutSessionDao;
+
+  private volatile DailyStatsDao _dailyStatsDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(22) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(24) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `user_profile` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `isVegetarian` INTEGER NOT NULL, `experienceLevel` TEXT NOT NULL, `fitnessGoal` TEXT NOT NULL, `email` TEXT NOT NULL, `phone` TEXT NOT NULL, `age` INTEGER NOT NULL, `sex` TEXT NOT NULL, `unitPreference` TEXT NOT NULL, `isProfileCompleted` INTEGER NOT NULL, PRIMARY KEY(`id`))");
@@ -67,8 +75,10 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
         db.execSQL("CREATE TABLE IF NOT EXISTS `meals` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `dietPlanId` INTEGER NOT NULL, `mealType` TEXT NOT NULL, `name` TEXT NOT NULL, `calories` INTEGER NOT NULL, `protein` INTEGER NOT NULL, `carbs` INTEGER NOT NULL, `fats` INTEGER NOT NULL, FOREIGN KEY(`dietPlanId`) REFERENCES `diet_plans`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_meals_dietPlanId` ON `meals` (`dietPlanId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `progress_entries` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `weight` REAL NOT NULL, `chest` REAL NOT NULL, `waist` REAL NOT NULL, `hips` REAL NOT NULL, `arms` REAL NOT NULL, `thighs` REAL NOT NULL, `bodyFat` REAL NOT NULL, `notes` TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `active_workout_sessions` (`id` INTEGER NOT NULL, `planId` INTEGER NOT NULL, `dayId` INTEGER NOT NULL, `startTime` INTEGER NOT NULL, `currentExerciseIndex` INTEGER NOT NULL, `currentSetNumber` INTEGER NOT NULL, `totalRepsCompleted` INTEGER NOT NULL, `totalWeightLifted` REAL NOT NULL, `isPaused` INTEGER NOT NULL, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `daily_stats` (`date` TEXT NOT NULL, `caloriesBurned` INTEGER NOT NULL, `caloriesConsumed` INTEGER NOT NULL, `waterIntakeMl` INTEGER NOT NULL, `workoutCompleted` INTEGER NOT NULL, `workoutProgressPercentage` INTEGER NOT NULL, `totalReps` INTEGER NOT NULL, `totalSets` INTEGER NOT NULL, `totalDurationMinutes` INTEGER NOT NULL, PRIMARY KEY(`date`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '84de98ec984630089b0df8b9a2ca58d3')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ca096adda60b1897570cb34e7135f7b5')");
       }
 
       @Override
@@ -82,6 +92,8 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
         db.execSQL("DROP TABLE IF EXISTS `diet_plans`");
         db.execSQL("DROP TABLE IF EXISTS `meals`");
         db.execSQL("DROP TABLE IF EXISTS `progress_entries`");
+        db.execSQL("DROP TABLE IF EXISTS `active_workout_sessions`");
+        db.execSQL("DROP TABLE IF EXISTS `daily_stats`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -309,9 +321,47 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
                   + " Expected:\n" + _infoProgressEntries + "\n"
                   + " Found:\n" + _existingProgressEntries);
         }
+        final HashMap<String, TableInfo.Column> _columnsActiveWorkoutSessions = new HashMap<String, TableInfo.Column>(9);
+        _columnsActiveWorkoutSessions.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsActiveWorkoutSessions.put("planId", new TableInfo.Column("planId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsActiveWorkoutSessions.put("dayId", new TableInfo.Column("dayId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsActiveWorkoutSessions.put("startTime", new TableInfo.Column("startTime", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsActiveWorkoutSessions.put("currentExerciseIndex", new TableInfo.Column("currentExerciseIndex", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsActiveWorkoutSessions.put("currentSetNumber", new TableInfo.Column("currentSetNumber", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsActiveWorkoutSessions.put("totalRepsCompleted", new TableInfo.Column("totalRepsCompleted", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsActiveWorkoutSessions.put("totalWeightLifted", new TableInfo.Column("totalWeightLifted", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsActiveWorkoutSessions.put("isPaused", new TableInfo.Column("isPaused", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysActiveWorkoutSessions = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesActiveWorkoutSessions = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoActiveWorkoutSessions = new TableInfo("active_workout_sessions", _columnsActiveWorkoutSessions, _foreignKeysActiveWorkoutSessions, _indicesActiveWorkoutSessions);
+        final TableInfo _existingActiveWorkoutSessions = TableInfo.read(db, "active_workout_sessions");
+        if (!_infoActiveWorkoutSessions.equals(_existingActiveWorkoutSessions)) {
+          return new RoomOpenHelper.ValidationResult(false, "active_workout_sessions(com.pamu.gymbro.data.local.entity.WorkoutSessionEntity).\n"
+                  + " Expected:\n" + _infoActiveWorkoutSessions + "\n"
+                  + " Found:\n" + _existingActiveWorkoutSessions);
+        }
+        final HashMap<String, TableInfo.Column> _columnsDailyStats = new HashMap<String, TableInfo.Column>(9);
+        _columnsDailyStats.put("date", new TableInfo.Column("date", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDailyStats.put("caloriesBurned", new TableInfo.Column("caloriesBurned", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDailyStats.put("caloriesConsumed", new TableInfo.Column("caloriesConsumed", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDailyStats.put("waterIntakeMl", new TableInfo.Column("waterIntakeMl", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDailyStats.put("workoutCompleted", new TableInfo.Column("workoutCompleted", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDailyStats.put("workoutProgressPercentage", new TableInfo.Column("workoutProgressPercentage", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDailyStats.put("totalReps", new TableInfo.Column("totalReps", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDailyStats.put("totalSets", new TableInfo.Column("totalSets", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsDailyStats.put("totalDurationMinutes", new TableInfo.Column("totalDurationMinutes", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysDailyStats = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesDailyStats = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoDailyStats = new TableInfo("daily_stats", _columnsDailyStats, _foreignKeysDailyStats, _indicesDailyStats);
+        final TableInfo _existingDailyStats = TableInfo.read(db, "daily_stats");
+        if (!_infoDailyStats.equals(_existingDailyStats)) {
+          return new RoomOpenHelper.ValidationResult(false, "daily_stats(com.pamu.gymbro.data.local.entity.DailyStatsEntity).\n"
+                  + " Expected:\n" + _infoDailyStats + "\n"
+                  + " Found:\n" + _existingDailyStats);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "84de98ec984630089b0df8b9a2ca58d3", "9160cc3ee95fda48ba2b988eb82df3fa");
+    }, "ca096adda60b1897570cb34e7135f7b5", "11e12052a660b1aaf4e3d85b2b4f4fce");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -322,7 +372,7 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "user_profile","exercise_categories","exercises","workout_plans","workout_days","workout_exercises","diet_plans","meals","progress_entries");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "user_profile","exercise_categories","exercises","workout_plans","workout_days","workout_exercises","diet_plans","meals","progress_entries","active_workout_sessions","daily_stats");
   }
 
   @Override
@@ -347,6 +397,8 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
       _db.execSQL("DELETE FROM `diet_plans`");
       _db.execSQL("DELETE FROM `meals`");
       _db.execSQL("DELETE FROM `progress_entries`");
+      _db.execSQL("DELETE FROM `active_workout_sessions`");
+      _db.execSQL("DELETE FROM `daily_stats`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -369,6 +421,8 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
     _typeConvertersMap.put(WorkoutDao.class, WorkoutDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(DietDao.class, DietDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(ProgressDao.class, ProgressDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(WorkoutSessionDao.class, WorkoutSessionDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(DailyStatsDao.class, DailyStatsDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -453,6 +507,34 @@ public final class GymBroDatabase_Impl extends GymBroDatabase {
           _progressDao = new ProgressDao_Impl(this);
         }
         return _progressDao;
+      }
+    }
+  }
+
+  @Override
+  public WorkoutSessionDao workoutSessionDao() {
+    if (_workoutSessionDao != null) {
+      return _workoutSessionDao;
+    } else {
+      synchronized(this) {
+        if(_workoutSessionDao == null) {
+          _workoutSessionDao = new WorkoutSessionDao_Impl(this);
+        }
+        return _workoutSessionDao;
+      }
+    }
+  }
+
+  @Override
+  public DailyStatsDao dailyStatsDao() {
+    if (_dailyStatsDao != null) {
+      return _dailyStatsDao;
+    } else {
+      synchronized(this) {
+        if(_dailyStatsDao == null) {
+          _dailyStatsDao = new DailyStatsDao_Impl(this);
+        }
+        return _dailyStatsDao;
       }
     }
   }

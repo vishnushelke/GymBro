@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pamu.gymbro.domain.model.User
 import com.pamu.gymbro.domain.model.WorkoutPlan
+import com.pamu.gymbro.domain.repository.WorkoutSessionRepository
 import com.pamu.gymbro.domain.usecase.favorite.FavoriteType
 import com.pamu.gymbro.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.pamu.gymbro.domain.usecase.user.GetUserUseCase
@@ -22,7 +23,8 @@ class WorkoutListViewModel @Inject constructor(
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val getUserUseCase: GetUserUseCase,
     private val saveWorkoutPlanUseCase: SaveWorkoutPlanUseCase,
-    private val deleteWorkoutPlanUseCase: DeleteWorkoutPlanUseCase
+    private val deleteWorkoutPlanUseCase: DeleteWorkoutPlanUseCase,
+    private val sessionRepository: WorkoutSessionRepository
 ) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(true)
@@ -59,21 +61,20 @@ class WorkoutListViewModel @Inject constructor(
         // Wait for initial DB emission before deciding to generate
         if (_isLoading.value && plans.isEmpty()) return 
 
-        val existingDefault = plans.find { it.name.startsWith("Default") }
+        val existingDefault = plans.find { it.name.startsWith("Default") || it.name.startsWith("Official") }
         if (existingDefault != null) {
             if (existingDefault.level != user.level || existingDefault.goal != user.goal) {
                 generateDefaultWorkout(replaceExistingId = existingDefault.id)
             }
         }
-        // Removed auto-generation if not found
     }
 
     fun hasDefaultPlan(): WorkoutPlan? {
-        return workoutPlans.value.find { it.name.startsWith("Default") }
+        return workoutPlans.value.find { it.name.startsWith("Default") || it.name.startsWith("Official") }
     }
 
     fun hasCustomPlan(): WorkoutPlan? {
-        return workoutPlans.value.find { !it.name.startsWith("Default") }
+        return workoutPlans.value.find { !it.name.startsWith("Default") && !it.name.startsWith("Official") }
     }
 
     fun generateDefaultWorkout(replaceExistingId: Long? = null) {
@@ -81,7 +82,10 @@ class WorkoutListViewModel @Inject constructor(
             val user = currentUser ?: return@launch
             _isLoading.value = true
             try {
-                replaceExistingId?.let { deleteWorkoutPlanUseCase(it) }
+                if (replaceExistingId != null) {
+                    deleteWorkoutPlanUseCase(replaceExistingId)
+                    sessionRepository.deleteActiveSession()
+                }
                 val (plan, days) = WorkoutGenerator.generateDefaultPlan(user.level, user.goal)
                 saveWorkoutPlanUseCase(plan, days)
             } catch (e: Exception) {

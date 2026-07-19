@@ -45,12 +45,15 @@ fun HomeScreen(
     onNavigateToDiets: () -> Unit = {},
     onNavigateToProgress: () -> Unit = {},
     onNavigateToReminders: () -> Unit = {},
-    onNavigateToProfile: () -> Unit = {}
+    onNavigateToProfile: () -> Unit = {},
+    onStartWorkout: (Long, Long) -> Unit = { _, _ -> },
+    onResumeWorkout: () -> Unit = {}
 ) {
     val summary by viewModel.summary.collectAsState()
     val favorites by viewModel.favorites.collectAsState()
     val networkStatus by viewModel.networkStatus.collectAsState()
     val user by viewModel.user.collectAsState()
+    val activeSession by viewModel.activeSession.collectAsState()
     
     var selectedTab by remember { mutableIntStateOf(1) } // Start on Home
 
@@ -114,7 +117,10 @@ fun HomeScreen(
                     summary = summary,
                     networkStatus = networkStatus,
                     favorites = favorites,
-                    onNavigateToProfile = onNavigateToProfile
+                    onNavigateToProfile = onNavigateToProfile,
+                    hasActiveSession = activeSession != null,
+                    onStartWorkout = onStartWorkout,
+                    onResumeWorkout = onResumeWorkout
                 )
                 2 -> ProfileContent(
                     user = user,
@@ -131,7 +137,10 @@ fun HomeTab(
     summary: DashboardSummary?,
     networkStatus: ConnectivityObserver.Status,
     favorites: FavoriteItems?,
-    onNavigateToProfile: () -> Unit
+    onNavigateToProfile: () -> Unit,
+    hasActiveSession: Boolean,
+    onStartWorkout: (Long, Long) -> Unit,
+    onResumeWorkout: () -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
         // Hero Section
@@ -198,7 +207,12 @@ fun HomeTab(
 
         Column(modifier = Modifier.padding(horizontal = 20.dp)) {
             summary?.let { data ->
-                DashboardHeader(data)
+                DashboardHeader(
+                    summary = data,
+                    hasActiveSession = hasActiveSession,
+                    onStartWorkout = onStartWorkout,
+                    onResumeWorkout = onResumeWorkout
+                )
                 Spacer(modifier = Modifier.height(24.dp))
                 QuickStatsRow(data)
                 Spacer(modifier = Modifier.height(32.dp))
@@ -390,50 +404,74 @@ fun ProfileInfoItem(icon: ImageVector, text: String) {
 }
 
 @Composable
-fun DashboardHeader(summary: DashboardSummary) {
+fun DashboardHeader(
+    summary: DashboardSummary,
+    hasActiveSession: Boolean,
+    onStartWorkout: (Long, Long) -> Unit,
+    onResumeWorkout: () -> Unit
+) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
-        Row(
-            modifier = Modifier
-                .padding(20.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = "TODAY'S PLAN",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = summary.todayWorkout ?: "Rest Day",
-                    style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = if (summary.todayWorkout != null) "Time to sweat!" else "Active recovery is key",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                )
+        Column(modifier = Modifier.padding(20.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "TODAY'S PLAN",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = summary.todayWorkout ?: "Rest Day",
+                        style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Black)
+                    )
+                }
+                
+                Box(contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator(
+                        progress = { summary.workoutCompletionPercentage / 100f },
+                        modifier = Modifier.size(56.dp),
+                        strokeWidth = 6.dp,
+                        color = MaterialTheme.colorScheme.primary,
+                        trackColor = MaterialTheme.colorScheme.surfaceVariant
+                    )
+                    Text(
+                        text = "${summary.workoutCompletionPercentage}%",
+                        style = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
-            
-            Box(contentAlignment = Alignment.Center) {
-                CircularProgressIndicator(
-                    progress = { summary.workoutCompletionPercentage / 100f },
-                    modifier = Modifier.size(64.dp),
-                    strokeWidth = 6.dp,
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant
-                )
-                Text(
-                    text = "${summary.workoutCompletionPercentage}%",
-                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
-                )
+
+            val pId = summary.workoutPlanId
+            val dId = summary.workoutDayId
+            if (pId != null && dId != null) {
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = { 
+                        if (hasActiveSession) onResumeWorkout() 
+                        else onStartWorkout(pId, dId)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Icon(
+                        imageVector = if (hasActiveSession) Icons.Default.PlayArrow else Icons.Default.FlashOn,
+                        contentDescription = null
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = if (hasActiveSession) "RESUME WORKOUT" else "START WORKOUT",
+                        fontWeight = FontWeight.Black
+                    )
+                }
             }
         }
     }
@@ -447,12 +485,12 @@ fun QuickStatsRow(summary: DashboardSummary) {
     ) {
         StatCard(
             modifier = Modifier.weight(1f),
-            label = "Calories",
-            value = "${summary.caloriesConsumed}",
+            label = "Burned",
+            value = "${summary.caloriesBurned}",
             unit = "kcal",
             icon = Icons.Default.Whatshot,
             color = Color(0xFFFF5722),
-            progress = summary.caloriesConsumed.toFloat() / summary.calorieGoal.toFloat()
+            progress = summary.caloriesBurned.toFloat() / 500f // Placeholder daily goal
         )
         StatCard(
             modifier = Modifier.weight(1f),
