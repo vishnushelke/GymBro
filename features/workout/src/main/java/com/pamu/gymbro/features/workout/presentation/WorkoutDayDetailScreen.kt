@@ -79,11 +79,43 @@ fun WorkoutDayDetailScreen(
                     )
                 }
 
-                items(workoutDay?.exercises ?: emptyList()) { exercise ->
-                    WorkoutDayExerciseItem(
-                        exercise = exercise,
-                        onClick = { onExerciseClick(exercise.exerciseId) }
-                    )
+                val exercises = workoutDay?.exercises ?: emptyList()
+                if (exercises.isEmpty()) {
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(32.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.FitnessCenter,
+                                contentDescription = null,
+                                modifier = Modifier.size(64.dp),
+                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text(
+                                text = "No exercises found for this day.",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                            )
+                            if (workoutDay?.title == "Rest Day") {
+                                Text(
+                                    text = "Enjoy your recovery!",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
+                    }
+                } else {
+                    items(exercises) { exercise ->
+                        WorkoutDayExerciseItem(
+                            exercise = exercise,
+                            onClick = { onExerciseClick(exercise.exerciseId) }
+                        )
+                    }
                 }
             }
         }

@@ -18,6 +18,7 @@ import com.pamu.gymbro.data.local.entity.ExerciseEntity;
 import com.pamu.gymbro.data.local.entity.WorkoutDayEntity;
 import com.pamu.gymbro.data.local.entity.WorkoutExerciseEntity;
 import com.pamu.gymbro.data.local.entity.WorkoutPlanEntity;
+import com.pamu.gymbro.data.local.model.WorkoutDayWithExercises;
 import com.pamu.gymbro.data.local.model.WorkoutExerciseWithExercise;
 import java.lang.Class;
 import java.lang.Exception;
@@ -338,192 +339,119 @@ public final class WorkoutDao_Impl implements WorkoutDao {
   }
 
   @Override
-  public Flow<List<WorkoutDayEntity>> getWorkoutDaysForPlan(final long planId) {
+  public Flow<List<WorkoutDayWithExercises>> getWorkoutDaysWithExercisesForPlan(final long planId) {
     final String _sql = "SELECT * FROM workout_days WHERE workoutPlanId = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     _statement.bindLong(_argIndex, planId);
-    return CoroutinesRoom.createFlow(__db, false, new String[] {"workout_days"}, new Callable<List<WorkoutDayEntity>>() {
+    return CoroutinesRoom.createFlow(__db, true, new String[] {"exercises", "workout_exercises",
+        "workout_days"}, new Callable<List<WorkoutDayWithExercises>>() {
       @Override
       @NonNull
-      public List<WorkoutDayEntity> call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
-        try {
-          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
-          final int _cursorIndexOfWorkoutPlanId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutPlanId");
-          final int _cursorIndexOfDayNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "dayNumber");
-          final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
-          final List<WorkoutDayEntity> _result = new ArrayList<WorkoutDayEntity>(_cursor.getCount());
-          while (_cursor.moveToNext()) {
-            final WorkoutDayEntity _item;
-            final long _tmpId;
-            _tmpId = _cursor.getLong(_cursorIndexOfId);
-            final long _tmpWorkoutPlanId;
-            _tmpWorkoutPlanId = _cursor.getLong(_cursorIndexOfWorkoutPlanId);
-            final int _tmpDayNumber;
-            _tmpDayNumber = _cursor.getInt(_cursorIndexOfDayNumber);
-            final String _tmpTitle;
-            _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
-            _item = new WorkoutDayEntity(_tmpId,_tmpWorkoutPlanId,_tmpDayNumber,_tmpTitle);
-            _result.add(_item);
-          }
-          return _result;
-        } finally {
-          _cursor.close();
-        }
-      }
-
-      @Override
-      protected void finalize() {
-        _statement.release();
-      }
-    });
-  }
-
-  @Override
-  public Flow<WorkoutDayEntity> getWorkoutDayById(final long dayId) {
-    final String _sql = "SELECT * FROM workout_days WHERE id = ?";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    _statement.bindLong(_argIndex, dayId);
-    return CoroutinesRoom.createFlow(__db, false, new String[] {"workout_days"}, new Callable<WorkoutDayEntity>() {
-      @Override
-      @Nullable
-      public WorkoutDayEntity call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
-        try {
-          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
-          final int _cursorIndexOfWorkoutPlanId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutPlanId");
-          final int _cursorIndexOfDayNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "dayNumber");
-          final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
-          final WorkoutDayEntity _result;
-          if (_cursor.moveToFirst()) {
-            final long _tmpId;
-            _tmpId = _cursor.getLong(_cursorIndexOfId);
-            final long _tmpWorkoutPlanId;
-            _tmpWorkoutPlanId = _cursor.getLong(_cursorIndexOfWorkoutPlanId);
-            final int _tmpDayNumber;
-            _tmpDayNumber = _cursor.getInt(_cursorIndexOfDayNumber);
-            final String _tmpTitle;
-            _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
-            _result = new WorkoutDayEntity(_tmpId,_tmpWorkoutPlanId,_tmpDayNumber,_tmpTitle);
-          } else {
-            _result = null;
-          }
-          return _result;
-        } finally {
-          _cursor.close();
-        }
-      }
-
-      @Override
-      protected void finalize() {
-        _statement.release();
-      }
-    });
-  }
-
-  @Override
-  public Flow<List<WorkoutExerciseEntity>> getExercisesForDay(final long dayId) {
-    final String _sql = "SELECT * FROM workout_exercises WHERE workoutDayId = ?";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    _statement.bindLong(_argIndex, dayId);
-    return CoroutinesRoom.createFlow(__db, false, new String[] {"workout_exercises"}, new Callable<List<WorkoutExerciseEntity>>() {
-      @Override
-      @NonNull
-      public List<WorkoutExerciseEntity> call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
-        try {
-          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
-          final int _cursorIndexOfWorkoutDayId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutDayId");
-          final int _cursorIndexOfExerciseId = CursorUtil.getColumnIndexOrThrow(_cursor, "exerciseId");
-          final int _cursorIndexOfSets = CursorUtil.getColumnIndexOrThrow(_cursor, "sets");
-          final int _cursorIndexOfReps = CursorUtil.getColumnIndexOrThrow(_cursor, "reps");
-          final int _cursorIndexOfRestSeconds = CursorUtil.getColumnIndexOrThrow(_cursor, "restSeconds");
-          final List<WorkoutExerciseEntity> _result = new ArrayList<WorkoutExerciseEntity>(_cursor.getCount());
-          while (_cursor.moveToNext()) {
-            final WorkoutExerciseEntity _item;
-            final long _tmpId;
-            _tmpId = _cursor.getLong(_cursorIndexOfId);
-            final long _tmpWorkoutDayId;
-            _tmpWorkoutDayId = _cursor.getLong(_cursorIndexOfWorkoutDayId);
-            final long _tmpExerciseId;
-            _tmpExerciseId = _cursor.getLong(_cursorIndexOfExerciseId);
-            final int _tmpSets;
-            _tmpSets = _cursor.getInt(_cursorIndexOfSets);
-            final String _tmpReps;
-            _tmpReps = _cursor.getString(_cursorIndexOfReps);
-            final int _tmpRestSeconds;
-            _tmpRestSeconds = _cursor.getInt(_cursorIndexOfRestSeconds);
-            _item = new WorkoutExerciseEntity(_tmpId,_tmpWorkoutDayId,_tmpExerciseId,_tmpSets,_tmpReps,_tmpRestSeconds);
-            _result.add(_item);
-          }
-          return _result;
-        } finally {
-          _cursor.close();
-        }
-      }
-
-      @Override
-      protected void finalize() {
-        _statement.release();
-      }
-    });
-  }
-
-  @Override
-  public Flow<List<WorkoutExerciseWithExercise>> getExercisesWithDetailsForDay(final long dayId) {
-    final String _sql = "SELECT * FROM workout_exercises WHERE workoutDayId = ?";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    _statement.bindLong(_argIndex, dayId);
-    return CoroutinesRoom.createFlow(__db, true, new String[] {"exercises",
-        "workout_exercises"}, new Callable<List<WorkoutExerciseWithExercise>>() {
-      @Override
-      @NonNull
-      public List<WorkoutExerciseWithExercise> call() throws Exception {
+      public List<WorkoutDayWithExercises> call() throws Exception {
         __db.beginTransaction();
         try {
           final Cursor _cursor = DBUtil.query(__db, _statement, true, null);
           try {
             final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
-            final int _cursorIndexOfWorkoutDayId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutDayId");
-            final int _cursorIndexOfExerciseId = CursorUtil.getColumnIndexOrThrow(_cursor, "exerciseId");
-            final int _cursorIndexOfSets = CursorUtil.getColumnIndexOrThrow(_cursor, "sets");
-            final int _cursorIndexOfReps = CursorUtil.getColumnIndexOrThrow(_cursor, "reps");
-            final int _cursorIndexOfRestSeconds = CursorUtil.getColumnIndexOrThrow(_cursor, "restSeconds");
-            final LongSparseArray<ExerciseEntity> _collectionExercise = new LongSparseArray<ExerciseEntity>();
+            final int _cursorIndexOfWorkoutPlanId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutPlanId");
+            final int _cursorIndexOfDayNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "dayNumber");
+            final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+            final LongSparseArray<ArrayList<WorkoutExerciseWithExercise>> _collectionWorkoutExercises = new LongSparseArray<ArrayList<WorkoutExerciseWithExercise>>();
             while (_cursor.moveToNext()) {
               final long _tmpKey;
-              _tmpKey = _cursor.getLong(_cursorIndexOfExerciseId);
-              _collectionExercise.put(_tmpKey, null);
+              _tmpKey = _cursor.getLong(_cursorIndexOfId);
+              if (!_collectionWorkoutExercises.containsKey(_tmpKey)) {
+                _collectionWorkoutExercises.put(_tmpKey, new ArrayList<WorkoutExerciseWithExercise>());
+              }
             }
             _cursor.moveToPosition(-1);
-            __fetchRelationshipexercisesAscomPamuGymbroDataLocalEntityExerciseEntity(_collectionExercise);
-            final List<WorkoutExerciseWithExercise> _result = new ArrayList<WorkoutExerciseWithExercise>(_cursor.getCount());
+            __fetchRelationshipworkoutExercisesAscomPamuGymbroDataLocalModelWorkoutExerciseWithExercise(_collectionWorkoutExercises);
+            final List<WorkoutDayWithExercises> _result = new ArrayList<WorkoutDayWithExercises>(_cursor.getCount());
             while (_cursor.moveToNext()) {
-              final WorkoutExerciseWithExercise _item;
-              final WorkoutExerciseEntity _tmpWorkoutExercise;
+              final WorkoutDayWithExercises _item;
+              final WorkoutDayEntity _tmpWorkoutDay;
               final long _tmpId;
               _tmpId = _cursor.getLong(_cursorIndexOfId);
-              final long _tmpWorkoutDayId;
-              _tmpWorkoutDayId = _cursor.getLong(_cursorIndexOfWorkoutDayId);
-              final long _tmpExerciseId;
-              _tmpExerciseId = _cursor.getLong(_cursorIndexOfExerciseId);
-              final int _tmpSets;
-              _tmpSets = _cursor.getInt(_cursorIndexOfSets);
-              final String _tmpReps;
-              _tmpReps = _cursor.getString(_cursorIndexOfReps);
-              final int _tmpRestSeconds;
-              _tmpRestSeconds = _cursor.getInt(_cursorIndexOfRestSeconds);
-              _tmpWorkoutExercise = new WorkoutExerciseEntity(_tmpId,_tmpWorkoutDayId,_tmpExerciseId,_tmpSets,_tmpReps,_tmpRestSeconds);
-              final ExerciseEntity _tmpExercise;
+              final long _tmpWorkoutPlanId;
+              _tmpWorkoutPlanId = _cursor.getLong(_cursorIndexOfWorkoutPlanId);
+              final int _tmpDayNumber;
+              _tmpDayNumber = _cursor.getInt(_cursorIndexOfDayNumber);
+              final String _tmpTitle;
+              _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+              _tmpWorkoutDay = new WorkoutDayEntity(_tmpId,_tmpWorkoutPlanId,_tmpDayNumber,_tmpTitle);
+              final ArrayList<WorkoutExerciseWithExercise> _tmpWorkoutExercisesCollection;
               final long _tmpKey_1;
-              _tmpKey_1 = _cursor.getLong(_cursorIndexOfExerciseId);
-              _tmpExercise = _collectionExercise.get(_tmpKey_1);
-              _item = new WorkoutExerciseWithExercise(_tmpWorkoutExercise,_tmpExercise);
+              _tmpKey_1 = _cursor.getLong(_cursorIndexOfId);
+              _tmpWorkoutExercisesCollection = _collectionWorkoutExercises.get(_tmpKey_1);
+              _item = new WorkoutDayWithExercises(_tmpWorkoutDay,_tmpWorkoutExercisesCollection);
               _result.add(_item);
+            }
+            __db.setTransactionSuccessful();
+            return _result;
+          } finally {
+            _cursor.close();
+          }
+        } finally {
+          __db.endTransaction();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
+  }
+
+  @Override
+  public Flow<WorkoutDayWithExercises> getWorkoutDayWithExercisesById(final long dayId) {
+    final String _sql = "SELECT * FROM workout_days WHERE id = ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, dayId);
+    return CoroutinesRoom.createFlow(__db, true, new String[] {"exercises", "workout_exercises",
+        "workout_days"}, new Callable<WorkoutDayWithExercises>() {
+      @Override
+      @Nullable
+      public WorkoutDayWithExercises call() throws Exception {
+        __db.beginTransaction();
+        try {
+          final Cursor _cursor = DBUtil.query(__db, _statement, true, null);
+          try {
+            final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+            final int _cursorIndexOfWorkoutPlanId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutPlanId");
+            final int _cursorIndexOfDayNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "dayNumber");
+            final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+            final LongSparseArray<ArrayList<WorkoutExerciseWithExercise>> _collectionWorkoutExercises = new LongSparseArray<ArrayList<WorkoutExerciseWithExercise>>();
+            while (_cursor.moveToNext()) {
+              final long _tmpKey;
+              _tmpKey = _cursor.getLong(_cursorIndexOfId);
+              if (!_collectionWorkoutExercises.containsKey(_tmpKey)) {
+                _collectionWorkoutExercises.put(_tmpKey, new ArrayList<WorkoutExerciseWithExercise>());
+              }
+            }
+            _cursor.moveToPosition(-1);
+            __fetchRelationshipworkoutExercisesAscomPamuGymbroDataLocalModelWorkoutExerciseWithExercise(_collectionWorkoutExercises);
+            final WorkoutDayWithExercises _result;
+            if (_cursor.moveToFirst()) {
+              final WorkoutDayEntity _tmpWorkoutDay;
+              final long _tmpId;
+              _tmpId = _cursor.getLong(_cursorIndexOfId);
+              final long _tmpWorkoutPlanId;
+              _tmpWorkoutPlanId = _cursor.getLong(_cursorIndexOfWorkoutPlanId);
+              final int _tmpDayNumber;
+              _tmpDayNumber = _cursor.getInt(_cursorIndexOfDayNumber);
+              final String _tmpTitle;
+              _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+              _tmpWorkoutDay = new WorkoutDayEntity(_tmpId,_tmpWorkoutPlanId,_tmpDayNumber,_tmpTitle);
+              final ArrayList<WorkoutExerciseWithExercise> _tmpWorkoutExercisesCollection;
+              final long _tmpKey_1;
+              _tmpKey_1 = _cursor.getLong(_cursorIndexOfId);
+              _tmpWorkoutExercisesCollection = _collectionWorkoutExercises.get(_tmpKey_1);
+              _result = new WorkoutDayWithExercises(_tmpWorkoutDay,_tmpWorkoutExercisesCollection);
+            } else {
+              _result = null;
             }
             __db.setTransactionSuccessful();
             return _result;
@@ -715,6 +643,85 @@ public final class WorkoutDao_Impl implements WorkoutDao {
           _tmpIsFavorite = _tmp != 0;
           _item_1 = new ExerciseEntity(_tmpId,_tmpName,_tmpCategoryId,_tmpDifficulty,_tmpEquipment,_tmpPrimaryMuscle,_tmpSecondaryMuscles,_tmpExerciseType,_tmpMovementPattern,_tmpCaloriesBurnedEstimate,_tmpDescription,_tmpBenefits,_tmpCommonMistakes,_tmpSafetyWarnings,_tmpBeginnerVariation,_tmpIntermediateVariation,_tmpAdvancedVariation,_tmpInstructions,_tmpThumbnailUrl,_tmpVideoFrontUrl,_tmpVideoSideUrl,_tmpVideoDuration,_tmpVideoFps,_tmpVideoResolution,_tmpIsFavorite);
           _map.put(_tmpKey, _item_1);
+        }
+      }
+    } finally {
+      _cursor.close();
+    }
+  }
+
+  private void __fetchRelationshipworkoutExercisesAscomPamuGymbroDataLocalModelWorkoutExerciseWithExercise(
+      @NonNull final LongSparseArray<ArrayList<WorkoutExerciseWithExercise>> _map) {
+    if (_map.isEmpty()) {
+      return;
+    }
+    if (_map.size() > RoomDatabase.MAX_BIND_PARAMETER_CNT) {
+      RelationUtil.recursiveFetchLongSparseArray(_map, true, (map) -> {
+        __fetchRelationshipworkoutExercisesAscomPamuGymbroDataLocalModelWorkoutExerciseWithExercise(map);
+        return Unit.INSTANCE;
+      });
+      return;
+    }
+    final StringBuilder _stringBuilder = StringUtil.newStringBuilder();
+    _stringBuilder.append("SELECT `id`,`workoutDayId`,`exerciseId`,`sets`,`reps`,`restSeconds` FROM `workout_exercises` WHERE `workoutDayId` IN (");
+    final int _inputSize = _map.size();
+    StringUtil.appendPlaceholders(_stringBuilder, _inputSize);
+    _stringBuilder.append(")");
+    final String _sql = _stringBuilder.toString();
+    final int _argCount = 0 + _inputSize;
+    final RoomSQLiteQuery _stmt = RoomSQLiteQuery.acquire(_sql, _argCount);
+    int _argIndex = 1;
+    for (int i = 0; i < _map.size(); i++) {
+      final long _item = _map.keyAt(i);
+      _stmt.bindLong(_argIndex, _item);
+      _argIndex++;
+    }
+    final Cursor _cursor = DBUtil.query(__db, _stmt, true, null);
+    try {
+      final int _itemKeyIndex = CursorUtil.getColumnIndex(_cursor, "workoutDayId");
+      if (_itemKeyIndex == -1) {
+        return;
+      }
+      final int _cursorIndexOfId = 0;
+      final int _cursorIndexOfWorkoutDayId = 1;
+      final int _cursorIndexOfExerciseId = 2;
+      final int _cursorIndexOfSets = 3;
+      final int _cursorIndexOfReps = 4;
+      final int _cursorIndexOfRestSeconds = 5;
+      final LongSparseArray<ExerciseEntity> _collectionExercise = new LongSparseArray<ExerciseEntity>();
+      while (_cursor.moveToNext()) {
+        final long _tmpKey;
+        _tmpKey = _cursor.getLong(_cursorIndexOfExerciseId);
+        _collectionExercise.put(_tmpKey, null);
+      }
+      _cursor.moveToPosition(-1);
+      __fetchRelationshipexercisesAscomPamuGymbroDataLocalEntityExerciseEntity(_collectionExercise);
+      while (_cursor.moveToNext()) {
+        final long _tmpKey_1;
+        _tmpKey_1 = _cursor.getLong(_itemKeyIndex);
+        final ArrayList<WorkoutExerciseWithExercise> _tmpRelation = _map.get(_tmpKey_1);
+        if (_tmpRelation != null) {
+          final WorkoutExerciseWithExercise _item_1;
+          final WorkoutExerciseEntity _tmpWorkoutExercise;
+          final long _tmpId;
+          _tmpId = _cursor.getLong(_cursorIndexOfId);
+          final long _tmpWorkoutDayId;
+          _tmpWorkoutDayId = _cursor.getLong(_cursorIndexOfWorkoutDayId);
+          final long _tmpExerciseId;
+          _tmpExerciseId = _cursor.getLong(_cursorIndexOfExerciseId);
+          final int _tmpSets;
+          _tmpSets = _cursor.getInt(_cursorIndexOfSets);
+          final String _tmpReps;
+          _tmpReps = _cursor.getString(_cursorIndexOfReps);
+          final int _tmpRestSeconds;
+          _tmpRestSeconds = _cursor.getInt(_cursorIndexOfRestSeconds);
+          _tmpWorkoutExercise = new WorkoutExerciseEntity(_tmpId,_tmpWorkoutDayId,_tmpExerciseId,_tmpSets,_tmpReps,_tmpRestSeconds);
+          final ExerciseEntity _tmpExercise;
+          final long _tmpKey_2;
+          _tmpKey_2 = _cursor.getLong(_cursorIndexOfExerciseId);
+          _tmpExercise = _collectionExercise.get(_tmpKey_2);
+          _item_1 = new WorkoutExerciseWithExercise(_tmpWorkoutExercise,_tmpExercise);
+          _tmpRelation.add(_item_1);
         }
       }
     } finally {

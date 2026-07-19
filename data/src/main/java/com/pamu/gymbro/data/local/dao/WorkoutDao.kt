@@ -18,18 +18,13 @@ interface WorkoutDao {
     @Query("SELECT * FROM workout_plans WHERE id = :planId")
     fun getWorkoutPlanById(planId: Long): Flow<WorkoutPlanEntity?>
 
+    @Transaction
     @Query("SELECT * FROM workout_days WHERE workoutPlanId = :planId")
-    fun getWorkoutDaysForPlan(planId: Long): Flow<List<WorkoutDayEntity>>
-
-    @Query("SELECT * FROM workout_days WHERE id = :dayId")
-    fun getWorkoutDayById(dayId: Long): Flow<WorkoutDayEntity?>
-
-    @Query("SELECT * FROM workout_exercises WHERE workoutDayId = :dayId")
-    fun getExercisesForDay(dayId: Long): Flow<List<WorkoutExerciseEntity>>
+    fun getWorkoutDaysWithExercisesForPlan(planId: Long): Flow<List<com.pamu.gymbro.data.local.model.WorkoutDayWithExercises>>
 
     @Transaction
-    @Query("SELECT * FROM workout_exercises WHERE workoutDayId = :dayId")
-    fun getExercisesWithDetailsForDay(dayId: Long): Flow<List<com.pamu.gymbro.data.local.model.WorkoutExerciseWithExercise>>
+    @Query("SELECT * FROM workout_days WHERE id = :dayId")
+    fun getWorkoutDayWithExercisesById(dayId: Long): Flow<com.pamu.gymbro.data.local.model.WorkoutDayWithExercises?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWorkoutPlan(plan: WorkoutPlanEntity): Long

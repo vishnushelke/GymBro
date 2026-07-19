@@ -26,34 +26,28 @@ class WorkoutRepositoryImpl @Inject constructor(
     }
 
     override fun getWorkoutDayById(dayId: Long): Flow<WorkoutDay?> {
-        return dao.getWorkoutDayById(dayId).map { it?.toDomain() }
+        return dao.getWorkoutDayWithExercisesById(dayId).map { it?.toDomain() }
     }
 
-    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     override fun getWorkoutDaysForPlan(planId: Long): Flow<List<WorkoutDay>> {
-        return dao.getWorkoutDaysForPlan(planId).flatMapLatest { dayEntities ->
-            val dayFlows = dayEntities.map { dayEntity ->
-                dao.getExercisesWithDetailsForDay(dayEntity.id).map { exercisesWithDetails ->
-                    dayEntity.toDomain(exercisesWithDetails.map { it.toDomain() })
-                }
-            }
-            if (dayFlows.isEmpty()) flowOf(emptyList())
-            else combine(dayFlows) { it.toList() }
+        return dao.getWorkoutDaysWithExercisesForPlan(planId).map { list ->
+            list.map { it.toDomain() }
         }
     }
 
-    override suspend fun insertWorkoutPlan(plan: WorkoutPlan, days: List<WorkoutDay>) = withContext(Dispatchers.IO) {
-        val planId = dao.insertWorkoutPlan(plan.toEntity())
-        
-        // Clear existing days if editing
-        if (plan.id > 0) {
-            dao.deleteDaysForPlan(plan.id)
-        }
+    override suspend fun insertWorkoutPlan(plan: WorkoutPlan, days: List<WorkoutDay>) {
+        withContext(Dispatchers.IO) {
+            if (plan.id > 0) {
+                dao.deleteDaysForPlan(plan.id)
+            }
 
-        days.forEach { day ->
-            val dayId = dao.insertWorkoutDays(listOf(day.toEntity().copy(workoutPlanId = planId))).first()
-            val exercises = day.exercises.map { it.toEntity().copy(workoutDayId = dayId) }
-            dao.insertWorkoutExercises(exercises)
+            val planId = dao.insertWorkoutPlan(plan.toEntity())
+            
+            days.forEach { day ->
+                val dayId = dao.insertWorkoutDays(listOf(day.toEntity().copy(workoutPlanId = planId))).first()
+                val exercises = day.exercises.map { it.toEntity().copy(workoutDayId = dayId) }
+                dao.insertWorkoutExercises(exercises)
+            }
         }
     }
 

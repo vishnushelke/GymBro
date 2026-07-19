@@ -40,6 +40,10 @@ fun WorkoutDayEntity.toDomain(exercises: List<WorkoutExercise> = emptyList()): W
     )
 }
 
+fun com.pamu.gymbro.data.local.model.WorkoutDayWithExercises.toDomain(): WorkoutDay {
+    return workoutDay.toDomain(workoutExercises.map { it.toDomain() })
+}
+
 fun WorkoutDay.toEntity(): WorkoutDayEntity {
     return WorkoutDayEntity(
         id = id,
